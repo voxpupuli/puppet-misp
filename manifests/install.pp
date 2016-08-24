@@ -3,6 +3,8 @@ class misp::install inherits misp {
 
   require 'misp::dependencies'
 
+  include vcsrepo
+  
   service { 'rh-php56-php-fpm':
     enable => true,
     ensure => 'running',
@@ -20,7 +22,7 @@ class misp::install inherits misp {
   }
 
   # MISP
-  vcsrepo { '/var/www/':
+  vcsrepo { '/var/www/MISP/':
     ensure   => present,
     provider => git,
     submodules => true,
@@ -33,8 +35,8 @@ class misp::install inherits misp {
     command => '/usr/bin/git config core.filemode false',
     cwd => '/var/www/MISP/',
     refreshonly => true,
+    subscribe => Vcsrepo['/var/www/MISP/'],
     notify => Exec['git clone python-cybox','git clone python-stix', 'CakeResque curl'],
-    subscribe => Vcsrepo['/var/www/']
   }
 
   exec {'git clone python-cybox':
