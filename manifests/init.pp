@@ -37,5 +37,24 @@
 #
 class misp {
 
+  certmgr::certificate { 'cert-misp': }
 
+  include systemd
+  include apache
+
+  firewall { '100 allow https':
+    proto  => 'tcp',
+    dport  => '443',
+    action => 'accept',
+  }
+
+  anchor { 'misp::begin': }
+  anchor { 'misp::end':}
+
+  Anchor['misp::begin'] ->
+    Class['misp::dependencies'] ->
+    Class['misp::install'] ->
+    Class['misp::config']  ->
+    Class['misp::service'] ->
+  Anchor['misp::end']
 }

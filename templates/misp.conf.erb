@@ -1,0 +1,33 @@
+<VirtualHost <%= @fqdn -%>:<%= @ssl_port -%>>
+ServerAdmin <%= @server_admin %>
+ServerName <%= @fqdn %>
+DocumentRoot <%= @document_root %>
+<Directory <%= @document_root %>>
+Options -Indexes
+AllowOverride all
+Order allow,deny
+allow from all
+</Directory>
+
+LoadModule ssl_module modules/mod_ssl.so
+
+SSLEngine On
+SSLProtocol all -SSLv2 -SSLv3
+SSLCipherSuite HIGH:!aNULL:!RC4:!MD5:!SEED:!IDEA
+SSLCertificateFile <%= @certificate_file %>
+SSLCertificateKeyFile <%= @certificate_key_file %>
+SSLCertificateChainFile <%= @certificate_chain_file %>
+
+<IfModule !mod_php5.c>
+SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+DirectoryIndex /index.php index.php
+<FilesMatch \.php$>
+SetHandler "proxy:fcgi://127.0.0.1:9000"
+</FilesMatch>
+</IfModule>
+
+LogLevel warn
+ErrorLog /var/log/httpd/misp.local_error.log
+CustomLog /var/log/httpd/misp.local_access.log combined
+ServerSignature Off
+</VirtualHost>
