@@ -10,6 +10,7 @@ class misp::dependencies inherits misp {
     'php-mbstring', #Required for Crypt_GPG
     'haveged',
     'mod_ssl', #Required for ssl connection
+    'mod_fcgid', #Required for fcgid for php56
   ],
     { 'ensure' => 'present' }
   )
