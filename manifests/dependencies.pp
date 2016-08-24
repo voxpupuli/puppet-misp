@@ -12,7 +12,7 @@ class misp::dependencies inherits misp {
     'haveged',
     'mod_ssl', #Required for ssl connection
     'mod_fcgid', #Required for fcgid for php56
-    'libblog4shib1', 'shibboleth.x86_64', 'shibboleth-selinux.noarch', #TODO: Only needed if shibboleth enabled in module
+    'liblog4shib1', 'shibboleth.x86_64', 'shibboleth-selinux.noarch', #TODO: Only needed if shibboleth enabled in module
   ],
     { 'ensure' => 'present' }
   )
