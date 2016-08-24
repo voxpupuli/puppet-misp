@@ -23,7 +23,7 @@ class misp::install inherits misp {
   vcsrepo { '/var/www/':
     ensure   => present,
     provider => git,
-    submodule => true,
+    submodules => true,
     force => false,
     source   => 'https://github.com/MISP/MISP.git',
     revision => $misp::git_tag,
