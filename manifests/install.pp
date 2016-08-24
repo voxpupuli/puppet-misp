@@ -3,8 +3,6 @@ class misp::install inherits misp {
 
   require 'misp::dependencies'
 
-  include vcsrepo
-
   service { 'rh-php56-php-fpm':
     enable => true,
     ensure => 'running',
