@@ -18,20 +18,15 @@ class misp::install inherits misp {
     enable => true,
     ensure => 'running',
   }
-  
-  # MISP
-  exec {'MISP clone':
-    command => '/usr/bin/git clone --recursive https://github.com/MISP/MISP.git',
-    cwd => '/var/www/',
-    unless => '/usr/bin/ls -d /var/www/MISP/',
-    notify => Exec['MISP git checkout'],
-  }
 
-  exec {'MISP git checkout':
-    command => '/usr/bin/git checkout tags/$git_tag',
-    cwd => '/var/www/MISP/',
-    refreshonly => true,
-    notify => Exec['git ignore permissions'],
+  # MISP
+  vcsrepo { '/var/www/':
+    ensure   => present,
+    provider => git,
+    submodule => true,
+    force => false,
+    source   => 'https://github.com/MISP/MISP.git',
+    revision => $misp::git_tag,
   }
 
   exec {'git ignore permissions':
@@ -39,6 +34,7 @@ class misp::install inherits misp {
     cwd => '/var/www/MISP/',
     refreshonly => true,
     notify => Exec['git clone python-cybox','git clone python-stix', 'CakeResque curl'],
+    subscribe => Vcsrepo['/var/www/MISP/']
   }
 
   exec {'git clone python-cybox':

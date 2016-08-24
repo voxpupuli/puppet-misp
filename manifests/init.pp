@@ -43,6 +43,9 @@ class misp {
   include systemd
   include apache
 
+  apache::listen { '443': }
+  apache::listen { '80': }
+
   firewall { '100 allow https':
     proto  => 'tcp',
     dport  => '443',
