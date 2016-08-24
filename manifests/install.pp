@@ -34,7 +34,7 @@ class misp::install inherits misp {
     cwd => '/var/www/MISP/',
     refreshonly => true,
     notify => Exec['git clone python-cybox','git clone python-stix', 'CakeResque curl'],
-    subscribe => Vcsrepo['/var/www/MISP/']
+    subscribe => Vcsrepo['/var/www/']
   }
 
   exec {'git clone python-cybox':
