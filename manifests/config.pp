@@ -1,7 +1,9 @@
 
-class misp::config ($db_name = "default", $db_user = "default", $db_port = "default", $git_tag="default", $salt="default", $cipherseed="default",
-  $ssl_port = "default", $server_admin = "deafault", $document_root = "default", $certificate_file ="default",
-  $certificate_key_file = "default", $certificate_chain_file = "default") inherits misp {
+class misp::config ($db_name = 'default', $db_user = 'default', $db_port = 'default', $git_tag='default', $salt='default', $cipherseed='default',
+  $ssl_port = 'default', $server_admin = 'deafault', $document_root = 'default', $certificate_file ='default',
+  $certificate_key_file = 'default', $certificate_chain_file = 'default') inherits misp {
+
+  require 'misp::install'
 
   #Apache permissions
 
@@ -82,13 +84,13 @@ class misp::config ($db_name = "default", $db_user = "default", $db_port = "defa
     subscribe => Exec['Directory permissions'],
   }
 
-  teigi::secret::sub_file{"/var/www/MISP/app/Config/database.php":
+  teigi::secret::sub_file{'/var/www/MISP/app/Config/database.php':
     teigi_keys => ['misp_db_password'],
-    template => "hg_security/misp/database.php.erb",
+    template => 'hg_security/misp/database.php.erb',
     subscribe => Exec['Directory permissions'],
     owner   => 'root',
     group   => 'apache',
-    mode => "640",
+    mode => '640',
   }
 
 
@@ -163,7 +165,7 @@ class misp::config ($db_name = "default", $db_user = "default", $db_port = "defa
   }
 
   exec {'start bg workers':
-    command => "/usr/bin/chmod +x /var/www/MISP/app/Console/worker/start.sh && /usr/bin/su -s /bin/bash apache -c '/usr/bin/scl enable rh-php56 /var/www/MISP/app/Console/worker/start.sh'",
+    command => '/usr/bin/chmod +x /var/www/MISP/app/Console/worker/start.sh && /usr/bin/su -s /bin/bash apache -c \'/usr/bin/scl enable rh-php56 /var/www/MISP/app/Console/worker/start.sh\'',
     user => 'root',
     group => 'apache',
     subscribe => Exec['chcon config.php'],

@@ -35,6 +35,7 @@
 #
 # Copyright 2016 Your name here, unless otherwise noted.
 #
+
 class misp {
 
   certmgr::certificate { 'cert-misp': }
@@ -48,13 +49,8 @@ class misp {
     action => 'accept',
   }
 
-  anchor { 'misp::begin': }
-  anchor { 'misp::end':}
-
-  Anchor['misp::begin'] ->
-    Class['misp::dependencies'] ->
-    Class['misp::install'] ->
-    Class['misp::config']  ->
-    Class['misp::service'] ->
-  Anchor['misp::end']
+  contain 'misp::dependencies'
+  contain 'misp::install'
+  contain 'misp::config'
+  contain 'misp::service'
 }
