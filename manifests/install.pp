@@ -4,7 +4,7 @@ class misp::install inherits misp {
   require 'misp::dependencies'
 
   include vcsrepo
-  
+
   service { 'rh-php56-php-fpm':
     enable => true,
     ensure => 'running',
@@ -22,12 +22,13 @@ class misp::install inherits misp {
   }
 
   # MISP
+
   vcsrepo { '/var/www/MISP/':
     ensure   => present,
     provider => git,
     submodules => true,
     force => false,
-    source   => 'https://github.com/MISP/MISP.git',
+    source   => 'git://github.com/MISP/MISP.git',
     revision => $misp::git_tag,
   }
 
