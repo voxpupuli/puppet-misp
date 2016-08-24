@@ -1,7 +1,8 @@
 
 class misp::dependencies inherits misp {
 
-  ensure_packages( [	'gcc', # Needed for compiling Python modules
+  ensure_packages( [
+    'gcc', # Needed for compiling Python modules
     'git', # Needed for pulling the MISP code and those for some dependencies
     'zip', 'redis', 'mariadb', #'httpd',# already defined by apache module
     'python-devel', 'python-pip', 'python-lxml', 'python-dateutil', 'python-six', 'python-lxml', 'python-dateutil', 'python-six', # Python related packages
@@ -11,6 +12,7 @@ class misp::dependencies inherits misp {
     'haveged',
     'mod_ssl', #Required for ssl connection
     'mod_fcgid', #Required for fcgid for php56
+    'blog4shib1', 'shibboleth.x86_64', 'shibboleth-selinux.noarch', #TODO: Only needed if shibboleth enabled in module
   ],
     { 'ensure' => 'present' }
   )
