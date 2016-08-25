@@ -97,7 +97,7 @@ class misp::config ($db_name = 'default', $db_user = 'default', $db_port = 'defa
 
   teigi::secret::sub_file{'/var/www/MISP/app/Config/database.php':
     teigi_keys => ['misp_db_password'],
-    template => 'hg_security/misp/database.php.erb',
+    template => 'misp/database.php.erb',
     subscribe => Exec['Directory permissions'],
     owner   => 'root',
     group   => 'apache',
@@ -109,7 +109,7 @@ class misp::config ($db_name = 'default', $db_user = 'default', $db_port = 'defa
     ensure => file,
     owner   => 'apache',
     group   => 'apache',
-    content => template('hg_security/misp/config.php.erb'),
+    content => template('misp/config.php.erb'),
     subscribe => Exec['Directory permissions'],
   }
 
@@ -119,7 +119,7 @@ class misp::config ($db_name = 'default', $db_user = 'default', $db_port = 'defa
     ensure => file,
     owner   => 'root',
     group   => 'apache',
-    content => template('hg_security/misp/misp.conf.erb'),
+    content => template('misp/misp.conf.erb'),
     subscribe => Exec['Directory permissions'],
   }
 
