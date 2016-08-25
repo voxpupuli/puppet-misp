@@ -10,7 +10,7 @@ class misp::config ($db_name = 'default', $db_user = 'default', $db_port = 'defa
   class {'::shibboleth':
     application_name    => 'wlcg-misp',
     site_name           => 'wlcg-misp.cern.ch',
-    remote_user_enabled => 'true',
+    remote_user_enabled => true,
     remote_user         => 'ADFS_LOGIN',
     session_storage     => 'memory',
     require_ssl         => true,
