@@ -1,7 +1,7 @@
 
-class misp::config ($db_name = 'default', $db_user = 'default', $db_port = 'default', $git_tag='default', $salt='default', $cipherseed='default',
+class misp::config ($db_name = 'default', $db_user = 'default', $db_host = 'default', $db_port = 'default', $git_tag='default', $salt='default', $cipherseed='default',
   $ssl_port = 'default', $server_admin = 'deafault', $document_root = 'default', $certificate_file ='default',
-  $certificate_key_file = 'default', $certificate_chain_file = 'default') inherits misp {
+  $certificate_key_file = 'default', $certificate_chain_file = 'default', $orgname = 'default') inherits misp {
 
   require 'misp::install'
 
