@@ -104,13 +104,13 @@ class misp::config ($db_name = 'default', $db_user = 'default', $db_host = 'defa
 
   #Apache config
 
-  file{'/etc/httpd/conf.d/misp.conf':
-    ensure => file,
-    owner   => 'root',
-    group   => 'apache',
-    content => template('misp/misp.conf.erb'),
-    subscribe => Exec['Directory permissions'],
-  }
+  #file{'/etc/httpd/conf.d/misp.conf':
+  #  ensure => file,
+  #  owner   => 'root',
+  #  group   => 'apache',
+  #  content => template('misp/misp.conf.erb'),
+  #  subscribe => Exec['Directory permissions'],
+  #}
 
   exec {'chcon files':
     command => '/usr/bin/chcon -t httpd_sys_content_rw_t /var/www/MISP/app/files',
