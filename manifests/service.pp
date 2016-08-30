@@ -18,5 +18,11 @@ class misp::service inherits misp {
     enable => true,
     ensure => 'running',
   }
-  
+
+  exec {'start bg workers':
+    command => '/usr/bin/chmod +x /var/www/MISP/app/Console/worker/start.sh && /usr/bin/su -s /bin/bash apache -c \'/usr/bin/scl enable rh-php56 /var/www/MISP/app/Console/worker/start.sh\'',
+    user => 'apache',
+    group => 'apache',
+    subscribe => Exec['chcon config.php'],
+  }
 }

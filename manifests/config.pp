@@ -154,11 +154,4 @@ class misp::config ($db_name = 'default', $db_user = 'default', $db_host = 'defa
     subscribe => File['/var/www/MISP/app/Config/config.php'],
   }
 
-  exec {'start bg workers':
-    command => '/usr/bin/chmod +x /var/www/MISP/app/Console/worker/start.sh && /usr/bin/su -s /bin/bash apache -c \'/usr/bin/scl enable rh-php56 /var/www/MISP/app/Console/worker/start.sh\'',
-    user => 'root',
-    group => 'apache',
-    subscribe => Exec['chcon config.php'],
-  }
-
 }
