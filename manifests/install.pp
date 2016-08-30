@@ -19,7 +19,7 @@ class misp::install inherits misp {
     cwd         => '/var/www/MISP/',
     refreshonly => true,
     subscribe   => Vcsrepo['/var/www/MISP/'],
-    notify      => Exec['git clone python-cybox','git clone python-stix', 'CakeResque curl'],
+    notify      => Vcsrepo['/var/www/MISP/app/files/scripts/python-cybox','/var/www/MISP/app/files/scripts/python-stix'],
   }
 
   vcsrepo { '/var/www/MISP/app/files/scripts/python-cybox':
@@ -66,6 +66,7 @@ class misp::install inherits misp {
     environment => ['COMPOSER_HOME=/var/www/MISP/app/'],
     refreshonly => true,
     notify      => Exec['CakeResque kamisama'],
+    subscribe   => Exec['git ignore permissions'],
   }
 
   exec {'CakeResque kamisama':
