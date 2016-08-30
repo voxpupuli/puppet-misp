@@ -1,7 +1,7 @@
 
 class misp::config ($db_name = 'misp', $db_user = 'misp', $db_host = 'misp.com', $db_port = '5505', $git_tag='v2.4.51',
   $salt='Rooraenietu8Eeyo<Qu2eeNfterd-dd+', $cipherseed='',
-  $orgname = 'ORGNAME', $webservername = 'httpd') inherits misp {
+  $orgname = 'ORGNAME', $webservername = 'httpd', $email = 'root@localhost', $contact = 'root@localhost') inherits misp {
 
   require '::misp::install'
 
