@@ -2,5 +2,5 @@ fixtures:
   repositories:
     stdlib: 'https://github.com/puppetlabs/puppetlabs-stdlib'
   symlinks:
-   "misp": "#{source_dir}"
+    "misp": "#{source_dir}"
 
