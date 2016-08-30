@@ -32,8 +32,8 @@ class misp::install inherits misp {
 
   exec {'git clone python-stix':
     command     => '/usr/bin/git clone https://github.com/STIXProject/python-stix.git',
-    cwd	        => '/var/www/MISP/app/files/scripts/',
-    refreshonly	=> true,
+    cwd         => '/var/www/MISP/app/files/scripts/',
+    refreshonly => true,
     unless      => '/usr/bin/ls -d /var/www/MISP/app/files/scripts/python-stix',
     notify      => Exec['python-stix config'],
   }
