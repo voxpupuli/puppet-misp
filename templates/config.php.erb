@@ -63,6 +63,11 @@ $config = array (
 			'amount' => 5,
 			'expire' => 300,
 		),
+	'Plugin' =>
+		array (
+			'Enrichment_services_enable' => <%= @enr_service -%>,
+			'Enrichment_hover_enable' => <%= @enr_hover -%>,
+		),
   // Uncomment the following to enable client SSL certificate authentication
   /*
   'CertAuth' =>
