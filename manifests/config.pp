@@ -148,7 +148,7 @@ class misp::config ($db_name = 'default', $db_user = 'default', $db_host = 'defa
   exec{'setsebool redis':
     command   => '/usr/sbin/setsebool -P httpd_can_network_connect on',
     subscribe => File['/etc/opt/rh/rh-php56/php.d/99-redis.ini'],
-    notify    => Service['<%= @webservername -%>'],
+    notify    => Service[$webservername],
   }
 
   #exec {'restart apache':
