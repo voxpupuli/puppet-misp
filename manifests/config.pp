@@ -1,8 +1,6 @@
 
 class misp::config ($db_name = 'misp', $db_user = 'misp', $db_host = 'misp.com', $db_port = '5505', $git_tag='v2.4.51',
   $salt='Rooraenietu8Eeyo<Qu2eeNfterd-dd+', $cipherseed='',
-  $ssl_port = '443', $server_admin = 'root@localhost', $document_root = '/var/www/html',
-  $certificate_file ='hostcert.pem', $certificate_key_file = 'hostkey.pem', $certificate_chain_file = 'ca.pem',
   $orgname = 'ORGNAME', $webservername = 'httpd') inherits misp {
 
   require '::misp::install'
