@@ -85,12 +85,12 @@ class misp::config ($db_name = 'default', $db_user = 'default', $db_host = 'defa
   }
 
   teigi::secret::sub_file{'/var/www/MISP/app/Config/database.php':
-    teigi_keys  => ['misp_db_password'],
-    template    => 'misp/database.php.erb',
-    subscribe   => Exec['Directory permissions'],
-    owner       => 'root',
-    group       => 'apache',
-    mode        => '640',
+    teigi_keys => ['misp_db_password'],
+    template   => 'misp/database.php.erb',
+    subscribe  => Exec['Directory permissions'],
+    owner      => 'root',
+    group      => 'apache',
+    mode       => '640',
   }
 
 
@@ -146,7 +146,7 @@ class misp::config ($db_name = 'default', $db_user = 'default', $db_host = 'defa
     command   => '/bin/systemctl restart  httpd.service',
     user      => 'root',
     group     => 'apache',
-    subscribe => Exec['setsebool redis']
+    subscribe => Exec['setsebool redis'],
   }
 
   exec{'chcon config.php':

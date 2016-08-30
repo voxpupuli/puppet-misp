@@ -40,7 +40,7 @@ class misp {
 
   certmgr::certificate { 'cert-misp': }
 
-  include systemd
+  include ::systemd
 
   firewall { '100 allow https':
     proto  => 'tcp',

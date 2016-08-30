@@ -16,20 +16,20 @@ class misp::dependencies inherits misp {
     { 'ensure' => 'present' }
   )
 
-  exec { "pear update-channels pear.php.net" :
-    command => "/usr/bin/pear update-channels pear.php.net",
-    require => [Package['php-pear']]
+  exec { 'pear update-channels pear.php.net' :
+    command => '/usr/bin/pear update-channels pear.php.net',
+    require => [Package['php-pear']],
   }
 
-  exec {"pear install Crypt_GPG":
-    command => "/usr/bin/pear install Crypt_GPG",
+  exec {'pear install Crypt_GPG':
+    command => '/usr/bin/pear install Crypt_GPG',
     creates => '/usr/bin/Crypt_GPG',
     unless  => '/usr/bin/pear list | grep Crypt_GPG',
-    require => Exec['pear update-channels pear.php.net']
+    require => Exec['pear update-channels pear.php.net'],
   }
 
-  exec {"pip install importlib":
-    command => "/usr/bin/pip install importlib",
-    unless  => "/usr/bin/pip list | grep importlib",
+  exec {'pip install importlib':
+    command => '/usr/bin/pip install importlib',
+    unless  => '/usr/bin/pip list | grep importlib',
   }
 }

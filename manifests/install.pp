@@ -6,12 +6,12 @@ class misp::install inherits misp {
   # MISP
 
   vcsrepo { '/var/www/MISP/':
-    ensure      => present,
-    provider    => git,
-    submodules  => true,
-    force       => false,
-    source      => 'git://github.com/MISP/MISP.git',
-    revision    => $misp::git_tag,
+    ensure     => present,
+    provider   => git,
+    submodules => true,
+    force      => false,
+    source     => 'git://github.com/MISP/MISP.git',
+    revision   => $misp::git_tag,
   }
 
   exec {'git ignore permissions':
