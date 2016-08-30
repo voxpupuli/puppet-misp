@@ -22,41 +22,43 @@ class misp::install inherits misp {
     notify      => Exec['git clone python-cybox','git clone python-stix', 'CakeResque curl'],
   }
 
-  exec {'git clone python-cybox':
-    command     => '/usr/bin/git clone https://github.com/CybOXProject/python-cybox.git',
-    cwd         => '/var/www/MISP/app/files/scripts/',
-    refreshonly => true,
-    unless      => '/usr/bin/ls -d /var/www/MISP/app/files/scripts/python-cybox',
-    notify      => Exec['python-cybox config'],
+  vcsrepo { '/var/www/MISP/app/files/scripts/python-cybox':
+    ensure     => present,
+    provider   => git,
+    submodules => true,
+    force      => false,
+    source     => 'git://github.com/CybOXProject/python-cybox.git',
+    revision   => 'v2.1.0.12',
   }
 
-  exec {'git clone python-stix':
-    command     => '/usr/bin/git clone https://github.com/STIXProject/python-stix.git',
-    cwd         => '/var/www/MISP/app/files/scripts/',
-    refreshonly => true,
-    unless      => '/usr/bin/ls -d /var/www/MISP/app/files/scripts/python-stix',
-    notify      => Exec['python-stix config'],
+  vcsrepo { '/var/www/MISP/app/files/scripts/python-stix':
+    ensure     => present,
+    provider   => git,
+    submodules => true,
+    force      => false,
+    source     => 'git://github.com/STIXProject/python-stix.git',
+    revision   => 'v1.1.1.4',
   }
 
   exec {'python-cybox config':
-    command     => '/usr/bin/git checkout v2.1.0.12 && /usr/bin/git config core.filemode false && /usr/bin/python setup.py install',
+    command     => '/usr/bin/git config core.filemode false && /usr/bin/python setup.py install',
     cwd         => '/var/www/MISP/app/files/scripts/python-cybox/',
     unless      => '/usr/bin/pip list | grep cybox',
     umask       => '0022',
     refreshonly => true,
+    subscribe   => Vcsrepo['/var/www/MISP/app/files/scripts/python-cybox'],
   }
 
   exec {'python-stix config':
-    command     => '/usr/bin/git checkout v1.1.1.4 && /usr/bin/git config core.filemode false && /usr/bin/python setup.py install',
+    command     => '/usr/bin/git config core.filemode false && /usr/bin/python setup.py install',
     cwd         => '/var/www/MISP/app/files/scripts/python-stix/',
     unless      => '/usr/bin/pip list | grep stix',
     umask       => '0022',
     refreshonly => true,
+    subscribe   => Vcsrepo['/var/www/MISP/app/files/scripts/python-stix'],
   }
 
   # CakePHP
-
-  #CakePHP
 
   exec {'CakeResque curl':
     command     => '/usr/bin/curl -s https://getcomposer.org/installer | php',
