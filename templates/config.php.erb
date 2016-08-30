@@ -7,7 +7,7 @@ $config = array (
     'salt' => '<%= @salt -%>',
     'cipherSeed' => '<%= @cipherseed -%>',
     //'auth'=>array('CertAuth.Certificate'), // additional authentication methods
-		'auth'=>array('ShibbAuth.ApacheShibb'),
+    'auth'=>array('ShibbAuth.ApacheShibb'),
   ),
   'MISP' =>
   array (
@@ -90,7 +90,6 @@ $config = array (
     'userDefaults'  => array ( 'role_id' => 3 ),          // default attributes for new users
   ),
   */
-
 	'ApacheShibbAuth'  =>                      // Configuration for shibboleth authentication
 	array(
 	'apacheEnv'         => 'REMOTE_USER',        // If proxy variable = HTTP_REMOTE_USER

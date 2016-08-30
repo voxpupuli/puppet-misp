@@ -48,8 +48,8 @@ class misp {
     action => 'accept',
   }
 
-  contain 'misp::dependencies'
-  contain 'misp::install'
-  contain 'misp::config'
-  contain 'misp::service'
+  contain '::misp::dependencies'
+  contain '::misp::install'
+  contain '::misp::config'
+  contain '::misp::service'
 }
