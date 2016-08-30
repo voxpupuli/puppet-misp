@@ -3,7 +3,7 @@ class misp::config ($db_name = 'misp', $db_user = 'misp', $db_host = 'misp.com',
   $salt='Rooraenietu8Eeyo<Qu2eeNfterd-dd+', $cipherseed='',
   $orgname = 'ORGNAME', $webservername = 'httpd', $email = 'root@localhost', $contact = 'root@localhost',
   $live = 'true', $site_admin_debug = 'false',
-  $gnu_email = 'no-reply@localhost', $gnu_homdir = '/var/www/html') inherits misp {
+  $gnu_email = 'no-reply@localhost', $gnu_homedir = '/var/www/html') inherits misp {
 
   require '::misp::install'
 
