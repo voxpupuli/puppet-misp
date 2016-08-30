@@ -24,13 +24,12 @@ class misp::dependencies inherits misp {
   exec {"pear install Crypt_GPG":
     command => "/usr/bin/pear install Crypt_GPG",
     creates => '/usr/bin/Crypt_GPG',
-    unless => '/usr/bin/pear list | grep Crypt_GPG',
+    unless  => '/usr/bin/pear list | grep Crypt_GPG',
     require => Exec['pear update-channels pear.php.net']
   }
 
   exec {"pip install importlib":
     command => "/usr/bin/pip install importlib",
-    unless => "/usr/bin/pip list | grep importlib",
+    unless  => "/usr/bin/pip list | grep importlib",
   }
-
 }
