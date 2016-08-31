@@ -73,7 +73,7 @@ class misp::config inherits misp {
     subscribe => Exec['Directory permissions'],
   }
 
-  file { '/var/www/MISP/app/Config/bootstrap.php':
+  file { "${config_dir}bootstrap.php":
     ensure    => file,
     owner     => 'root',
     group     => 'apache',
@@ -81,7 +81,7 @@ class misp::config inherits misp {
     subscribe => Exec['Directory permissions'],
   }
 
-  file { '/var/www/MISP/app/Config/core.php':
+  file { "${config_dir}core.php":
     ensure    => file,
     owner     => 'root',
     group     => 'apache',
@@ -89,16 +89,16 @@ class misp::config inherits misp {
     subscribe => Exec['Directory permissions'],
   }
 
-  teigi::secret::sub_file{'/var/www/MISP/app/Config/database.php':
-    teigi_keys => ['misp_db_password'],
-    template   => 'misp/database.php.erb',
-    subscribe  => Exec['Directory permissions'],
-    owner      => 'root',
-    group      => 'apache',
+  file{"${config_dir}database.php":
+    ensure    => file,
+    owner     => 'root',
+    group     => 'apache',
     mode       => '640',
+    content   => template('misp/database.php.erb'),
+    subscribe => Exec['Directory permissions'],
   }
 
-  file{'/var/www/MISP/app/Config/config.php':
+  file{"${config_dir}config.php":
     ensure    => file,
     owner     => 'apache',
     group     => 'apache',

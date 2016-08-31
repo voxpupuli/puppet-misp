@@ -55,7 +55,9 @@ class misp (
   $gnu_email = 'no-reply@localhost',
   $gnu_homedir = '/var/www/html',
   $import_service = false,
-  $export_service = false) {
+  $export_service = false,
+  $install_dir = '/var/www/MISP/',
+  $config_dir = '/var/www/MISP/app/Config/') {
 
   #certmgr::certificate { 'cert-misp': }
 
