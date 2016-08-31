@@ -1,10 +1,5 @@
 
-class misp::config ($db_name = 'misp', $db_user = 'misp', $db_host = 'misp.com', $db_port = '5505', $git_tag='v2.4.51',
-  $salt='Rooraenietu8Eeyo<Qu2eeNfterd-dd+', $cipherseed='',
-  $orgname = 'ORGNAME', $webservername = 'httpd', $email = 'root@localhost', $contact = 'root@localhost',
-  $live = true, $site_admin_debug = false, $enr_service = false, $enr_hover = false,
-  $gnu_email = 'no-reply@localhost', $gnu_homedir = '/var/www/html',
-  $import_enable = false, $export_enable = false) inherits misp {
+class misp::config inherits misp {
 
   require '::misp::install'
 
