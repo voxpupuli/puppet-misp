@@ -1,7 +1,7 @@
 
 class misp::service inherits misp {
 
-  require '::misp::install'
+  require '::misp::config'
 
   service { 'rh-php56-php-fpm':
     ensure    => 'running',
