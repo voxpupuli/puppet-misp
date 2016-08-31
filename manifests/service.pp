@@ -23,6 +23,5 @@ class misp::service inherits misp {
     command   => '/usr/bin/chmod +x /var/www/MISP/app/Console/worker/start.sh && /usr/bin/su -s /bin/bash apache -c \'/usr/bin/scl enable rh-php56 /var/www/MISP/app/Console/worker/start.sh\'',
     user      => 'root',
     group     => 'apache',
-    subscribe => File['/var/www/MISP/app/Config/config.php'],
   }
 }
