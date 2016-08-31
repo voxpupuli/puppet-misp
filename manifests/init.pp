@@ -41,7 +41,7 @@ class misp ($db_name = 'misp', $db_user = 'misp', $db_host = 'misp.com', $db_por
   $orgname = 'ORGNAME', $webservername = 'httpd', $email = 'root@localhost', $contact = 'root@localhost',
   $live = true, $site_admin_debug = false, $enr_service = false, $enr_hover = false,
   $gnu_email = 'no-reply@localhost', $gnu_homedir = '/var/www/html',
-  $import_enable = false, $export_enable = false) {
+  $import_service = false, $export_service = false) {
 
   #certmgr::certificate { 'cert-misp': }
 
