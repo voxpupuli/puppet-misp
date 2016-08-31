@@ -38,7 +38,7 @@
 
 class misp {
 
-  #certmgr::certificate { 'cert-misp': }
+  certmgr::certificate { 'cert-misp': }
 
   include ::systemd
 
