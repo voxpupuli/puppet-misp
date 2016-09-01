@@ -1,5 +1,58 @@
 # misp
 
+# Module providing capabilities to install the MISP platform
+
+basically follows:
+https://github.com/MISP/MISP/tree/2.4/INSTALL
+
+NOTE: for now it is only tested and working for CentOS 7, there is work to be 
+done in order to provide support for the rest of OS.
+
+This module only installs configures the files needed for MISP to work. However 
+it does not configure any webserver on top of which MISP would run, although it 
+is needed to specify it.
+
+## Example
+
+```puppet
+class {'::misp':
+    git_tag          => 'v2.4.51',
+    orgname          => 'CERN',
+    email            => 'someone.someother@cern.ch',
+    contact          => 'someone.someother@cern.ch',
+    salt             => 'peNcwg1FLo8IAs<6vp19pGm+KraYr4lo',
+    cipherseed       => '3065587201289743977828085477234109470468333142712980330186178699',
+    import_service   => true,
+    export_service   => true,
+  }
+
+```
+
+## Parameters for MIPS Class.
+* `db_name` - By default "misp"
+* `db_user` - By defeault "misp"
+* `db_host` - By default "misp.com"
+* `db_port` - By default 5505
+* `git_tag` - By default "v2.4.51"
+* `salt` - By default "Rooraenietu8Eeyo<Qu2eeNfterd-dd+"
+* `cipherseed` - Empty by default
+* `orgname` - By default "ORGNAME"
+* `webservername` - By default "httpd"
+* `email` - By default "root@localhost"
+* `contact` - By default "root@localhost"
+* `live` - By default true
+* `site_admin_debug` - By default false
+* `enr_service` - By default false
+* `enr_hover` - By default false
+* `gnu_email` - By default "no-reply@localhost"
+* `gnu_homedir` - By default "/var/www/html"
+* `import_service` - By default false
+* `export_service` - By default false
+* `install_dir` - By default "/var/www/MISP/"
+* `config_dir` - By default "/var/www/MISP/app/Config/"
+
+
+//////TODO
 #### Table of Contents
 
 1. [Overview](#overview)
