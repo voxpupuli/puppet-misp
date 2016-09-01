@@ -15,7 +15,7 @@ class misp::config inherits misp {
     ensure    => directory,
     owner     => 'apache',
     group     => 'apache',
-    seltype   => 'httpd_sys_content_rw_t',
+    seltype   => 'httpd_sys_rw_content_t',
     recurse   => false,
     subscribe => Exec['Directory permissions'],
     notify    => File['/var/www/MISP/app/files/terms','/var/www/MISP/app/files/scripts/tmp'],
@@ -25,7 +25,7 @@ class misp::config inherits misp {
     ensure  => directory,
     owner   => 'apache',
     group   => 'apache',
-    seltype => 'httpd_sys_content_rw_t',
+    seltype => 'httpd_sys_rw_content_t',
     recurse => false,
   }
 
@@ -33,7 +33,7 @@ class misp::config inherits misp {
     ensure  => directory,
     owner   => 'apache',
     group   => 'apache',
-    seltype => 'httpd_sys_content_rw_t',
+    seltype => 'httpd_sys_rw_content_t',
     recurse => false,
   }
 
@@ -41,7 +41,7 @@ class misp::config inherits misp {
     ensure    => directory,
     owner     => 'apache',
     group     => 'apache',
-    seltype   => 'httpd_sys_content_rw_t',
+    seltype   => 'httpd_sys_rw_content_t',
     recurse   => false,
     subscribe => Exec['Directory permissions'],
   }
@@ -51,7 +51,7 @@ class misp::config inherits misp {
     owner     => 'apache',
     group     => 'apache',
     recurse   => true,
-    seltype   => 'httpd_sys_content_rw_t',
+    seltype   => 'httpd_sys_rw_content_t',
     subscribe => Exec['Directory permissions'],
   }
 
@@ -60,7 +60,7 @@ class misp::config inherits misp {
     owner     => 'apache',
     group     => 'apache',
     recurse   => true,
-    seltype   => 'httpd_sys_content_rw_t',
+    seltype   => 'httpd_sys_rw_content_t',
     subscribe => Exec['Directory permissions'],
   }
 
@@ -69,7 +69,7 @@ class misp::config inherits misp {
     owner     => 'apache',
     group     => 'apache',
     recurse   => true,
-    seltype   => 'httpd_sys_content_rw_t',
+    seltype   => 'httpd_sys_rw_content_t',
     subscribe => Exec['Directory permissions'],
   }
 
@@ -103,7 +103,7 @@ class misp::config inherits misp {
     owner     => 'apache',
     group     => 'apache',
     content   => template('misp/config.php.erb'),
-    seltype   => 'httpd_sys_content_rw_t',
+    seltype   => 'httpd_sys_rw_content_t',
     subscribe => Exec['Directory permissions'],
   }
 
