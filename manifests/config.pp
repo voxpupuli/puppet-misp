@@ -73,7 +73,7 @@ class misp::config inherits misp {
     subscribe => Exec['Directory permissions'],
   }
 
-  file { "${config_dir}bootstrap.php":
+  file { "${misp::config_dir}bootstrap.php":
     ensure    => file,
     owner     => 'root',
     group     => 'apache',
@@ -81,7 +81,7 @@ class misp::config inherits misp {
     subscribe => Exec['Directory permissions'],
   }
 
-  file { "${config_dir}core.php":
+  file { "${misp::config_dir}core.php":
     ensure    => file,
     owner     => 'root',
     group     => 'apache',
@@ -89,7 +89,7 @@ class misp::config inherits misp {
     subscribe => Exec['Directory permissions'],
   }
 
-  file{"${config_dir}database.php":
+  file{"${misp::config_dir}database.php":
     ensure    => file,
     owner     => 'root',
     group     => 'apache',
@@ -98,7 +98,7 @@ class misp::config inherits misp {
     subscribe => Exec['Directory permissions'],
   }
 
-  file{"${config_dir}config.php":
+  file{"${misp::config_dir}config.php":
     ensure    => file,
     owner     => 'apache',
     group     => 'apache',
