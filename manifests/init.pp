@@ -59,7 +59,7 @@ class misp (
   $install_dir = '/var/www/MISP/',
   $config_dir = '/var/www/MISP/app/Config/') {
 
-  #certmgr::certificate { 'cert-misp': }
+    #certmgr::certificate { 'cert-misp': }
 
   include ::systemd
 
