@@ -8,20 +8,20 @@ class misp::config inherits misp {
   exec {'Directory permissions':
     command     => '/usr/bin/chown -R root:apache /var/www/MISP && /usr/bin/find /var/www/MISP -type d -exec /usr/bin/chmod g=rx {} \; && /usr/bin/chmod -R g+r,o= /var/www/MISP',
     refreshonly => true, #Might be a problem with updates. It will only be executed if the full installation goes through
-    subscribe   => File["${install_dir}app/Plugin/CakeResque/Config/config.php"],
+    subscribe   => File["${misp::misp::install_dir}app/Plugin/CakeResque/Config/config.php"],
   }
 
-  file {"${install_dir}app/files" :
+  file {"${misp::install_dir}app/files" :
     ensure    => directory,
     owner     => 'apache',
     group     => 'apache',
     seltype   => 'httpd_sys_rw_content_t',
     recurse   => false,
     subscribe => Exec['Directory permissions'],
-    notify    => File["${install_dir}app/files/terms","${install_dir}app/files/scripts/tmp"],
+    notify    => File["${misp::install_dir}app/files/terms","${misp::install_dir}app/files/scripts/tmp"],
   }
 
-  file {"${install_dir}app/files/terms" :
+  file {"${misp::install_dir}app/files/terms" :
     ensure  => directory,
     owner   => 'apache',
     group   => 'apache',
@@ -29,7 +29,7 @@ class misp::config inherits misp {
     recurse => false,
   }
 
-  file {"${install_dir}app/files/scripts/tmp" :
+  file {"${misp::install_dir}app/files/scripts/tmp" :
     ensure  => directory,
     owner   => 'apache',
     group   => 'apache',
@@ -37,7 +37,7 @@ class misp::config inherits misp {
     recurse => false,
   }
 
-  file {"${install_dir}app/Plugin/CakeResque/tmp" :
+  file {"${misp::install_dir}app/Plugin/CakeResque/tmp" :
     ensure    => directory,
     owner     => 'apache',
     group     => 'apache',
@@ -46,7 +46,7 @@ class misp::config inherits misp {
     subscribe => Exec['Directory permissions'],
   }
 
-  file {"${install_dir}app/tmp" :
+  file {"${misp::install_dir}app/tmp" :
     ensure    => directory,
     owner     => 'apache',
     group     => 'apache',
@@ -55,7 +55,7 @@ class misp::config inherits misp {
     subscribe => Exec['Directory permissions'],
   }
 
-  file {"${install_dir}app/webroot/img/orgs" :
+  file {"${misp::install_dir}app/webroot/img/orgs" :
     ensure    => directory,
     owner     => 'apache',
     group     => 'apache',
@@ -64,7 +64,7 @@ class misp::config inherits misp {
     subscribe => Exec['Directory permissions'],
   }
 
-  file {"${install_dir}app/webroot/img/custom" :
+  file {"${misp::install_dir}app/webroot/img/custom" :
     ensure    => directory,
     owner     => 'apache',
     group     => 'apache',
@@ -77,7 +77,7 @@ class misp::config inherits misp {
     ensure    => file,
     owner     => 'root',
     group     => 'apache',
-    source    => "file://${install_dir}app/Config/bootstrap.default.php",
+    source    => "file://${misp::install_dir}app/Config/bootstrap.default.php",
     subscribe => Exec['Directory permissions'],
   }
 
@@ -85,7 +85,7 @@ class misp::config inherits misp {
     ensure    => file,
     owner     => 'root',
     group     => 'apache',
-    source    => "file://${install_dir}app/Config/core.default.php",
+    source    => "file://${misp::install_dir}app/Config/core.default.php",
     subscribe => Exec['Directory permissions'],
   }
 
@@ -93,7 +93,7 @@ class misp::config inherits misp {
     ensure    => file,
     owner     => 'root',
     group     => 'apache',
-    mode       => '640',
+    mode      => '0640',
     content   => template('misp/database.php.erb'),
     subscribe => Exec['Directory permissions'],
   }
