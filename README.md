@@ -39,7 +39,6 @@ This module needs the following packages:
     * rh-php56, rh-php56-php-fpm, rh-php56-php-devel, rh-php56-php-mysqlnd, rh-php56-php-mbstring, php-pecl-redis, php-pear: PHP 5.6 related packages
     * php-mbstring: Python package required by Crypt_GPG
     * libxslt-devel', 'zlib-devel
-    * mod_ssl 
 
 The services needed by MISP are 
 
