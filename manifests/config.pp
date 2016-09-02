@@ -5,6 +5,14 @@ class misp::config inherits misp {
 
   # Apache permissions
 
+  file { "${misp::install_dir}app/Plugin/CakeResque/Config/config.php":
+    ensure    => file,
+    owner     => 'root',
+    group     => 'apache',
+    source    => "file://${misp::install_dir}INSTALL/setup/config.php",
+    subscribe => Exec['CakeResque install'],
+  }
+
   exec {'Directory permissions':
     command     => '/usr/bin/chown -R root:apache /var/www/MISP && /usr/bin/find /var/www/MISP -type d -exec /usr/bin/chmod g=rx {} \; && /usr/bin/chmod -R g+r,o= /var/www/MISP',
     refreshonly => true, #Might be a problem with updates. It will only be executed if the full installation goes through

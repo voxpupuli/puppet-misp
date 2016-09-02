@@ -114,12 +114,4 @@ class misp::install inherits misp {
     target    => '/etc/opt/rh/rh-php56/php-fpm.d/timezone.ini',
     subscribe => File['/etc/opt/rh/rh-php56/php-fpm.d/timezone.ini'],
   }
-
-  file { '/var/www/MISP/app/Plugin/CakeResque/Config/config.php':
-    ensure    => file,
-    owner     => 'root',
-    group     => 'apache',
-    source    => 'file:///var/www/MISP/INSTALL/setup/config.php',
-    subscribe => Exec['CakeResque install'],
-  }
 }
