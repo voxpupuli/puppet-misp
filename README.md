@@ -18,7 +18,11 @@ starts the services. However it does not create the database, that is up to the 
 set up the webserver on top of which MISP would run, menaning that apache, nginx or another one will be needed (nevertheless
 it is needed for the module to know the name of the process of the web server).
 
-The module follows the instructions that can be found [here](https://github.com/MISP/MISP/tree/2.4/INSTALL)
+In addition the database will need to be set up, the schema imported and then create a user with rights to access misp database. 
+If using gpg the gpg key will need to be created.
+
+The module follows the instructions that can be found [here](https://github.com/MISP/MISP/tree/2.4/INSTALL). Also details about the 
+database and gpg key creation and set up can be found there.
 
 NOTE: the configuration and database files of MISP are used as templates on the module, therefore if the are major changes on the version of MISP the template might cause troubles
 and need to be updated.

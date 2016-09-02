@@ -39,7 +39,7 @@
 class misp (
   $db_name = 'misp',
   $db_user = 'misp',
-  $db_host = 'misp.com',
+  $db_host = 'localhost',
   $db_port = '5505',
   $git_tag='v2.4.51',
   $salt='Rooraenietu8Eeyo<Qu2eeNfterd-dd+',
