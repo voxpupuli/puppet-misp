@@ -1,58 +1,5 @@
-# misp
+# MISP MODULE
 
-# Module providing capabilities to install the MISP platform
-
-basically follows:
-https://github.com/MISP/MISP/tree/2.4/INSTALL
-
-NOTE: for now it is only tested and working for CentOS 7, there is work to be 
-done in order to provide support for the rest of OS.
-
-This module only installs configures the files needed for MISP to work. However 
-it does not configure any webserver on top of which MISP would run, although it 
-is needed to specify it.
-
-## Example
-
-```puppet
-class {'::misp':
-    git_tag          => 'v2.4.51',
-    orgname          => 'CERN',
-    email            => 'someone.someother@cern.ch',
-    contact          => 'someone.someother@cern.ch',
-    salt             => 'peNcwg1FLo8IAs<6vp19pGm+KraYr4lo',
-    cipherseed       => '3065587201289743977828085477234109470468333142712980330186178699',
-    import_service   => true,
-    export_service   => true,
-  }
-
-```
-
-## Parameters for MIPS Class.
-* `db_name` - By default "misp"
-* `db_user` - By defeault "misp"
-* `db_host` - By default "misp.com"
-* `db_port` - By default 5505
-* `git_tag` - By default "v2.4.51"
-* `salt` - By default "Rooraenietu8Eeyo<Qu2eeNfterd-dd+"
-* `cipherseed` - Empty by default
-* `orgname` - By default "ORGNAME"
-* `webservername` - By default "httpd"
-* `email` - By default "root@localhost"
-* `contact` - By default "root@localhost"
-* `live` - By default true
-* `site_admin_debug` - By default false
-* `enr_service` - By default false
-* `enr_hover` - By default false
-* `gnu_email` - By default "no-reply@localhost"
-* `gnu_homedir` - By default "/var/www/html"
-* `import_service` - By default false
-* `export_service` - By default false
-* `install_dir` - By default "/var/www/MISP/"
-* `config_dir` - By default "/var/www/MISP/app/Config/"
-
-
-//////TODO
 #### Table of Contents
 
 1. [Overview](#overview)
@@ -68,65 +15,94 @@ class {'::misp':
 
 ## Overview
 
-A one-maybe-two sentence summary of what the module does/what problem it solves.
-This is your 30 second elevator pitch for your module. Consider including
-OS/Puppet version it works with.
+This module install and configure MISP (Malware Information Sharing Platform) on CentOS 7. 
+It has been tested on Puppet 3.8.7 and with MISP versions 2.4.50 and 2.4.51.
 
 ## Module Description
 
-If applicable, this section should have a brief description of the technology
-the module integrates with and what that integration enables. This section
-should answer the questions: "What does this module *do*?" and "Why would I use
-it?"
+This module installs and configure MISP on CentOS 7. It installs all the dependencies needed, configures MISP and 
+starts the services. However it does not create the database, that is up to the user to do. In addition it does not 
+set up the webserver on top of which MISP would run, menaning that apache, nginx or another one will be needed (nevertheless
+it is needed for the module to know the name of the process of the web server).
 
-If your module has a range of functionality (installation, configuration,
-management, etc.) this is the time to mention it.
+The module follows the instructions that can be found [here](https://github.com/MISP/MISP/tree/2.4/INSTALL)
 
 ## Setup
 
 ### What misp affects
 
-* A list of files, packages, services, or operations that the module will alter,
-  impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form.
+The MISP module will not alter any OS files, all the configuration will happen in /install/directory/app/Config/
+where the *core.php*, *bootstrap.php*, *database.php* and *config.php* files will be deployed with the established values.
 
-### Setup Requirements **OPTIONAL**
+This module needs the following packages:
 
-If your module requires anything extra before setting up (pluginsync enabled,
-etc.), mention it here.
+    * gcc: Needed for compiling Python modules
+    * git: Needed for pulling the MISP code and other git repositories which MISP depends on
+    * zip, redis, haveged and maria db
+    * python-devel, python-pip, python-lxml, python-dateutil, python-six, python-lm, importlib [pip], Crypt_GPG [pear]: Python related packages
+    * rh-php56, rh-php56-php-fpm, rh-php56-php-devel, rh-php56-php-mysqlnd, rh-php56-php-mbstring, php-pecl-redis, php-pear: PHP 5.6 related packages
+    * php-mbstring: Python package required by Crypt_GPG
+    * libxslt-devel', 'zlib-devel
+    * mod_ssl 
 
-### Beginning with misp
+The services needed by MISP are 
 
-The very basic steps needed for a user to get the module up and running.
-
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you may wish to include an additional section here: Upgrading
-(For an example, see http://forge.puppetlabs.com/puppetlabs/firewall).
+    * rh-php56-php-fpm
+    * haveged
+    * redis
+    * The 4 workers and the scheduler [CakeResque]
 
 ## Usage
 
-Put the classes, types, and resources for customizing, configuring, and doing
-the fancy stuff with your module here.
+### Basic usage
 
-## Reference
+In orther to use the module it would be enough with including the module:
+```
+    include ::misp,
+```
 
-Here, list the classes, types, providers, facts, etc contained in your module.
-This section should include all of the under-the-hood workings of your module so
-people know what the module is touching on their system but don't need to mess
-with things. (We are working on automating this section!)
+Or the class:
+```
+    class{ ::misp:}
+```
 
-## Limitations
+An the module will use all parameters with default values, these values are specified later on.
 
-This is where you list OS compatibility, version compatibility, etc.
+### Another usage example
 
-## Development
+```
+class {'::misp':
+    git_tag          => 'v2.4.51',
+    org_id           => '1',
+    email            => 'someone.someother@cern.ch',
+    contact          => 'someone.someother@cern.ch',
+    salt             => 'peNcwg1FLo8IAs<6vp19pGm+KraYr4lo',
+    cipherseed       => '3065587201289743977828085477234109470468333142712980330186178699',
+    import_service   => true,
+    export_service   => true,
+  }
 
-Since your module is awesome, other users will want to play with it. Let them
-know what the ground rules for contributing are.
+```
 
-## Release Notes/Contributors/Etc **Optional**
-
-If you aren't using changelog, put your release notes here (though you should
-consider using changelog). You may also add any additional sections you feel are
-necessary or important to include here. Please use the `## ` header.
+### Parameters for MIPS Class.
+* `git_tag` - Tag or version of MISP that will be installed. By default "v2.4.51"
+* `install_dir` - Directory in which to install MISP. By default "/var/www/MISP/"
+* `config_dir` - Directory in which the configuration of MISP should be located. By default "/var/www/MISP/app/Config/"
+* `email` - Email address of the MISP installation. By default "root@localhost"
+* `contact` - Contact address of the MISP installation. By default "root@localhost"
+* `org_id` - Id of the organisation that owns the MISP instance. By default is set to 1, meaning the first Organisation in the system
+* `live` - If MISP should be live or not (be accessible to not admins). By default true
+* `site_admin_debug` - If the site admins page is on debug mode (not recommended). By default false
+* `salt` - By default "Rooraenietu8Eeyo<Qu2eeNfterd-dd+"
+* `cipherseed` - Empty by default
+* `gnu_email` - By default "no-reply@localhost"
+* `gnu_homedir` - By default "/var/www/html"
+* `enr_service` - Enrichment service. By default false
+* `enr_hover` - Enrichment hover. By default false
+* `import_service` - Import services (both API and UI level). By default false
+* `export_service` - Export services (both API and UI level). By default false
+* `webservername` - Name of the web server process on top of which MISP runs. By default "httpd"
+* `db_name` - Name of the database. By default "misp"
+* `db_user` - Name of the user with rights on the database. By defeault "misp"
+* `db_host` - Name of the host in which the database is located. By default "misp.com"
+* `db_port` - Port to connect to the database in the specified host. By default 5505

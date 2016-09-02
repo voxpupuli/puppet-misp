@@ -44,7 +44,7 @@ class misp (
   $git_tag='v2.4.51',
   $salt='Rooraenietu8Eeyo<Qu2eeNfterd-dd+',
   $cipherseed='',
-  $orgname = 'ORGNAME',
+  $org_id = '1',
   $webservername = 'httpd',
   $email = 'root@localhost',
   $contact = 'root@localhost',
