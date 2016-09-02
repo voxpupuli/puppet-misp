@@ -6,14 +6,7 @@
 2. [Module Description - What the module does and why it is useful](#module-description)
 3. [Setup - The basics of getting started with misp](#setup)
     * [What misp affects](#what-misp-affects)
-    * [Setup requirements](#setup-requirements)
-    * [Beginning with misp](#beginning-with-misp)
 4. [Usage - Configuration options and additional functionality](#usage)
-5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
-5. [Limitations - OS compatibility, etc.](#limitations)
-6. [Development - Guide for contributing to the module](#development)
-
-## Overview
 
 This module install and configure MISP (Malware Information Sharing Platform) on CentOS 7. 
 It has been tested on Puppet 3.8.7 and with MISP versions 2.4.50 and 2.4.51.
@@ -26,6 +19,9 @@ set up the webserver on top of which MISP would run, menaning that apache, nginx
 it is needed for the module to know the name of the process of the web server).
 
 The module follows the instructions that can be found [here](https://github.com/MISP/MISP/tree/2.4/INSTALL)
+
+NOTE: the configuration and database files of MISP are used as templates on the module, therefore if the are major changes on the version of MISP the template might cause troubles
+and need to be updated.
 
 ## Setup
 
