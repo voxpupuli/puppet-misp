@@ -53,20 +53,20 @@ The services needed by MISP are
 ### Basic usage
 
 In orther to use the module it would be enough with including the module:
-```
-    include ::misp,
+```puppet
+include ::misp,
 ```
 
 Or the class:
-```
-    class{ ::misp:}
+```puppet
+class{ ::misp:}
 ```
 
 An the module will use all parameters with default values, these values are specified later on.
 
 ### Another usage example
 
-```
+```puppet
 class {'::misp':
     git_tag          => 'v2.4.51',
     org_id           => '1',
