@@ -23,9 +23,9 @@ class misp::dependencies inherits misp {
     require => [Package['php-pear']],
   }
 
-  exec {'/usr/bin/scl enable rh-php56 "pear install Crypt_GPG"':
+  exec {'Crypt_GPG':
     user    => root,
-    command => '/usr/bin/pear install Crypt_GPG',
+    command => '/usr/bin/scl enable rh-php56 "pear install Crypt_GPG"',
     creates => '/usr/bin/Crypt_GPG',
     unless  => '/usr/bin/scl enable rh-php56 "pear list | grep Crypt_GPG"',
     require => Exec['pear update-channels pear.php.net'],
