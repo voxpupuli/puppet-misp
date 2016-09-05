@@ -77,8 +77,8 @@ class misp::install inherits misp {
 
   exec {'CakeResque config':
     command     => '/usr/bin/php composer.phar config vendor-dir Vendor',
-    cwd         => '${misp::install_dir}/app/',
-    environment => ["OMPOSER_HOME=${misp::install_dir}/app/"],
+    cwd         => "${misp::install_dir}/app/",
+    environment => ["COMPOSER_HOME=${misp::install_dir}/app/"],
     refreshonly => true,
     notify      => Exec['CakeResque install'],
   }
