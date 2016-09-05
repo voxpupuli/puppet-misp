@@ -40,8 +40,12 @@ class misp (
   $db_name = 'misp',
   $db_user = 'misp',
   $db_host = 'localhost',
-  $db_port = '5505',
-  $git_tag='v2.4.51',
+  $db_port = '3306',
+  $misp_git_tag='v2.4.51',
+  $stix_git_repo='git://github.com/STIXProject/python-stix.git',
+  $stix_git_tag='v1.1.1.4',
+  $cybox_git_repo='git://github.com/CybOXProject/python-cybox.git',
+  $cybox_git_tag='v2.1.0.12',
   $salt='Rooraenietu8Eeyo<Qu2eeNfterd-dd+',
   $cipherseed='',
   $org_id = '1',
@@ -50,30 +54,16 @@ class misp (
   $contact = 'root@localhost',
   $live = true,
   $site_admin_debug = false,
-  $enr_service = false,
-  $enr_hover = false,
-  $gnu_email = 'no-reply@localhost',
-  $gnu_homedir = '/var/www/html',
+  $enrichment_service = false,
+  $enrichment_hover = false,
+  $gpg_email = 'no-reply@localhost',
+  $gpg_homedir = '/var/www/html',
   $import_service = false,
   $export_service = false,
   $install_dir = '/var/www/MISP/',
-  $config_dir = '/var/www/MISP/app/Config/') {
+  $config_dir = "${install_dir}/app/Config/") {
 
-    #certmgr::certificate { 'cert-misp': }
-
-  include ::systemd
-
-  firewall { '100 allow https':
-    proto  => 'tcp',
-    dport  => '443',
-    action => 'accept',
-  }
-
-  firewall { '101 allow http':
-    proto  => 'tcp',
-    dport  => '80',
-    action => 'accept',
-  }
+  #include ::systemd
 
   contain '::misp::dependencies'
   contain '::misp::install'

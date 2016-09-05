@@ -5,65 +5,63 @@ class misp::install inherits misp {
 
   # MISP
 
-  vcsrepo { '/var/www/MISP/':
+  vcsrepo { "${misp::install_dir}":
     ensure     => present,
     provider   => git,
     submodules => true,
     force      => false,
     source     => 'git://github.com/MISP/MISP.git',
-    revision   => $misp::git_tag,
+    revision   => $misp::misp_git_tag,
   }
 
   exec {'git ignore permissions':
     command     => '/usr/bin/git config core.filemode false',
-    cwd         => '/var/www/MISP/',
+    cwd         => "${misp::install_dir}",
     refreshonly => true,
-    subscribe   => Vcsrepo['/var/www/MISP/'],
-    notify      => Vcsrepo['/var/www/MISP/app/files/scripts/python-cybox','/var/www/MISP/app/files/scripts/python-stix'],
+    subscribe   => Vcsrepo["${misp::install_dir}"],
+    notify      => Vcsrepo["${misp::install_dir}/app/files/scripts/python-cybox","${misp::install_dir}/app/files/scripts/python-stix"],
   }
 
-  vcsrepo { '/var/www/MISP/app/files/scripts/python-cybox':
+  vcsrepo { "${misp::install_dir}/app/files/scripts/python-cybox":
     ensure     => present,
     provider   => git,
-    submodules => true,
     force      => false,
-    source     => 'git://github.com/CybOXProject/python-cybox.git',
-    revision   => 'v2.1.0.12',
+    source     => $misp::cybox_git_repo,
+    revision   => $misp::cybox_git_tag,
   }
 
-  vcsrepo { '/var/www/MISP/app/files/scripts/python-stix':
+  vcsrepo { "${misp::install_dir}/app/files/scripts/python-stix":
     ensure     => present,
     provider   => git,
-    submodules => true,
     force      => false,
-    source     => 'git://github.com/STIXProject/python-stix.git',
-    revision   => 'v1.1.1.4',
+    source     => $misp::stix_git_repo,
+    revision   => $misp::stix_git_tag,
   }
 
   exec {'python-cybox config':
     command     => '/usr/bin/git config core.filemode false && /usr/bin/python setup.py install',
-    cwd         => '/var/www/MISP/app/files/scripts/python-cybox/',
+    cwd         => "${misp::install_dir}/app/files/scripts/python-cybox/",
     unless      => '/usr/bin/pip list | grep cybox',
     umask       => '0022',
     refreshonly => true,
-    subscribe   => Vcsrepo['/var/www/MISP/app/files/scripts/python-cybox'],
+    subscribe   => Vcsrepo["${misp::install_dir}/app/files/scripts/python-cybox"],
   }
 
   exec {'python-stix config':
     command     => '/usr/bin/git config core.filemode false && /usr/bin/python setup.py install',
-    cwd         => '/var/www/MISP/app/files/scripts/python-stix/',
+    cwd         => "${misp::install_dir}/app/files/scripts/python-stix/",
     unless      => '/usr/bin/pip list | grep stix',
     umask       => '0022',
     refreshonly => true,
-    subscribe   => Vcsrepo['/var/www/MISP/app/files/scripts/python-stix'],
+    subscribe   => Vcsrepo["${misp::install_dir}/app/files/scripts/python-stix"],
   }
 
   # CakePHP
 
   exec {'CakeResque curl':
     command     => '/usr/bin/curl -s https://getcomposer.org/installer | php',
-    cwd         => '/var/www/MISP/app/',
-    environment => ['COMPOSER_HOME=/var/www/MISP/app/'],
+    cwd         => "${misp::install_dir}/app/",
+    environment => ["COMPOSER_HOME=${misp::install_dir}/app/"],
     refreshonly => true,
     notify      => Exec['CakeResque kamisama'],
     subscribe   => Exec['git ignore permissions'],
@@ -71,24 +69,24 @@ class misp::install inherits misp {
 
   exec {'CakeResque kamisama':
     command     => '/usr/bin/php composer.phar require kamisama/cake-resque:4.1.2',
-    cwd         => '/var/www/MISP/app/',
-    environment => ['COMPOSER_HOME=/var/www/MISP/app/'],
+    cwd         => "${misp::install_dir}/app/",
+    environment => ["COMPOSER_HOME=${misp::install_dir}/app/"],
     refreshonly => true,
     notify      => Exec['CakeResque config'],
   }
 
   exec {'CakeResque config':
     command     => '/usr/bin/php composer.phar config vendor-dir Vendor',
-    cwd         => '/var/www/MISP/app/',
-    environment => ['COMPOSER_HOME=/var/www/MISP/app/'],
+    cwd         => '${misp::install_dir}/app/',
+    environment => ["OMPOSER_HOME=${misp::install_dir}/app/"],
     refreshonly => true,
     notify      => Exec['CakeResque install'],
   }
 
   exec {'CakeResque install':
     command     => '/usr/bin/php composer.phar install',
-    environment => ['COMPOSER_HOME=/var/www/MISP/app/'],
-    cwd         => '/var/www/MISP/app/',
+    environment => ["COMPOSER_HOME=${misp::install_dir}/app/"],
+    cwd         => "${misp::install_dir}/app/",
     refreshonly => true,
     notify      => File['/etc/opt/rh/rh-php56/php-fpm.d/redis.ini', '/etc/opt/rh/rh-php56/php-fpm.d/timezone.ini'],
   }
