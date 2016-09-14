@@ -118,7 +118,7 @@ class misp::install inherits misp {
           cd "${0%/*}"
          ../cake CakeResque.CakeResque stats'
 
-  file { "${misp::install_dir}/app/Console/worker/start.sh":
+  file { "${misp::install_dir}/app/Console/worker/status.sh":
     ensure  => file,
     content => $status_str,
     owner   => $misp::default_high_user,
