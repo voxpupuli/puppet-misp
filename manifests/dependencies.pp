@@ -18,17 +18,13 @@ class misp::dependencies inherits misp {
     command => '/usr/bin/scl enable rh-php56  "pecl install redis-2.2.8"',
     unless  => '/usr/bin/scl enable rh-php56  "pecl list | grep redis"',
   }
-  exec { 'pear update-channels pear.php.net' :
-    command => '/usr/bin/pear update-channels pear.php.net',
-    require => [Package['php-pear']],
-  }
 
   exec {'Crypt_GPG':
     user    => root,
-    command => '/usr/bin/scl enable rh-php56 "pear install Crypt_GPG"',
+    command => '/usr/bin/pear update-channels pear.php.net && /usr/bin/scl enable rh-php56 "pear install Crypt_GPG"',
     creates => '/usr/bin/Crypt_GPG',
     unless  => '/usr/bin/scl enable rh-php56 "pear list | grep Crypt_GPG"',
-    require => Exec['pear update-channels pear.php.net'],
+    require => [Exec['pear update-channels pear.php.net'],Package['php-pear']],
   }
 
   exec {'pip install importlib':

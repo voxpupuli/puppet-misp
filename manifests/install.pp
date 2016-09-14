@@ -104,12 +104,25 @@ class misp::install inherits misp {
 
   file {'/etc/opt/rh/rh-php56/php-fpm.d/timezone.ini':
     ensure  => file,
-    content => 'date.timezone = \'Europe/Zurich\'',
+    content => "date.timezone = '${timezone}'",
   }
 
   file {'/etc/opt/rh/rh-php56/php.d/99-timezone.ini':
     ensure    => link,
     target    => '/etc/opt/rh/rh-php56/php-fpm.d/timezone.ini',
     subscribe => File['/etc/opt/rh/rh-php56/php-fpm.d/timezone.ini'],
+  }
+
+  #File cration for managing workers
+  $status_str = '#!/bin/bash
+          cd "${0%/*}"
+         ../cake CakeResque.CakeResque stats'
+
+  file { "${misp::install_dir}/app/Console/worker/start.sh":
+    ensure  => file,
+    content => $status_str,
+    owner   => $misp::default_high_user,
+    group   => $misp::default_high_group,
+    mode    => '0751',
   }
 }

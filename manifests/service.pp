@@ -20,8 +20,9 @@ class misp::service inherits misp {
   }
 
   exec {'start bg workers':
-    command => "/usr/bin/chmod +x /var/www/MISP/app/Console/worker/start.sh && /usr/bin/su -s /bin/bash apache -c '/usr/bin/scl enable rh-php56 ${misp::install_dir}app/Console/worker/start.sh'",
-    user    => 'root',
-    group   => 'apache',
+    command => "/usr/bin/chmod +x ${misp::install_dir}/app/Console/worker/start.sh && /usr/bin/su -s /bin/bash apache -c '/usr/bin/scl enable rh-php56 ${misp::install_dir}/app/Console/worker/start.sh'",
+    unless  => "/usr/bin/chmod +x ${misp::install_dir}/app/Console/worker/status.sh && /usr/bin/su -s /bin/bash apache -c '/usr/bin/scl enable rh-php56 ${misp::install_dir}/app/Console/worker/status.sh' | grep \"Workers count : 6\"",
+    user    => $misp::default_high_user,
+    group   => $misp::default_high_group,
   }
 }
