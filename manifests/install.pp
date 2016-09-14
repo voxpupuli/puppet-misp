@@ -124,5 +124,6 @@ class misp::install inherits misp {
     owner   => $misp::default_high_user,
     group   => $misp::default_high_group,
     mode    => '0751',
+    subscribe   => Vcsrepo["${misp::install_dir}"],
   }
 }
