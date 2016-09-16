@@ -92,7 +92,7 @@ class misp::config inherits misp {
 
   exec{'setsebool redis':
     command   => '/usr/sbin/setsebool -P httpd_can_network_connect on',
-    unless => '/usr/sbin/getsebool httpd_can_network_connect | grep -e  "--> on"',
+    unless    => '/usr/sbin/getsebool httpd_can_network_connect | grep -e  "--> on"',
     notify    => Service[$misp::webservername],
     subscribe => File['/etc/opt/rh/rh-php56/php.d/99-redis.ini'],
   }
