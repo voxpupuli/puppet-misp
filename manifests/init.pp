@@ -62,11 +62,11 @@ class misp (
   $export_service = false,
   $install_dir = '/var/www/MISP/',
   $config_dir = "${install_dir}/app/Config/",
-  $timezone = "UCT",
-  $default_user = "apache",
-  $default_group = "apache",
-  $default_high_user = "root",
-  $default_high_group = "apache") {
+  $timezone = 'UCT',
+  $default_user = 'apache',
+  $default_group = 'apache',
+  $default_high_user = 'root',
+  $default_high_group = 'apache') {
 
   #include ::systemd
 

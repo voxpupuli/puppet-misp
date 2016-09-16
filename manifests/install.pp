@@ -5,7 +5,7 @@ class misp::install inherits misp {
 
   # MISP
 
-  vcsrepo { "${misp::install_dir}":
+  vcsrepo { $misp::install_dir:
     ensure     => present,
     provider   => git,
     submodules => true,
@@ -16,26 +16,26 @@ class misp::install inherits misp {
 
   exec {'git ignore permissions':
     command     => '/usr/bin/git config core.filemode false',
-    cwd         => "${misp::install_dir}",
+    cwd         => $misp::install_dir,
     refreshonly => true,
-    subscribe   => Vcsrepo["${misp::install_dir}"],
+    subscribe   => Vcsrepo[$misp::install_dir],
     notify      => Vcsrepo["${misp::install_dir}/app/files/scripts/python-cybox","${misp::install_dir}/app/files/scripts/python-stix"],
   }
 
   vcsrepo { "${misp::install_dir}/app/files/scripts/python-cybox":
-    ensure     => present,
-    provider   => git,
-    force      => false,
-    source     => $misp::cybox_git_repo,
-    revision   => $misp::cybox_git_tag,
+    ensure   => present,
+    provider => git,
+    force    => false,
+    source   => $misp::cybox_git_repo,
+    revision => $misp::cybox_git_tag,
   }
 
   vcsrepo { "${misp::install_dir}/app/files/scripts/python-stix":
-    ensure     => present,
-    provider   => git,
-    force      => false,
-    source     => $misp::stix_git_repo,
-    revision   => $misp::stix_git_tag,
+    ensure   => present,
+    provider => git,
+    force    => false,
+    source   => $misp::stix_git_repo,
+    revision => $misp::stix_git_tag,
   }
 
   exec {'python-cybox config':
@@ -104,7 +104,7 @@ class misp::install inherits misp {
 
   file {'/etc/opt/rh/rh-php56/php-fpm.d/timezone.ini':
     ensure  => file,
-    content => "date.timezone = '${timezone}'",
+    content => "date.timezone = '${misp::timezone}'",
   }
 
   file {'/etc/opt/rh/rh-php56/php.d/99-timezone.ini':
@@ -119,11 +119,11 @@ class misp::install inherits misp {
          ../cake CakeResque.CakeResque stats'
 
   file { "${misp::install_dir}/app/Console/worker/status.sh":
-    ensure  => file,
-    content => $status_str,
-    owner   => $misp::default_high_user,
-    group   => $misp::default_high_group,
-    mode    => '0751',
-    subscribe   => Vcsrepo["${misp::install_dir}"],
+    ensure    => file,
+    content   => $status_str,
+    owner     => $misp::default_high_user,
+    group     => $misp::default_high_group,
+    mode      => '0751',
+    subscribe => Vcsrepo[$misp::install_dir],
   }
 }
