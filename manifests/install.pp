@@ -114,16 +114,13 @@ class misp::install inherits misp {
   }
 
   #File cration for managing workers
-  $status_str = '#!/bin/bash
-          cd "${0%/*}"
-         ../cake CakeResque.CakeResque stats'
 
   file { "${misp::install_dir}/app/Console/worker/status.sh":
     ensure    => file,
-    content   => $status_str,
+    source    => "puppet:///modules/${module_name}/status.sh",
     owner     => $misp::default_high_user,
     group     => $misp::default_high_group,
-    mode      => '0751',
+    mode      => '0755',
     subscribe => Vcsrepo[$misp::install_dir],
   }
 }

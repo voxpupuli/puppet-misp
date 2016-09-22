@@ -4,7 +4,7 @@ class misp::dependencies inherits misp {
   ensure_packages( [
     'gcc', # Needed for compiling Python modules
     'git', # Needed for pulling the MISP code and those for some dependencies
-    'zip', 'redis', 'mariadb',
+    'zip', 'mariadb',
     'python-devel', 'python-pip', 'python-lxml', 'python-dateutil', 'python-six', # Python related packages
     'libxslt-devel', 'zlib-devel',
     'rh-php56', 'rh-php56-php-fpm', 'rh-php56-php-devel', 'rh-php56-php-mysqlnd', 'rh-php56-php-mbstring', 'php-pear',# PHP related packages
@@ -13,6 +13,12 @@ class misp::dependencies inherits misp {
   ],
     { 'ensure' => 'present' }
   )
+
+  if $misp::redis {
+    package { 'redis':
+      ensure => present,
+    }
+  }
 
   exec {'php56 redis': # Needed to install redis for php 5.6; php-pecl-redis installs it for php 5.4
     command => '/usr/bin/scl enable rh-php56  "pecl install redis-2.2.8"',

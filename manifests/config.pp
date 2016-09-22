@@ -14,7 +14,7 @@ class misp::config inherits misp {
   }
 
   exec {'Directory permissions':
-    command     => "/usr/bin/chown -R root:apache /var/www/MISP && /usr/bin/find ${misp::install_dir} -type d -exec /usr/bin/chmod g=rx {} \; && /usr/bin/chmod -R g+r,o= ${misp::install_dir}",
+    command     => "/usr/bin/chown -R $misp::default_high_user:$misp::default_high_group /var/www/MISP && /usr/bin/find ${misp::install_dir} -type d -exec /usr/bin/chmod g=rx {} \\; && /usr/bin/chmod -R g+r,o= ${misp::install_dir}",
     refreshonly => true,
     require     => File["${misp::install_dir}/app/Plugin/CakeResque/Config/config.php"],
     subscribe   => Exec['CakeResque install'],
@@ -95,5 +95,11 @@ class misp::config inherits misp {
     unless    => '/usr/sbin/getsebool httpd_can_network_connect | grep -e  "--> on"',
     notify    => Service[$misp::webservername],
     subscribe => File['/etc/opt/rh/rh-php56/php.d/99-redis.ini'],
+  }
+
+  file{"${misp::install_dir}/app/Console/worker/start.sh":
+    owner     => $misp::default_high_user,
+    group     => $misp::default_high_group,
+    mode      => '+x',
   }
 }

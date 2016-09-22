@@ -21,6 +21,7 @@ class misp (
   $auth_method = '',
   $org_id = '1',
   $webservername = 'httpd',
+  $redis_server = true,
   $email = 'root@localhost', # This address is used as sender (from) when sending notifications
   $contact = 'root@localhost', # This address is used in error messages
   $live = true,
@@ -28,17 +29,17 @@ class misp (
   $enrichment_service = false,
   $enrichment_hover = false,
   $gpg_email = 'no-reply@localhost',
-  $gpg_homedir = '/var/www/html',
-  $import_service = false,
-  $export_service = false,
+  $gpg_homedir = '/var/www/MISP/',
+  $import_service = true,
+  $export_service = true,
   $install_dir = '/var/www/MISP/',
   $config_dir = "${install_dir}/app/Config/",
-  $timezone = 'UCT',
+  $timezone = 'UTC',
   $default_user = 'apache',
   $default_group = 'apache',
   $default_high_user = 'root',
   $default_high_group = 'apache',
-  $shib_default_org = 'ORGNAME',
+  $shib_default_org = '1',
   $egroup_role_match = {}) {
 
   #include ::systemd
