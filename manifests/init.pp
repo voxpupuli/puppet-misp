@@ -1,12 +1,9 @@
 #
 # === Authors
 #
-# Author Name ppanero27@gmail.com
+# Author Name Pablo Panero (ppanero27@gmail.com)
 #
-# === Copyright
-#
-# Copyright 2016 Pablo Panero
-#
+
 
 class misp (
   $db_name = 'misp',
