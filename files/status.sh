@@ -8,13 +8,13 @@ status() {
       pid="$(echo $worker | sed 's/^.\(.*\).$/\1/')"
       status="$(ps --no-headers -s -q $pid | awk '{ print $7 }')"
       if [ $status != "S" ] && [ $status != "D" ] && [ $status != "R" ]; then
-        echo 1
+        return 1
       fi
     elif [ ${#worker} -eq 1 ] && [ $worker -ne 5 ]; then
-      echo $((5-${#worker}))
+      return $((5-${#worker}))
     fi
   done
-  echo 0
+  return 0
 }
 
 status
