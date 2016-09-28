@@ -1,20 +1,21 @@
 #!/bin/bash
 cd "${0%/*}"
 status() {
-  workers="$(../cake CakeResque.CakeResque stats | grep -e email -e cache -e prio -e default -e "Workers count" | sed 's/[^0-9]*//g')"
-  for worker in $workers
+  workers=("$(redis-cli keys *email* )" "$(redis-cli keys *prio*)" "$(redis-cli keys *default*)" "$(redis-cli keys *cache*)" "$(redis-cli keys *_schdlr_*)")
+  count=0
+  for worker in "${workers[@]}"
   do
-    if [ ${#worker} -gt 1 ]; then
-      pid="$(echo $worker | sed 's/^.\(.*\).$/\1/')"
+    pid="$(echo $worker | sed 's/[^0-9]*//g')"
+    if [ -z "$pid" ]; then
+      count=$(($count+1))
+    else
       status="$(ps --no-headers -s -q $pid | awk '{ print $7 }')"
-      if [ $status != "S" ] && [ $status != "D" ] && [ $status != "R" ]; then
-        return 1
+      if [[ ( -z "$status" ) || ( $status != "S" && $status != "D" && $status != "R" ) ]]; then
+        count=$(($count+1))
       fi
-    elif [ ${#worker} -eq 1 ] && [ $worker -ne 5 ]; then
-      return $((5-${#worker}))
     fi
   done
-  return 0
+  return $count
 }
 
 status
