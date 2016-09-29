@@ -39,6 +39,7 @@ class misp (
   $footermidleft = '',
   $footermidright = '',
   $host_org_id = '1',
+  $email_subject_org = 'ORGNAME',
   $showorg = true,
   $background_jobs = true,
   $cached_attachments = true,
