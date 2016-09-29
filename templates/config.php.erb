@@ -1,77 +1,89 @@
 <?php
 $config = array (
-  'debug' => 0,
-	'site_admin_debug' => <%= @site_admin_debug -%>,
+  'debug' => <%= @debug -%>,
+  'site_admin_debug' => <%= @site_admin_debug -%>,
   'Security' =>
-  array (
-    'level' => 'medium',
-    'salt' => '<%= @salt -%>',
-    'cipherSeed' => '<%= @cipherseed -%>',
-    <% if (@auth_method != '') then %>
-      'auth'=>array('<%= @auth_method -%>'),
-    <% else %>
-      //'auth'=>array('CertAuth.Certificate'), // additional authentication methods
-    <% end %>
-  	),
+    array (
+     'level' => '<%= @security_level -%>',
+     'salt' => '<%= @salt -%>',
+     'cipherSeed' => '<%= @cipherseed -%>',
+     <% if (@auth_method != '') then %>
+     'auth'=>array('<%= @auth_method -%>'),
+     <% else %>
+     //'auth'=>array('CertAuth.Certificate'), // additional  authentication methods
+     <% end %>
+     'password_policy_length' => <%= @password_policy_length -%>,
+     'password_policy_complexity' => '<%= @password_policy_complexity -%>',
+     ),
   'MISP' =>
-  	array (
-			'baseurl' => 'https://<%= @fqdn -%>',
-			'footermidleft' => '',
-			'footermidright' => '',
-			'host_org_id' => '<%= @org_id -%>',
-			'showorg' => true,
-			'background_jobs' => true,
-			'cached_attachments' => true,
-			'email' => '<%= @email -%>',
-			'contact' => '<%= @contact -%>',
-			'cveurl' => 'http://cve.circl.lu/cve/',
-			'disablerestalert' => false,
-			'default_event_distribution' => '1',
-			'default_attribute_distribution' => 'event',
-			'tagging' => true,
-			'full_tags_on_event_index' => true,
-			'footer_logo' => '',
-			'take_ownership_xml_import' => false,
-			'unpublishedprivate' => false,
-			'disable_emailing' => false,
-			'live'	=> <%= @live -%>,
-  	),
+    array (
+      'baseurl' => 'https://<%= @fqdn -%>',
+      'footermidleft' => '',
+      'footermidright' => '',
+      'host_org_id' => '<%= @org_id -%>',
+      'showorg' => true,
+      'background_jobs' => true,
+      'cached_attachments' => true,
+      'email' => '<%= @email -%>',
+      'contact' => '<%= @contact -%>',
+      'cveurl' => 'http://cve.circl.lu/cve/',
+      'disablerestalert' => false,
+      'default_event_distribution' => '1',
+      'default_attribute_distribution' => 'event',
+      'tagging' => true,
+      'full_tags_on_event_index' => true,
+      'footer_logo' => '',
+      'take_ownership_xml_import' => false,
+      'unpublishedprivate' => false,
+      'disable_emailing' => false,
+      'live'  => <%= @live -%>,
+    ),
   'GnuPG' =>
-		array (
-			'onlyencrypted' => false,
-			'email' => '<%= @gpg_email -%>',
-			'homedir' => '<%= @gpg_homedir -%>',
-			'password' => '',
-			'bodyonlyencrypted' => false,
-		),
+    array (
+      'onlyencrypted' => false,
+      'email' => '<%= @gpg_email -%>',
+      'homedir' => '<%= @gpg_homedir -%>',
+      'password' => '',
+      'bodyonlyencrypted' => false,
+    ),
   'SMIME' =>
-		array (
-			'enabled' => false,
-			'email' => '',
-			'cert_public_sign' => '',
-			'key_sign' => '',
-			'password' => '',
-		),
+    array (
+      'enabled' => false,
+      'email' => '',
+      'cert_public_sign' => '',
+      'key_sign' => '',
+      'password' => '',
+    ),
   'Proxy' =>
-		array (
-			'host' => '',
-			'port' => '',
-			'method' => '',
-			'user' => '',
-			'password' => '',
-		),
+    array (
+      'host' => '',
+      'port' => '',
+      'method' => '',
+      'user' => '',
+      'password' => '',
+    ),
   'SecureAuth' =>
-		array (
-			'amount' => 5,
-			'expire' => 300,
-		),
-	'Plugin' =>
-		array (
-			'Enrichment_services_enable' => <%= @enrichment_service -%>,
-			'Enrichment_hover_enable' => <%= @enrichment_hover -%>,
-			'Import_services_enable' => <%= @import_service -%>,
-			'Export_services_enable' => <%= @export_service -%>,
-),
+    array (
+      'amount' => <%= @secure_auth_amount -%>,
+      'expire' => <%= @secure_auth_expire -%>,
+    ),
+  'Plugin' =>
+    array (
+      'Export_services_enable' => <%= @export_services_enable -%>,
+      'Export_services_url' => '<%= @export_services_url -%>',
+      'Export_services_port' => <%= @export_services_port -%>,
+      'Export_timeout' => <%= @export_timeout -%>,
+      'Import_services_enable' => <%= @import_services_enable -%>,
+      'Import_services_url' => '<%= @import_services_url -%>',
+      'Import_services_port' => <%= @import_services_port -%>,
+      'Import_timeout' => <%= @import_timeout -%>,
+      'Enrichment_services_enable' => <%= @enrichment_services_enable -%>,
+      'Enrichment_services_url' => '<%= @enrichment_services_url -%>',
+      'Enrichment_services_port' => <%= @enrichment_services_port -%>,
+      'Enrichment_timeout' => <%= @enrichment_timeout -%>,
+      'Enrichment_hover_enable' => <%= @enrichment_hover_enable -%>,
+      'Enrichment_hover_timeout' => <%= @enrichment_hover_timeout -%>,
+  ),
   // Uncomment the following to enable client SSL certificate authentication
   /*
   'CertAuth' =>
