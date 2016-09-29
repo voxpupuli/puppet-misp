@@ -45,7 +45,7 @@ class misp (
   $email = 'root@localhost', # This address is used as sender (from) when sending notifications
   $contact = 'root@localhost', # This address is used in error messages
   $cveurl = 'http://cve.circl.lu/cve/',
-  $disablealert = false,
+  $disablerestalert = false,
   $default_event_distribution = '1',
   $default_attribute_distribution = 'event',
   $tagging = true,
