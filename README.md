@@ -115,55 +115,26 @@ those cases. By default root
 ##### MISP configuration
 
 
-
-* `email` - Email address of the MISP installation. By default "root@localhost"
-* `contact` - Contact address of the MISP installation. By default "root@localhost"
-* `org_id` - Id of the organisation that owns the MISP instance. By default is set to 1, meaning the first Organisation in the system
-* `live` - If MISP should be live or not (be accessible to not admins). By default true
-* `site_admin_debug` - Full debug mode (not recommended). By default false
-* `salt` - By default "Rooraenietu8Eeyo<Qu2eeNfterd-dd+"
-* `cipherseed` - Empty by default
-* `gpg_email` - By default "no-reply@localhost"
-* `gpg_homedir` - By default "/var/www/html"
-* `enrichment_service` - Enrichment service. By default false
-* `enrichment_hover` - Enrichment hover. By default false
-* `import_service` - Import services (both API and UI level). By default false
-* `export_service` - Export services (both API and UI level). By default false
-* `webservername` - Name of the web server process on top of which MISP runs. By default "httpd"
-
-* `timezone`- The timezone of the host in which MISP is installed. By default "UTC"
-* `default_user` - The low level user to whom to assign the ownership of the files. By default "apache"
-* `default_group` = The low level group to whom to assign the ownership of the files.  By default "apache"
-* `default_high_user` = The high level user as whom to run shells and scripts. By default "root"
-* `default_high_group` = The high level group as whom to run shells and scripts. By default "apache"
-
-
-##### Services
-
-* `webservername` = The name of the service of the web server on top of which MISP is running. By default httpd
-* `redis_server` = If the redis database will be installed locally or not, meaning that the redis server will be installed. By default true
-
-
-  # config.php
-  $debug = 0,
-  $site_admin_debug = false,
-  # Security
+##### config.php
+  * `debug` = 0,
+  * `site_admin_debug` - Full debug mode (not recommended). By default false
+##### Security
   $security_level = 'medium',
-  $salt = 'Rooraenietu8Eeyo<Qu2eeNfterd-dd+',
-  $cipherseed = '',
+  * `salt` - By default "Rooraenietu8Eeyo<Qu2eeNfterd-dd+"
+  * `cipherseed` - Empty by default
   $auth_method = '', # Empty means default user-password login method
   $password_policy_length = 6,
   $password_policy_complexity = '/((?=.*\\d)|(?=.*\\W+))(?![\\n])(?=.*[A-Z])(?=.*[a-z]).*$/',
-  # MISP
+##### MISP
   $footermidleft = '',
   $footermidright = '',
-  $host_org_id = '1',
+  * `host_org_id` - Id of the organisation that owns the MISP instance. By default is set to 1, meaning the first Organisation in the system
   $email_subject_org = 'ORGNAME',
   $showorg = true,
   $background_jobs = true,
   $cached_attachments = true,
-  $email = 'root@localhost', # This address is used as sender (from) when sending notifications
-  $contact = 'root@localhost', # This address is used in error messages
+  * `email` - Email address of the MISP installation, this address is used as sender (from) when sending notifications. By default "root@localhost"
+  * `contact` - Contact address of the MISP installation, this address is used in error messages. By default "root@localhost"
   $cveurl = 'http://cve.circl.lu/cve/',
   $disablerestalert = false,
   $default_event_distribution = '1',
@@ -174,7 +145,7 @@ those cases. By default root
   $take_ownership_xml_import = false,
   $unpublishedprivate = false,
   $disable_emailing = false,
-  $live = true,
+  * `live` - If MISP should be live or not (be accessible to not admins). By default true
   $extended_alert_subject = false,
   $default_event_threat_level = '1',
   $newUserText = 'Dear new MISP user,\\n\\nWe would hereby like to welcome you to the $org MISP community.\\n\\n Use the credentials below to log into MISP at $misp, where you will be prompted to manually change your password to something of your own choice.\\n\\nUsername: $username\\nPassword: $password\\n\\nIf you have any questions, don\'t hesitate to contact us at: $contact.\\n\\nBest regards,\\nYour $org MISP support team',
@@ -190,28 +161,28 @@ those cases. By default root
   $email_subject_TLP_string = 'TLP Amber',
   $terms_download = false,
   $showorgalternate = false,
-  # GPG
+##### GPG
   $gpg_onlyencrypted = false,
-  $gpg_email = 'no-reply@localhost',
-  $gpg_homedir = '/var/www/MISP/',
+  * `gpg_email` - By default "no-reply@localhost"
+  * `gpg_homedir` - By default "/var/www/html"
   $gpg_password = '',
   $gpg_bodyonlyencrypted = false,
-  # SMIME
+##### SMIME
   $smime_enabled = false,
   $smime_email = '',
   $smime_cert_public_sign = '',
   $smime_key_sign = '',
   $smime_password = '',
-  # Proxy
+##### Proxy
   $proxy_host = '',
   $proxy_port = '',
   $proxy_method = '',
   $proxy_user = '',
   $proxy_password = '',
-  # SecureAuth
+##### SecureAuth
   $secure_auth_amount = 5,
   $secure_auth_expire = 300,
-  # Plugin
+##### Plugin
   $customAuth_disable_logout = true,
   $ZeroMQ_enable = false,
   $ZeroMQ_port = 50000,
@@ -247,9 +218,17 @@ those cases. By default root
   $enrichment_timeout = 10,
   $enrichment_hover_enable = true,
   $enrichment_hover_timeout = 5,
-  # ApacheShibbAuth
+##### ApacheShibbAuth
   $shib_default_org = '1',
   $egroup_role_match = {},
+
+##### Services
+
+* `webservername` = The name of the service of the web server on top of which MISP is running. By default httpd
+* `redis_server` = If the redis database will be installed locally or not, meaning that the redis server will be installed. By default true
+
+
+ 
   
 The *email* variable specifies the email address that will be used for as sender for the notifications, the *contact* email address is the 
 one that will be shown in the displayed messages.
