@@ -66,7 +66,7 @@ class misp (
   $disableUserSelfManagement = false,
   $block_old_event_alert = false,
   $maintenance_message = 'Great things are happening! MISP is undergoing maintenance, but will return shortly. You can contact the administration at $email.',
-  $email_subject_TPL_string = 'TLP Amber',
+  $email_subject_TLP_string = 'TLP Amber',
   $terms_download = false,
   $showorgalternate = false,
   # GPG
