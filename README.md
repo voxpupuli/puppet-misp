@@ -154,8 +154,8 @@ By default set to "Rooraenietu8Eeyo<Qu2eeNfterd-dd+".
 * `password_policy_complexity` - Password complexity requirement. By default set to '/((?=.*\\d)|(?=.*\\W+))(?![\\n])(?=.*[A-Z])(?=.*[a-z]).*$/'.
 
 #### MISP
-* `footermidleft` = '',
-* `footermidright` = '',
+* `footermidleft` - Footer text prepending the "Powered by MISP" text. Empty by default.
+* `footermidright` - Footer text following the "Powered by MISP" text. Empty by default.
 * `host_org_id` - The hosting organisation of this instance. If this is not selected then replication instances cannot be added. 
 By default is set to 1, meaning the first Organisation in the system.
 * `email_subject_org` - The organisation tag of the hosting organisation. This is used in the e-mail subjects. By defualt set to 'ORGNAME'.
@@ -172,10 +172,12 @@ community only, 2 means contacted communities and 3 is all communities. By defua
 * `default_attribute_distribution` - The default distribution setting for attributes, set it to 'event' if you would like 
 the attributes to default to the event distribution level. (0-3 or "event"). By default set to 'event'.
 * `tagging` - Enable the tagging feature of MISP. By default set to true.
-* `full_tags_on_event_index` = true,
-* `footer_logo` = '',
-* `take_ownership_xml_import` = false,
-* `unpublishedprivate` = false,
+* `full_tags_on_event_index` - Show the full tag names on the event index. By default set to true.
+* `footer_logo` - This setting allows you to display a logo on the right side of the footer. Empty by default.
+* `take_ownership_xml_import` - Allows users to take ownership of an event uploaded via the "Add MISP XML" button. 
+By default set to false.
+* `unpublishedprivate` - True will deny access to unpublished events to users outside the organization of the submitter 
+except site admins. By default set to false.
 * `disable_emailing` - When enabled, no outgoing e-mails will be sent by MISP. By default set to false.
 * `live` - If set to false the instance will only be accessible by site admins. By default true.
 * `extended_alert_subject` - Enabling this flag will allow the event description to be transmitted in the alert e-mail's subject. 
@@ -199,11 +201,15 @@ By default set to false.
 * `log_auth` - MISP will log all successful authentications using API keys. By default set to false.
 * `disableUserSelfManagement` - When enabled only Org and Site admins can edit a user's profile. By default set to false.
 * `block_old_event_alert` - Enable this setting to start blocking alert e-mails for old events. By default set to false.
-* `block_old_event_alert_age` = 30,
-* `maintenance_message` = 'Great things are happening! MISP is undergoing maintenance, but will return shortly. You can contact the administration at $email.',
-* `email_subject_TLP_string` = 'TLP Amber',
-* `terms_download` = false,
-* `showorgalternate` = false,
+* `block_old_event_alert_age` - This setting will control how old an event can be for it to be alerted on, measured in days.
+  By default set to 30.
+* `maintenance_message` - The message that users will see if the instance is not live. By default set to "Great things 
+are happening! MISP is undergoing maintenance, but will return shortly. You can contact the administration at $email.".
+* `email_subject_TLP_string` - This is the TLP string in alert e-mail sent when an event is published. By default 'TLP Amber'.
+* `terms_download` - Choose whether the terms and conditions should be displayed inline (false) or offered as a 
+download (true). By default set to false.
+* `showorgalternate` - True enables the alternate org fields for the event index (source org and member org) instead of 
+the traditional way of showing only an org field. By default set to false. 
 
 #### GPG
 * `gpg_onlyencrypted` = false,
@@ -270,16 +276,12 @@ attempts are exhausted. By default set to 300.
 * `enrichment_hover_timeout` = 5,
 
 #### ApacheShibbAuth
-* `shib_default_org` = '1',
-* `egroup_role_match` = {},
+* `shib_default_org` - Default organisation for user creation when using Shibboleth authentication plugin. By default set to 1.
+* `egroup_role_match` - Group to role mapping used for authorization when using Shibboleth authentication plugin. 
+Empty by default ({}).
 
 ### Services
 
 * `webservername` = The name of the service of the web server on top of which MISP is running. By default httpd.
-* `redis_server` = If the redis database will be installed locally or not, meaning that the redis server will be installed. By default true.
-
-
- 
-  
-The *email* variable specifies the email address that will be used for as sender for the notifications, the *contact* email address is the 
-one that will be shown in the displayed messages.
+* `redis_server` = If the redis database will be installed locally or not, meaning that the redis server will be installed. 
+By default true.
