@@ -212,25 +212,27 @@ download (true). By default set to false.
 the traditional way of showing only an org field. By default set to false. 
 
 #### GPG
-* `gpg_onlyencrypted` = false,
-* `gpg_email` - By default "no-reply@localhost"
-* `gpg_homedir` - By default "/var/www/html"
-* `gpg_password` = '',
-* `gpg_bodyonlyencrypted` = false,
+* `gpg_onlyencrypted` - Allow (false) unencrypted e-mails to be sent to users that don't have a PGP key. 
+By default set to false.
+* `gpg_email` - The e-mail address that the instance's PGP key is tied to. By default "no-reply@localhost".
+* `gpg_homedir` - The location of the GPG homedir. By default "/var/www/MISP/.gnupg".
+* `gpg_password` - The password (if it is set) of the PGP key of the instance. Empty by default.
+* `gpg_bodyonlyencrypted` - Allow (false) the body of unencrypted e-mails to contain details about the event. 
+By default set to false.
 
 #### SMIME
-* `smime_enabled` = false,
-* `smime_email` = '',
-* `smime_cert_public_sign` = '',
-* `smime_key_sign` = '',
-* `smime_password` = '',
+* `smime_enabled` - Enable SMIME encryption. By default set to false.
+* `smime_email` - The e-mail address that the instance's SMIME key is tied to. Empty by default.
+* `smime_cert_public_sign` - The location of the public half of the signing certificate. Empty by default.
+* `smime_key_sign` - The location of the private half of the signing certificate. Empty by default.
+* `smime_password` - The password (if it is set) of the SMIME key of the instance. Empty by default.
 
 #### Proxy
-* `proxy_host` = '',
-* `proxy_port` = '',
-* `proxy_method` = '',
-* `proxy_user` = '',
-* `proxy_password` = '',
+* `proxy_host` - The hostname of an HTTP proxy for outgoing sync requests. Leave empty to not use a proxy. Empty by default.
+* `proxy_port` - The TCP port for the HTTP proxy. Empty by default.
+* `proxy_method` - The authentication method for the HTTP proxy. Currently supported are Basic or Digest. Empty by default.
+* `proxy_user` - The authentication username for the HTTP proxy. Empty by default.
+* `proxy_password` - The authentication password for the HTTP proxy. Empty by default.
 
 #### SecureAuth
 * `secure_auth_amount` - The number of tries a user can try to login and fail before the bruteforce protection kicks in. 
