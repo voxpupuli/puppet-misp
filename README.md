@@ -104,79 +104,101 @@ class {'::misp':
 ## Parameters of the MIPS Class
 
 The MISP class can take every parameter needed to change the configuration of MISP. However, they all have the default value 
-set to the recommended value by MISP so there is no need to change it. The parameters can be classified in the ones needed for 
-the installation of MISP itself, for the database, for the configuration, and for the services. The parameters are the following:
+set to the recommended value so there is no need to change it. The parameters can be classified in the ones needed for 
+the installation of MISP itself, for the database, for the configuration and for the services. The parameters are the following:
 
 ### MISP installation
   
-* `misp_git_tag` - Tag or version of MISP that will be installed. By default "v2.4.51"
-* `install_dir` - Directory in which to install MISP. By default "/var/www/MISP/"
-* `config_dir` - Directory in which the configuration of MISP should be located. By default "{install_dir}/app/Config/"
-* `stix_git_repo`- Git url of the STIX module. By default "git://github.com/STIXProject/python-stix.git"
-* `stix_git_tag`- Tag or version of the STIX module. By default "v1.1.1.4"
-* `cybox_git_repo`- Git url of the CyBox repository. By default "git://github.com/CybOXProject/python-cybox.git"
-* `cybox_git_tag`- Tag or version of the CyBox module. By default "v2.1.0.12"
-* `timezone`- Timezone where the instance has been placed. By default "UTC"
-* `default_user`- User as which to run the installation of MISP. By default apache
-* `default_group`- Group as which to run the installation of MISP. By default apache
+* `misp_git_tag` - Version of MISP that will be installed. By default "v2.4.51".
+* `install_dir` - Directory in which MISP will be installed. By default "/var/www/MISP/".
+* `config_dir` - Directory in which the configuration of MISP should be located. By default "install_dir/app/Config/".
+* `stix_git_repo`- Git url of the STIX module. By default "git://github.com/STIXProject/python-stix.git".
+* `stix_git_tag`- Version of the STIX module. By default "v1.1.1.4".
+* `cybox_git_repo`- Git url of the CyBox repository. By default "git://github.com/CybOXProject/python-cybox.git".
+* `cybox_git_tag`- Version of the CyBox module. By default "v2.1.0.12".
+* `timezone`- Timezone where the instance has been placed. By default "UTC".
+* `default_user`- User as which to run the installation of MISP. By default apache.
+* `default_group`- Group as which to run the installation of MISP. By default apache.
 * `default_high_user`- In some cases root permissions are need in the installation, this user will be used in 
-those cases. By default root
+those cases. By default root.
 * `default_high_group`- In some cases root permissions are need in the installation, this group will be used in 
-                        those cases. By default apache
+those cases. By default apache.
 
 ### Database configuration
 
-* `db_name` - Name of the database. By default "misp"
-* `db_user` - Name of the user with rights on the database. By defeault "misp"
-* `db_host` - Name of the host in which the database is located. By default "misp.com"
-* `db_port` - Port to connect to the database in the specified host. By default 3306
-* `db_password` - Password used to access the database. By default is empty
+* `db_name` - Name of the database. By default "misp".
+* `db_user` - Name of the user with rights on the database. By defeault "misp".
+* `db_host` - Name of the host in which the database is located. By default "misp.com".
+* `db_port` - Port to connect to the database in the specified host. By default 3306.
+* `db_password` - Password used to access the database. By default is empty.
 
 ### MISP configuration
 
 #### Site Configuration
-* `debug` = 0,
-* `site_admin_debug` - Full debug mode (not recommended). By default false
+* `debug` - Debug mode for the full instance. By default set to 0 (false).
+* `site_admin_debug` - The debug level of the instance for site admins. This feature allows site admins to run debug mode on a live instance 
+without exposing it to other users. The most verbose option of debug and site_admin_debug is used for site admins. 
+By default false.
+
+This two parameters are recommended to be set to 0 and false respectively. However, if needed they can be set to tru to find 
+errors with names/tables in the database. In this case it would be better to just set to true 'site_admin_debug' instead of 
+the whole instance.
 
 #### Security
-* `security_level` = 'medium',
-* `salt` - By default "Rooraenietu8Eeyo<Qu2eeNfterd-dd+"
-* `cipherseed` - Empty by default
-* `auth_method` = '', # Empty means default user-password login method
-* `password_policy_length` = 6,
-* `password_policy_complexity` = '/((?=.*\\d)|(?=.*\\W+))(?![\\n])(?=.*[A-Z])(?=.*[a-z]).*$/',
+* `security_level` = 'medium'
+* `salt` - The salt used for the hashed passwords. Keep in mind, this will invalidate all passwords in the database.
+By default set to "Rooraenietu8Eeyo<Qu2eeNfterd-dd+".
+* `cipherseed` - Seed for the cipher. Empty by default.
+* `auth_method` - Authentication method used for the instance. Empty means default user-password login method. Empty by default.
+* `password_policy_length` - Password length requirement. By default set to 6.
+* `password_policy_complexity` - Password complexity requirement. By default set to '/((?=.*\\d)|(?=.*\\W+))(?![\\n])(?=.*[A-Z])(?=.*[a-z]).*$/'.
 
 #### MISP
 * `footermidleft` = '',
 * `footermidright` = '',
-* `host_org_id` - Id of the organisation that owns the MISP instance. By default is set to 1, meaning the first Organisation in the system
-* `email_subject_org` = 'ORGNAME',
-* `showorg` = true,
-* `background_jobs` = true,
-* `cached_attachments` = true,
-* `email` - Email address of the MISP installation, this address is used as sender (from) when sending notifications. By default "root@localhost"
-* `contact` - Contact address of the MISP installation, this address is used in error messages. By default "root@localhost"
-* `cveurl` = 'http://cve.circl.lu/cve/',
-* `disablerestalert` = false,
-* `default_event_distribution` = '1',
-* `default_attribute_distribution` = 'event',
-* `tagging` = true,
+* `host_org_id` - The hosting organisation of this instance. If this is not selected then replication instances cannot be added. 
+By default is set to 1, meaning the first Organisation in the system.
+* `email_subject_org` - The organisation tag of the hosting organisation. This is used in the e-mail subjects. By defualt set to 'ORGNAME'.
+* `showorg` - Setting this setting to 'false' will hide all organisation names / logos. By default set to true.
+* `background_jobs` - Enables the use of MISP's background processing. By default set to true.
+* `cached_attachments` - Allow the XML caches to include the encoded attachments. By default set to true.
+* `email` - The e-mail address that MISP should use for all notifications. By default "root@localhost".
+* `contact` - The e-mail address that MISP should include as a contact address for the instance's support team. By default "root@localhost"
+* `cveurl` - Turn Vulnerability type attributes into links linking to the provided CVE lookup. By default set to 'http://cve.circl.lu/cve/',
+* `disablerestalert` - When enabled notification e-mails will not be sent when an event is created via the REST interface. 
+By defualt set to false.
+* `default_event_distribution` - The default distribution setting for events (0-3). 0 meanse your organisation only, 1 means this
+community only, 2 means contacted communities and 3 is all communities. By defualt set to 1.
+* `default_attribute_distribution` - The default distribution setting for attributes, set it to 'event' if you would like 
+the attributes to default to the event distribution level. (0-3 or "event"). By default set to 'event'.
+* `tagging` - Enable the tagging feature of MISP. By default set to true.
 * `full_tags_on_event_index` = true,
 * `footer_logo` = '',
 * `take_ownership_xml_import` = false,
 * `unpublishedprivate` = false,
-* `disable_emailing` = false,
-* `live` - If MISP should be live or not (be accessible to not admins). By default true
-* `extended_alert_subject` = false,
-* `default_event_threat_level` = '1',
-* `newUserText` = 'Dear new MISP user,\\n\\nWe would hereby like to welcome you to the $org MISP community.\\n\\n Use the credentials below to log into MISP at $misp, where you will be prompted to manually change your password to something of your own choice.\\n\\nUsername: $username\\nPassword: $password\\n\\nIf you have any questions, don\'t hesitate to contact us at: $contact.\\n\\nBest regards,\\nYour $org MISP support team',
-* `passwordResetText` = 'Dear MISP user,\\n\\nA password reset has been triggered for your account. Use the below provided temporary password to log into MISP at $misp, where you will be prompted to manually change your password to something of your own choice.\\n\\nUsername: $username\\nYour temporary password: $password\\n\\nIf you have any questions, don\'t hesitate to contact us at: $contact.\\n\\nBest regards,\\nYour $org MISP support team',
-* `enableEventBlacklisting` = false,
-* `enableOrgBlacklisting` = false,
-* `log_client_ip` = false,
-* `log_auth` = false,
-* `disableUserSelfManagement` = false,
-* `block_old_event_alert` = false,
+* `disable_emailing` - When enabled, no outgoing e-mails will be sent by MISP. By default set to false.
+* `live` - If set to false the instance will only be accessible by site admins. By default true.
+* `extended_alert_subject` - Enabling this flag will allow the event description to be transmitted in the alert e-mail's subject. 
+By default set to false.
+* `default_event_threat_level` - The default threat level setting when creating events. By default set to 1.
+* `newUserText` - The message sent to the user after an account creation. By default set to "Dear new MISP user,\\n\\nWe 
+would hereby like to welcome you to the $org MISP community.\\n\\n Use the credentials below to log into MISP at $misp, 
+where you will be prompted to manually change your password to something of your own choice.\\n\\nUsername: $username\\n
+Password: $password\\n\\nIf you have any questions, don\'t hesitate to contact us at: $contact.\\n\\nBest regards,\\nYour 
+$org MISP support team".
+* `passwordResetText` - The message sent to the users when a password reset is triggered. By default set to "Dear MISP user,
+\\n\\nA password reset has been triggered for your account. Use the below provided temporary password to log into MISP 
+at $misp, where you will be prompted to manually change your password to something of your own choice.\\n\\nUsername: 
+$username\\nYour temporary password: $password\\n\\nIf you have any questions, don\'t hesitate to contact us at: 
+$contact.\\n\\nBest regards,\\nYour $org MISP support team".
+* `enableEventBlacklisting` - Enable the blacklisting of event UUIDs to prevent them from being pushed to your instance. 
+By default set to false.
+* `enableOrgBlacklisting` - Enable blacklisting of organisation UUIDs to prevent them from creating events. 
+By default set to false.
+* `log_client_ip` - All log entries will include the IP address of the user. By default set to false.
+* `log_auth` - MISP will log all successful authentications using API keys. By default set to false.
+* `disableUserSelfManagement` - When enabled only Org and Site admins can edit a user's profile. By default set to false.
+* `block_old_event_alert` - Enable this setting to start blocking alert e-mails for old events. By default set to false.
 * `block_old_event_alert_age` = 30,
 * `maintenance_message` = 'Great things are happening! MISP is undergoing maintenance, but will return shortly. You can contact the administration at $email.',
 * `email_subject_TLP_string` = 'TLP Amber',
@@ -205,8 +227,10 @@ those cases. By default root
 * `proxy_password` = '',
 
 #### SecureAuth
-* `secure_auth_amount` = 5,
-* `secure_auth_expire` = 300,
+* `secure_auth_amount` - The number of tries a user can try to login and fail before the bruteforce protection kicks in. 
+By default set to 5.
+* `secure_auth_expire` - The duration (in seconds) of how long the user will be locked out when the allowed number of login 
+attempts are exhausted. By default set to 300.
 
 #### Plugin
 * `customAuth_disable_logout` = true,
@@ -251,8 +275,8 @@ those cases. By default root
 
 ### Services
 
-* `webservername` = The name of the service of the web server on top of which MISP is running. By default httpd
-* `redis_server` = If the redis database will be installed locally or not, meaning that the redis server will be installed. By default true
+* `webservername` = The name of the service of the web server on top of which MISP is running. By default httpd.
+* `redis_server` = If the redis database will be installed locally or not, meaning that the redis server will be installed. By default true.
 
 
  
