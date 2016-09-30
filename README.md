@@ -9,7 +9,7 @@
 4. [Usage - Configuration options and additional functionality](#usage)
     * [Basic usage](#basic-usage)
     * [Another usage example](#another-usage-example)
-5. [Parameters of the MIPS Class.](#parameters-of-the-misp-class.)
+5. [Parameters of the MIPS Class.](#parameters-of-the-misp-class)
     * [MISP installation](#misp-installation)
     * [Database configuration](#database-configuration)
     * [MISP configuration](#misp-configuration)
@@ -21,7 +21,7 @@
         * [Proxy](#proxy)
         * [Secure Authentication](#secure-auth)
         * [Plugin](#plugin)
-        * [Apache Shibboleth Authentication](#ApacheShibbAuth)          
+        * [Apache Shibboleth Authentication](#apacheshibbauth)          
     * [Services](#services)
     
 
