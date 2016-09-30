@@ -125,17 +125,19 @@ those cases. By default root
 
 #### MISP configuration
 
-####config.php
+#### config.php
 * `debug` = 0,
 * `site_admin_debug` - Full debug mode (not recommended). By default false
-####Security
+
+#### Security
 * `security_level` = 'medium',
 * `salt` - By default "Rooraenietu8Eeyo<Qu2eeNfterd-dd+"
 * `cipherseed` - Empty by default
 * `auth_method` = '', # Empty means default user-password login method
 * `password_policy_length` = 6,
 * `password_policy_complexity` = '/((?=.*\\d)|(?=.*\\W+))(?![\\n])(?=.*[A-Z])(?=.*[a-z]).*$/',
-####MISP
+
+#### MISP
 * `footermidleft` = '',
 * `footermidright` = '',
 * `host_org_id` - Id of the organisation that owns the MISP instance. By default is set to 1, meaning the first Organisation in the system
@@ -171,28 +173,33 @@ those cases. By default root
 * `email_subject_TLP_string` = 'TLP Amber',
 * `terms_download` = false,
 * `showorgalternate` = false,
-####GPG
+
+#### GPG
 * `gpg_onlyencrypted` = false,
 * `gpg_email` - By default "no-reply@localhost"
 * `gpg_homedir` - By default "/var/www/html"
 * `gpg_password` = '',
 * `gpg_bodyonlyencrypted` = false,
-####SMIME
+
+#### SMIME
 * `smime_enabled` = false,
 * `smime_email` = '',
 * `smime_cert_public_sign` = '',
 * `smime_key_sign` = '',
 * `smime_password` = '',
-####Proxy
+
+#### Proxy
 * `proxy_host` = '',
 * `proxy_port` = '',
 * `proxy_method` = '',
 * `proxy_user` = '',
 * `proxy_password` = '',
-####SecureAuth
+
+#### SecureAuth
 * `secure_auth_amount` = 5,
 * `secure_auth_expire` = 300,
-####Plugin
+
+#### Plugin
 * `customAuth_disable_logout` = true,
 * `ZeroMQ_enable` = false,
 * `ZeroMQ_port` = 50000,
@@ -228,7 +235,8 @@ those cases. By default root
 * `enrichment_timeout` = 10,
 * `enrichment_hover_enable` = true,
 * `enrichment_hover_timeout` = 5,
-####ApacheShibbAuth
+
+#### ApacheShibbAuth
 * `shib_default_org` = '1',
 * `egroup_role_match` = {},
 
