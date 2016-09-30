@@ -9,7 +9,7 @@
 4. [Usage - Configuration options and additional functionality](#usage)
     * [Basic usage](#basic-usage)
     * [Another usage example](#another-usage-example)
-5. [Parameters of the MIPS Class.](#parameters-of-the-misp-class)
+5. [Parameters of the MISP Class.](#parameters-of-the-misp-class)
     * [MISP installation](#misp-installation)
     * [Database configuration](#database-configuration)
     * [MISP configuration](#misp-configuration)
@@ -101,7 +101,7 @@ class {'::misp':
 
 ```
 
-## Parameters of the MIPS Class.
+## Parameters of the MIPS Class
 
 The MISP class can take every parameter needed to change the configuration of MISP. However, they all have the default value 
 set to the recommended value by MISP so there is no need to change it. The parameters can be classified in the ones needed for 
