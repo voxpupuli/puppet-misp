@@ -7,6 +7,14 @@
 3. [Setup - Getting started with the misp module](#setup)
     * [What misp affects](#what-misp-affects)
 4. [Usage - Configuration options and additional functionality](#usage)
+    * [Basic usage](#basic-usage)
+    * [Another usage example](#another-usage-example)
+    * [Parameters of the MIPS Class.](#parameters-of-the-misp-class.)
+        * [MISP installation](#misp-installation)
+        * [Database configuration](#database-configuration)
+        * [MISP configuration](#misp-configuration)
+        * [Services](#services)
+    
 
 This module installs and configures MISP (Malware Information Sharing Platform) on CentOS 7. 
 It has been tested on Puppet 3.8.7 and with MISP versions 2.4.50 and 2.4.51.
@@ -14,25 +22,28 @@ It has been tested on Puppet 3.8.7 and with MISP versions 2.4.50 and 2.4.51.
 ## Module Description
 
 This module installs and configures MISP on CentOS 7. It installs all the needed dependencies, configures MISP and 
-starts the services. However it does not create the database or the gpg key, that is up to the user to do. In addition it does not 
-set up the webserver on top of which MISP would run, menaning that apache, nginx or another web server of your choice will be needed (nevertheless
-the module need to know to know the name of the deamon of the web server (e.g. httpd)).
+starts the services. However it does not set up the database nor the GPG key, that is up to the administrator to do. 
+In addition it does not set up the web server on top of which MISP would run, meaning that Apache, Nginx or another 
+web server of your choice would be needed (nevertheless the module need to know to know the name of the service of the 
+web server (e.g. httpd)).
 
-As mentioned before database will need to be set up, the schema imported and then create a user with rights to access misp database. 
-If gpg will be used, the gpg key will need to be created.
+As mentioned before the database would need to be set up, the schema imported and then a user with rights to access the 
+'misp' database created. If GPG would be used, the GPG key would need to be created and placed in the configured 
+directory (by default '/var/www/MISP/').
 
-The module follows the installation instructions that can be found [here](https://github.com/MISP/MISP/tree/2.4/INSTALL). Also details about the 
-database and gpg key creation and set up can be found there.
+The module follows the installation instructions that can be found [here](https://github.com/MISP/MISP/tree/2.4/INSTALL). 
+Also details about the database and GPG key creation and set up can be found there.
 
-NOTE: the configuration and database files of MISP are used as templates on the module, therefore if the are major changes on the version of MISP the template might cause troubles
-and need to be updated.
+NOTE: the configuration and database files of MISP are used as templates on the module, therefore if the are major 
+changes on the version of MISP the template might cause troubles and need to be updated.
 
 ## Setup
 
-### What misp affects
+### What MISP affects
 
-The MISP module will not alter any OS files, all the configuration will happen in /install/directory/app/Config/
-where the *core.php*, *bootstrap.php*, *database.php* and *config.php* files will be deployed with the established values.
+The MISP module will not alter any OS files, all the configuration will happen in '/config_dir/' (by default 
+/install_dir/app/Config/') where the *core.php*, *bootstrap.php*, *database.php* and *config.php* files will be deployed 
+with the established values.
 
 This module needs the following packages:
 
@@ -48,14 +59,15 @@ The services needed by MISP are:
 
     * rh-php56-php-fpm
     * haveged
-    * redis
+    * redis: This package installs the redis server, therefore it would only be installed if the 'redis' parameter is 
+    set to true. 
     * The 4 workers and the scheduler [CakeResque]
 
 ## Usage
 
 ### Basic usage
 
-In orther to use the module it would be enough with including the module:
+In order to use the module it would be enough to include the module:
 ```puppet
 include ::misp,
 ```
@@ -65,7 +77,7 @@ Or the class:
 class{ ::misp:}
 ```
 
-An the module will use all parameters with default values, these values are specified later on.
+And the module will use all parameters with default values, these values are specified later on.
 
 ### Another usage example
 
@@ -76,12 +88,11 @@ class {'::misp':
     contact          => 'someone.someother@somewhere.ch',
     salt             => 'Rooraenietu8Eeyo<Qu2eeNfterd-dd+',
     cipherseed       => '9999999999999999999999999999999999999999999999999999999999999999',
-
   }
 
 ```
 
-### Parameters for MIPS Class.
+### Parameters of the MIPS Class.
 
 The MISP class can take every parameter needed to change the configuration of MISP. However, they all have the default value 
 set to the recommended value by MISP so there is no need to change it. The parameters can be classified in the ones needed for 
@@ -104,7 +115,7 @@ those cases. By default root
 * `default_high_group`- In some cases root permissions are need in the installation, this group will be used in 
                         those cases. By default apache
 
-##### Database configuration
+#### Database configuration
 
 * `db_name` - Name of the database. By default "misp"
 * `db_user` - Name of the user with rights on the database. By defeault "misp"
@@ -112,20 +123,19 @@ those cases. By default root
 * `db_port` - Port to connect to the database in the specified host. By default 3306
 * `db_password` - Password used to access the database. By default is empty
 
-##### MISP configuration
+#### MISP configuration
 
-
-##### config.php
+*config.php*
 * `debug` = 0,
 * `site_admin_debug` - Full debug mode (not recommended). By default false
-##### Security
+*Security*
 * `security_level` = 'medium',
 * `salt` - By default "Rooraenietu8Eeyo<Qu2eeNfterd-dd+"
 * `cipherseed` - Empty by default
 * `auth_method` = '', # Empty means default user-password login method
 * `password_policy_length` = 6,
 * `password_policy_complexity` = '/((?=.*\\d)|(?=.*\\W+))(?![\\n])(?=.*[A-Z])(?=.*[a-z]).*$/',
-##### MISP
+*MISP*
 * `footermidleft` = '',
 * `footermidright` = '',
 * `host_org_id` - Id of the organisation that owns the MISP instance. By default is set to 1, meaning the first Organisation in the system
@@ -161,28 +171,28 @@ those cases. By default root
 * `email_subject_TLP_string` = 'TLP Amber',
 * `terms_download` = false,
 * `showorgalternate` = false,
-##### GPG
+*GPG*
 * `gpg_onlyencrypted` = false,
 * `gpg_email` - By default "no-reply@localhost"
 * `gpg_homedir` - By default "/var/www/html"
 * `gpg_password` = '',
 * `gpg_bodyonlyencrypted` = false,
-##### SMIME
+*SMIME*
 * `smime_enabled` = false,
 * `smime_email` = '',
 * `smime_cert_public_sign` = '',
 * `smime_key_sign` = '',
 * `smime_password` = '',
-##### Proxy
+*Proxy*
 * `proxy_host` = '',
 * `proxy_port` = '',
 * `proxy_method` = '',
 * `proxy_user` = '',
 * `proxy_password` = '',
-##### SecureAuth
+*SecureAuth*
 * `secure_auth_amount` = 5,
 * `secure_auth_expire` = 300,
-##### Plugin
+*Plugin*
 * `customAuth_disable_logout` = true,
 * `ZeroMQ_enable` = false,
 * `ZeroMQ_port` = 50000,
@@ -218,11 +228,11 @@ those cases. By default root
 * `enrichment_timeout` = 10,
 * `enrichment_hover_enable` = true,
 * `enrichment_hover_timeout` = 5,
-##### ApacheShibbAuth
+*ApacheShibbAuth*
 * `shib_default_org` = '1',
 * `egroup_role_match` = {},
 
-##### Services
+#### Services
 
 * `webservername` = The name of the service of the web server on top of which MISP is running. By default httpd
 * `redis_server` = If the redis database will be installed locally or not, meaning that the redis server will be installed. By default true
