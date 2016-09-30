@@ -13,6 +13,15 @@
         * [MISP installation](#misp-installation)
         * [Database configuration](#database-configuration)
         * [MISP configuration](#misp-configuration)
+            * [Site configuration](#site-configuration)
+            * [Security](#security)
+            * [MISP](#misp)
+            * [GPG](#gpg)
+            * [SMIME](#smime)
+            * [Proxy](#proxy)
+            * [Secure Authentication](#secure-auth)
+            * [Plugin](#plugin)
+            * [Apache Shibboleth Authentication](#ApacheShibbAuth)          
         * [Services](#services)
     
 
@@ -125,7 +134,7 @@ those cases. By default root
 
 #### MISP configuration
 
-#### config.php
+#### Site Configuration
 * `debug` = 0,
 * `site_admin_debug` - Full debug mode (not recommended). By default false
 
