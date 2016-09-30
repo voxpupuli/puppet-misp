@@ -103,7 +103,7 @@ class {'::misp':
 
 ## Parameters of the MIPS Class
 
-The MISP class can take every parameter needed to change the configuration of MISP. However, they all have the default value 
+The MISP class can take many parameters to change the configuration of MISP. However, they all have the default value 
 set to the recommended value so there is no need to change it. The parameters can be classified in the ones needed for 
 the installation of MISP itself, for the database, for the configuration and for the services. The parameters are the following:
 
@@ -241,41 +241,49 @@ By default set to 5.
 attempts are exhausted. By default set to 300.
 
 #### Plugin
-* `customAuth_disable_logout` = true,
-* `ZeroMQ_enable` = false,
-* `ZeroMQ_port` = 50000,
-* `ZeroMQ_redis_host`= 'localhost',
-* `ZeroMQ_redis_port` = 6379,
-* `ZeroMQ_redis_password` = '',
-* `ZeroMQ_redis_database` = '1',
-* `ZeroMQ_redis_namespace` = 'mispq',
-* `RPZ_policy` = 0,
-* `RPZ_walled_garden` = '127.0.0.1',
-* `RPZ_serial` = '$date00',
-* `RPZ_refresh` = '2h',
-* `RPZ_retry` = '30m',
-* `RPZ_expiry` = '30d',
-* `RPZ_minimum_ttl` = '1h',
-* `RPZ_ttl` = '1w',
-* `RPZ_ns` = 'localhost',
-* `RPZ_email` = 'root.localhost',
-* `sightings_anonymise` = false,
-* `sightings_policy` = 0,
-* `sightings_enable` = false,
-* `export_services_enable` = true,
-* `export_services_url` = 'http://127.0.0.1',
-* `export_services_port` = 6666,
-* `export_timeout` = 10,
-* `import_services_enable` = true,
-* `import_services_url` = 'http://127.0.0.1',
-* `import_services_port` = 6666,
-* `import_timeout` = 10,
-* `enrichment_services_enable` = true,
-* `enrichment_services_url` = 'http://127.0.0.1',
-* `enrichment_services_port` = 6666,
-* `enrichment_timeout` = 10,
-* `enrichment_hover_enable` = true,
-* `enrichment_hover_timeout` = 5,
+* `customAuth_disable_logout` - Disable the logout button for users authenticate with the external auth mechanism.
+By default set to true.
+* `ZeroMQ_enable` - Enables or disables the pub/sub feature of MISP. By default set to false.
+* `ZeroMQ_port` - The port that the pub/sub feature will use. By default set to 50000.
+* `ZeroMQ_redis_host`- Location of the Redis db used by MISP and the Python PUB script to queue data to be published. 
+By default set to 'localhost'.
+* `ZeroMQ_redis_port` - The port that Redis is listening on. By default set to 6379.
+* `ZeroMQ_redis_password` - The password, if set for Redis. Emtpy by default.
+* `ZeroMQ_redis_database` - The database to be used for queuing messages for the pub/sub functionality. By default set to '1'.
+* `ZeroMQ_redis_namespace` - The namespace to be used for queuing messages for the pub/sub functionality. By default 
+set to 'mispq'.
+* `RPZ_policy` - The default policy action for the values added to the RPZ. 0 means DROP, 1 NXDOMAIN, 2 NODATA and 3 walled-garden. 
+By default set to 0.
+* `RPZ_walled_garden` - The default walled garden used by the RPZ export. By default set to '127.0.0.1'.
+* `RPZ_serial` - The serial in the SOA portion of the zone file. By default set to '$date00'.
+* `RPZ_refresh` - The refresh specified in the SOA portion of the zone file. By default set to '2h'.
+* `RPZ_retry` - The retry specified in the SOA portion of the zone file. By default set to '30m'.
+* `RPZ_expiry` - The expiry specified in the SOA portion of the zone file. By default set to '30d'.
+* `RPZ_minimum_ttl` - The minimum TTL specified in the SOA portion of the zone file. By default set to '1h'.
+* `RPZ_ttl` - The TTL of the zone file. By default set to '1w'.
+* `RPZ_ns` - The RPZ ns. By default set to 'localhost'.
+* `RPZ_email` - The e-mail address specified in the SOA portion of the zone file. By default set to 'root.localhost'.
+* `sightings_anonymise` - Enabling the anonymisation of sightings will simply aggregate all sightings instead of showing 
+the organisations that have reported a sighting. By default set to false.
+* `sightings_policy` - This setting defines who will have access to seeing the reported sightings. 0 means event owner, 
+1 event owner and sighting reporter and 2 means everyone. By default set to 0.
+* `sightings_enable` - When enabled, users can use the UI or the appropriate APIs to submit sightings data about indicators. 
+By default set to false.
+* `export_services_enable` - Enable/disable the import services. By default set to true.
+* `export_services_url` - The url used to access the export services. By default set to 'http://127.0.0.1'.
+* `export_services_port` - The port used to access the export services. By default set to 6666.
+* `export_timeout` - Set a timeout for the import services. By default set to 10.
+* `import_services_enable` - Enable/disable the import services. By default set to true.
+* `import_services_url` - The url used to access the import services. By default set to 'http://127.0.0.1'.
+* `import_services_port` - The port used to access the import services. By default set to 6666.
+* `import_timeout` - Set a timeout for the import services. By default set to 10.
+* `enrichment_services_enable` - Enable/disable the enrichment services. By default set to true.
+* `enrichment_services_url` - The url used to access the enrichment services. By default set to 'http://127.0.0.1'.
+* `enrichment_services_port` - The port used to access the enrichment services. By default set to 6666.
+* `enrichment_timeout` - Set a timeout for the enrichment services. By default set to 10.
+* `enrichment_hover_enable` - Enable/disable the hover over information retrieved from the enrichment modules. 
+By default set to true.
+* `enrichment_hover_timeout` - Set a timeout for the hover services. By default set to  5.
 
 #### ApacheShibbAuth
 * `shib_default_org` - Default organisation for user creation when using Shibboleth authentication plugin. By default set to 1.
