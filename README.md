@@ -9,10 +9,10 @@
 4. [Usage - Configuration options and additional functionality](#usage)
     * [Basic usage](#basic-usage)
     * [Another usage example](#another-usage-example)
-    * [Parameters of the MIPS Class.](#parameters-of-the-misp-class.)
-        * [MISP installation](#misp-installation)
-        * [Database configuration](#database-configuration)
-        * [MISP configuration](#misp-configuration)
+5. [Parameters of the MIPS Class.](#parameters-of-the-misp-class.)
+    * [MISP installation](#misp-installation)
+    * [Database configuration](#database-configuration)
+    * [MISP configuration](#misp-configuration)
         * [Site configuration](#site-configuration)
         * [Security](#security)
         * [MISP](#misp)
@@ -22,7 +22,7 @@
         * [Secure Authentication](#secure-auth)
         * [Plugin](#plugin)
         * [Apache Shibboleth Authentication](#ApacheShibbAuth)          
-        * [Services](#services)
+    * [Services](#services)
     
 
 This module installs and configures MISP (Malware Information Sharing Platform) on CentOS 7. 
@@ -101,13 +101,13 @@ class {'::misp':
 
 ```
 
-### Parameters of the MIPS Class.
+## Parameters of the MIPS Class.
 
 The MISP class can take every parameter needed to change the configuration of MISP. However, they all have the default value 
 set to the recommended value by MISP so there is no need to change it. The parameters can be classified in the ones needed for 
 the installation of MISP itself, for the database, for the configuration, and for the services. The parameters are the following:
 
-#### MISP installation
+### MISP installation
   
 * `misp_git_tag` - Tag or version of MISP that will be installed. By default "v2.4.51"
 * `install_dir` - Directory in which to install MISP. By default "/var/www/MISP/"
@@ -124,7 +124,7 @@ those cases. By default root
 * `default_high_group`- In some cases root permissions are need in the installation, this group will be used in 
                         those cases. By default apache
 
-#### Database configuration
+### Database configuration
 
 * `db_name` - Name of the database. By default "misp"
 * `db_user` - Name of the user with rights on the database. By defeault "misp"
@@ -132,7 +132,7 @@ those cases. By default root
 * `db_port` - Port to connect to the database in the specified host. By default 3306
 * `db_password` - Password used to access the database. By default is empty
 
-#### MISP configuration
+### MISP configuration
 
 #### Site Configuration
 * `debug` = 0,
@@ -249,7 +249,7 @@ those cases. By default root
 * `shib_default_org` = '1',
 * `egroup_role_match` = {},
 
-#### Services
+### Services
 
 * `webservername` = The name of the service of the web server on top of which MISP is running. By default httpd
 * `redis_server` = If the redis database will be installed locally or not, meaning that the redis server will be installed. By default true
