@@ -39,7 +39,7 @@ class misp (
   $default_group = 'apache',
   $default_high_user = 'root',
   $default_high_group = 'apache',
-  $shib_default_org = '1',
+  $shib_default_org = '',
   $egroup_role_match = {}) {
 
   #include ::systemd
