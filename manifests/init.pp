@@ -25,6 +25,7 @@ class misp (
   $email = 'root@localhost', # This address is used as sender (from) when sending notifications
   $contact = 'root@localhost', # This address is used in error messages
   $live = true,
+  $session_timeout = 60,
   $site_admin_debug = false,
   $enrichment_service = false,
   $enrichment_hover = false,

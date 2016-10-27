@@ -8,20 +8,20 @@
     * [What misp affects](#what-misp-affects)
 4. [Usage - Configuration options and additional functionality](#usage)
 
-This module installs and configures MISP (Malware Information Sharing Platform) on CentOS 7. 
+This module installs and configures MISP (Malware Information Sharing Platform) on CentOS 7.
 It has been tested on Puppet 3.8.7 and with MISP versions 2.4.50 and 2.4.51.
 
 ## Module Description
 
-This module installs and configures MISP on CentOS 7. It installs all the needed dependencies, configures MISP and 
-starts the services. However it does not create the database or the gpg key, that is up to the user to do. In addition it does not 
+This module installs and configures MISP on CentOS 7. It installs all the needed dependencies, configures MISP and
+starts the services. However it does not create the database or the gpg key, that is up to the user to do. In addition it does not
 set up the webserver on top of which MISP would run, menaning that apache, nginx or another web server of your choice will be needed (nevertheless
 the module need to know to know the name of the deamon of the web server (e.g. httpd)).
 
-As mentioned before database will need to be set up, the schema imported and then create a user with rights to access misp database. 
+As mentioned before database will need to be set up, the schema imported and then create a user with rights to access misp database.
 If gpg will be used, the gpg key will need to be created.
 
-The module follows the installation instructions that can be found [here](https://github.com/MISP/MISP/tree/2.4/INSTALL). Also details about the 
+The module follows the installation instructions that can be found [here](https://github.com/MISP/MISP/tree/2.4/INSTALL). Also details about the
 database and gpg key creation and set up can be found there.
 
 NOTE: the configuration and database files of MISP are used as templates on the module, therefore if the are major changes on the version of MISP the template might cause troubles
@@ -44,7 +44,7 @@ This module needs the following packages:
     * php-mbstring: Python package required by Crypt_GPG
     * libxslt-devel', 'zlib-devel
 
-The services needed by MISP are: 
+The services needed by MISP are:
 
     * rh-php56-php-fpm
     * haveged
@@ -99,6 +99,7 @@ class {'::misp':
 * `contact` - Contact address of the MISP installation. By default "root@localhost"
 * `org_id` - Id of the organisation that owns the MISP instance. By default is set to 1, meaning the first Organisation in the system
 * `live` - If MISP should be live or not (be accessible to not admins). By default true
+* `session_timeout` - Session timeout in minutes, default is 1 hour
 * `site_admin_debug` - Full debug mode (not recommended). By default false
 * `salt` - By default "Rooraenietu8Eeyo<Qu2eeNfterd-dd+"
 * `cipherseed` - Empty by default
@@ -119,5 +120,5 @@ class {'::misp':
 * `default_high_user` = The high level user as whom to run shells and scripts. By default "root"
 * `default_high_group` = The high level group as whom to run shells and scripts. By default "apache"
 
-The *email* variable specifies the email address that will be used for as sender for the notifications, the *contact* email address is the 
+The *email* variable specifies the email address that will be used for as sender for the notifications, the *contact* email address is the
 one that will be shown in the displayed messages.

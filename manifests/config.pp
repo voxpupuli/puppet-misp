@@ -14,7 +14,7 @@ class misp::config inherits misp {
   }
 
   exec {'Directory permissions':
-    command     => "/usr/bin/chown -R $misp::default_high_user:$misp::default_high_group /var/www/MISP && /usr/bin/find ${misp::install_dir} -type d -exec /usr/bin/chmod g=rx {} \\; && /usr/bin/chmod -R g+r,o= ${misp::install_dir}",
+    command     => "/usr/bin/chown -R ${misp::default_high_user}:${misp::default_high_group} /var/www/MISP && /usr/bin/find ${misp::install_dir} -type d -exec /usr/bin/chmod g=rx {} \\; && /usr/bin/chmod -R g+r,o= ${misp::install_dir}",
     refreshonly => true,
     require     => File["${misp::install_dir}/app/Plugin/CakeResque/Config/config.php"],
     subscribe   => Exec['CakeResque install'],
@@ -68,7 +68,7 @@ class misp::config inherits misp {
     ensure    => file,
     owner     => $misp::default_high_user,
     group     => $misp::default_high_group,
-    source    => "file://${misp::install_dir}/app/Config/core.default.php",
+    source    => template('misp/core.php.erb'),
     subscribe => Exec['Directory permissions'],
   }
 
@@ -98,8 +98,8 @@ class misp::config inherits misp {
   }
 
   file{"${misp::install_dir}/app/Console/worker/start.sh":
-    owner     => $misp::default_high_user,
-    group     => $misp::default_high_group,
-    mode      => '+x',
+    owner => $misp::default_high_user,
+    group => $misp::default_high_group,
+    mode  => '+x',
   }
 }
