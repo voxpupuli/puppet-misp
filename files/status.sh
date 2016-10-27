@@ -1,21 +1,24 @@
 #!/bin/bash
-cd "${0%/*}"
+
 status() {
-  workers=("$(redis-cli keys *email* )" "$(redis-cli keys *prio*)" "$(redis-cli keys *default*)" "$(redis-cli keys *cache*)" "$(redis-cli keys *_schdlr_*)")
-  count=0
-  for worker in "${workers[@]}"
-  do
-    pid="$(echo $worker | sed 's/[^0-9]*//g')"
-    if [ -z "$pid" ]; then
-      count=$(($count+1))
+  # Get the list of MISP background workers from Redis
+  workers=( $(redis-cli smembers resque:workers) )
+  ret_code=$?
+  if [ $ret_code -eq 0 ]; then
+    # Extract PIDs from worker names
+    pids=`echo "${workers[@]}" | tr ' ' '\n' | sed -n 's/.*:\([0-9]\+\):.*/\1/p' | tr '\n' ' '`
+    # Get the status of the processes
+    process_states=( $(ps --no-headers -o state -p $pids) )
+    # Check that it was possible to get the process status for all workers
+    if [ ${#process_states[@]} -ne ${#workers[@]} ]; then
+      let ret_code=${#workers[@]}-${#process_states[@]}
     else
-      status="$(ps --no-headers -s -q $pid | awk '{ print $7 }')"
-      if [[ ( -z "$status" ) || ( $status != "S" && $status != "D" && $status != "R" ) ]]; then
-        count=$(($count+1))
-      fi
+      # Check how many of the workers are running
+      running_processes=`echo "${process_states[@]}" | tr ' ' '\n' | grep -c "[SRD]"`
+      let ret_code=${#workers[@]}-${running_processes}
     fi
-  done
-  return $count
+  fi
+  return $ret_code
 }
 
 status
