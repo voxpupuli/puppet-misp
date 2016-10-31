@@ -20,6 +20,7 @@ class misp (
   $cipherseed = '',
   $auth_method = '',
   $org_id = '1',
+  $org = 'ORGNAME',
   $webservername = 'httpd',
   $redis_server = true,
   $email = 'root@localhost', # This address is used as sender (from) when sending notifications

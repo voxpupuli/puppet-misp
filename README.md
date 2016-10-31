@@ -98,6 +98,7 @@ class {'::misp':
 * `email` - Email address of the MISP installation. By default "root@localhost"
 * `contact` - Contact address of the MISP installation. By default "root@localhost"
 * `org_id` - Id of the organisation that owns the MISP instance. By default is set to 1, meaning the first Organisation in the system
+* `org` - The name of the organisation that owns the MISP instance. Should match the name of the Organisation with the id $org_id
 * `live` - If MISP should be live or not (be accessible to not admins). By default true
 * `session_timeout` - Session timeout in minutes, default is 1 hour
 * `site_admin_debug` - Full debug mode (not recommended). By default false
