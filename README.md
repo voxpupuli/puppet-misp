@@ -183,29 +183,29 @@ except site admins. By default set to false.
 * `extended_alert_subject` - Enabling this flag will allow the event description to be transmitted in the alert e-mail's subject. 
 By default set to false.
 * `default_event_threat_level` - The default threat level setting when creating events. By default set to 1.
-* `newUserText` - The message sent to the user after an account creation. By default set to "Dear new MISP user,\\n\\nWe 
+* `new_user_text` - The message sent to the user after an account creation. By default set to "Dear new MISP user,\\n\\nWe 
 would hereby like to welcome you to the $org MISP community.\\n\\n Use the credentials below to log into MISP at $misp, 
 where you will be prompted to manually change your password to something of your own choice.\\n\\nUsername: $username\\n
 Password: $password\\n\\nIf you have any questions, don\'t hesitate to contact us at: $contact.\\n\\nBest regards,\\nYour 
 $org MISP support team".
-* `passwordResetText` - The message sent to the users when a password reset is triggered. By default set to "Dear MISP user,
+* `password_reset_text` - The message sent to the users when a password reset is triggered. By default set to "Dear MISP user,
 \\n\\nA password reset has been triggered for your account. Use the below provided temporary password to log into MISP 
 at $misp, where you will be prompted to manually change your password to something of your own choice.\\n\\nUsername: 
 $username\\nYour temporary password: $password\\n\\nIf you have any questions, don\'t hesitate to contact us at: 
 $contact.\\n\\nBest regards,\\nYour $org MISP support team".
-* `enableEventBlacklisting` - Enable the blacklisting of event UUIDs to prevent them from being pushed to your instance. 
+* `enable_event_blacklisting` - Enable the blacklisting of event UUIDs to prevent them from being pushed to your instance. 
 By default set to false.
-* `enableOrgBlacklisting` - Enable blacklisting of organisation UUIDs to prevent them from creating events. 
+* `enable_org_blacklisting` - Enable blacklisting of organisation UUIDs to prevent them from creating events. 
 By default set to false.
 * `log_client_ip` - All log entries will include the IP address of the user. By default set to false.
 * `log_auth` - MISP will log all successful authentications using API keys. By default set to false.
-* `disableUserSelfManagement` - When enabled only Org and Site admins can edit a user's profile. By default set to false.
+* `disable_user_self_management` - When enabled only Org and Site admins can edit a user's profile. By default set to false.
 * `block_old_event_alert` - Enable this setting to start blocking alert e-mails for old events. By default set to false.
 * `block_old_event_alert_age` - This setting will control how old an event can be for it to be alerted on, measured in days.
   By default set to 30.
 * `maintenance_message` - The message that users will see if the instance is not live. By default set to "Great things 
 are happening! MISP is undergoing maintenance, but will return shortly. You can contact the administration at $email.".
-* `email_subject_TLP_string` - This is the TLP string in alert e-mail sent when an event is published. By default 'TLP Amber'.
+* `email_subject_tlp_string` - This is the TLP string in alert e-mail sent when an event is published. By default 'TLP Amber'.
 * `terms_download` - Choose whether the terms and conditions should be displayed inline (false) or offered as a 
 download (true). By default set to false.
 * `showorgalternate` - True enables the alternate org fields for the event index (source org and member org) instead of 
@@ -243,26 +243,26 @@ attempts are exhausted. By default set to 300.
 #### Plugin
 * `customAuth_disable_logout` - Disable the logout button for users authenticate with the external auth mechanism.
 By default set to true.
-* `ZeroMQ_enable` - Enables or disables the pub/sub feature of MISP. By default set to false.
-* `ZeroMQ_port` - The port that the pub/sub feature will use. By default set to 50000.
-* `ZeroMQ_redis_host`- Location of the Redis db used by MISP and the Python PUB script to queue data to be published. 
+* `zeromq_enable` - Enables or disables the pub/sub feature of MISP. By default set to false.
+* `zeromq_port` - The port that the pub/sub feature will use. By default set to 50000.
+* `zeromq_redis_host`- Location of the Redis db used by MISP and the Python PUB script to queue data to be published. 
 By default set to 'localhost'.
-* `ZeroMQ_redis_port` - The port that Redis is listening on. By default set to 6379.
-* `ZeroMQ_redis_password` - The password, if set for Redis. Emtpy by default.
-* `ZeroMQ_redis_database` - The database to be used for queuing messages for the pub/sub functionality. By default set to '1'.
-* `ZeroMQ_redis_namespace` - The namespace to be used for queuing messages for the pub/sub functionality. By default 
+* `zeromq_redis_port` - The port that Redis is listening on. By default set to 6379.
+* `zeromq_redis_password` - The password, if set for Redis. Emtpy by default.
+* `zeromq_redis_database` - The database to be used for queuing messages for the pub/sub functionality. By default set to '1'.
+* `zeromq_redis_namespace` - The namespace to be used for queuing messages for the pub/sub functionality. By default 
 set to 'mispq'.
 * `RPZ_policy` - The default policy action for the values added to the RPZ. 0 means DROP, 1 NXDOMAIN, 2 NODATA and 3 walled-garden. 
 By default set to 0.
-* `RPZ_walled_garden` - The default walled garden used by the RPZ export. By default set to '127.0.0.1'.
-* `RPZ_serial` - The serial in the SOA portion of the zone file. By default set to '$date00'.
-* `RPZ_refresh` - The refresh specified in the SOA portion of the zone file. By default set to '2h'.
-* `RPZ_retry` - The retry specified in the SOA portion of the zone file. By default set to '30m'.
-* `RPZ_expiry` - The expiry specified in the SOA portion of the zone file. By default set to '30d'.
-* `RPZ_minimum_ttl` - The minimum TTL specified in the SOA portion of the zone file. By default set to '1h'.
-* `RPZ_ttl` - The TTL of the zone file. By default set to '1w'.
-* `RPZ_ns` - The RPZ ns. By default set to 'localhost'.
-* `RPZ_email` - The e-mail address specified in the SOA portion of the zone file. By default set to 'root.localhost'.
+* `rpz_walled_garden` - The default walled garden used by the RPZ export. By default set to '127.0.0.1'.
+* `rpz_serial` - The serial in the SOA portion of the zone file. By default set to '$date00'.
+* `rpz_refresh` - The refresh specified in the SOA portion of the zone file. By default set to '2h'.
+* `rpz_retry` - The retry specified in the SOA portion of the zone file. By default set to '30m'.
+* `rpz_expiry` - The expiry specified in the SOA portion of the zone file. By default set to '30d'.
+* `rpz_minimum_ttl` - The minimum TTL specified in the SOA portion of the zone file. By default set to '1h'.
+* `rpz_ttl` - The TTL of the zone file. By default set to '1w'.
+* `rpz_ns` - The RPZ ns. By default set to 'localhost'.
+* `rpz_email` - The e-mail address specified in the SOA portion of the zone file. By default set to 'root.localhost'.
 * `sightings_anonymise` - Enabling the anonymisation of sightings will simply aggregate all sightings instead of showing 
 the organisations that have reported a sighting. By default set to false.
 * `sightings_policy` - This setting defines who will have access to seeing the reported sightings. 0 means event owner, 

@@ -20,8 +20,8 @@ class misp::service inherits misp {
   }
 
   exec {'start bg workers':
-    command => "/usr/bin/su -s /bin/bash $misp::default_user -c '/usr/bin/scl enable rh-php56 ${misp::install_dir}/app/Console/worker/start.sh'",
-    unless  => "/usr/bin/su -s /bin/bash $misp::default_user -c '/usr/bin/scl enable rh-php56 ${misp::install_dir}/app/Console/worker/status.sh'",
+    command => "/usr/bin/su -s /bin/bash ${misp::default_user} -c '/usr/bin/scl enable rh-php56 ${misp::install_dir}/app/Console/worker/start.sh'",
+    unless  => "/usr/bin/su -s /bin/bash ${misp::default_user} -c '/usr/bin/scl enable rh-php56 ${misp::install_dir}/app/Console/worker/status.sh'",
     user    => $misp::default_high_user,
     group   => $misp::default_high_group,
   }
