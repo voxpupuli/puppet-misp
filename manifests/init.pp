@@ -58,7 +58,7 @@ class misp (
   $email_subject_tlp_string = 'TLP Amber',
   $email_subject_tag = 'tlp', #TODO
   $email_subject_include_tag_name = true #TODO
-  $email_subject_org = 'ORGNAME', //DELETED? TODO
+  $email_subject_org = 'ORGNAME', #DELETED? TODO
   $background_jobs = true,
   $cached_attachments = true,
   $email = 'root@localhost', # This address is used as sender (from) when sending notifications
