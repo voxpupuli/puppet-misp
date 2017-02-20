@@ -26,7 +26,6 @@ class misp (
   $debug = 0,
   $site_admin_debug = false,
   # # MISP puppet configuration
-  $session_timeout = 60,
   $install_dir = '/var/www/MISP/',
   $config_dir = "${install_dir}/app/Config/",
   $timezone = 'UTC',
@@ -106,7 +105,6 @@ class misp (
   $incoming_tags_disabled_by_default = false, #TODO
   $completely_disable_correlation = false, #TODO
   $allow_disabling_correlation = false, #TODO
-  $show_correlations_on_index = false, #TODO
   # # GPG
   $gpg_binary = '/usr/bin/gpg', #TODO
   $gpg_onlyencrypted = false,
@@ -132,7 +130,7 @@ class misp (
   # # Session
   $session_auto_regenerate = false, #TODO
   $session_defaults = '', #TODO
-  $session_timeout = '', #TODO
+  $session_timeout = '60', #TODO
   # # Plugin
   $rpz_policy = 0,
   $rpz_walled_garden = '127.0.0.1',
