@@ -32,7 +32,7 @@ $config = array (
       'showorg' => <%= @showorg -%>,
       'threatlevel_in_email_subject' => <%= @threatlevel_in_email_subject -%>,
       'email_subject_TLP_string' => '<%= @email_subject_tlp_string -%>',
-      'email_subject_tag' => <%= @email_subject_tag -%>',
+      'email_subject_tag' => '<%= @email_subject_tag -%>',
       'email_subject_include_tag_name' => '<%= @email_subject_include_tag_name -%>',
       'background_jobs' => <%= @background_jobs -%>,
       'cached_attachments' => <%= @cached_attachments -%>,
@@ -47,13 +47,13 @@ $config = array (
       'default_event_threat_level' => '<%= @default_event_threat_level -%>',
       'tagging' => <%= @tagging -%>,
       'full_tags_on_event_index' => <%= @full_tags_on_event_index -%>,
-      'welcome_text_top' => <%= @welcome_text_top -%>,
-      'welcome_text_bottom' => <%= @welcome_text_bottom -%>,
-      'welcome_logo' => <%= @welcome_logo -%>,
-      'welcome_logo2' => <%= @welcome_logo2 -%>,
+      'welcome_text_top' => '<%= @welcome_text_top -%>',
+      'welcome_text_bottom' => '<%= @welcome_text_bottom -%>',
+      'welcome_logo' => '<%= @welcome_logo -%>',
+      'welcome_logo2' => '<%= @welcome_logo2 -%>',
       'take_ownership_xml_import' => <%= @take_ownership_xml_import -%>,
       'terms_download' => <%= @terms_download -%>,
-      'terms_file' => <%= @terms_file -%>,
+      'terms_file' => '<%= @terms_file -%>',
       'showorgalternate' => <%= @showorgalternate -%>,     
       'unpublishedprivate' => <%= @unpublishedprivate -%>,
       'newUserText' => "<%= @new_user_text -%>",
@@ -85,7 +85,7 @@ $config = array (
     ),
   'GnuPG' =>
     array (
-      'binary' => <%= @gpg_binary -%>,
+      'binary' => '<%= @gpg_binary -%>',
       'onlyencrypted' => <%= @gpg_onlyencrypted -%>,
       'bodyonlyencrypted' => <%= @gpg_bodyonlyencrypted -%>,
       'email' => '<%= @gpg_email -%>',
@@ -144,7 +144,7 @@ $config = array (
       'CustomAuth_enable' => <%= @customauth_enable -%>,
       'CustomAuth_header' => '<%= @customauth_header -%>',
       'CustomAuth_use_header_namespace' => <%= @customauth_use_header_namespace -%>,
-      'CustomAuth_header_namespace' => '<%= @customauth_header_namespace -%>,'
+      'CustomAuth_header_namespace' => '<%= @customauth_header_namespace -%>',
       'CustomAuth_required' => <%= @customauth_required -%>,
       'CustomAuth_only_allow_source' => '<%= @customauth_only_allow_source -%>',
       'CustomAuth_name' => '<%= @customauth_name -%>',
@@ -203,7 +203,7 @@ $config = array (
       'GroupTag'          => 'ADFS_GROUP',
       'GroupSeparator'    => ';',
       'GroupRoleMatching' => array(                // 3:User, 1:admin. May be good to set "1" for the first user
-        <% egroup_role_match.each do |key,value| -%>
+        <% @egroup_role_match.each do |key,value| -%>
         '<%= key %>' => <%= value %>,
         <% end %>
       ),

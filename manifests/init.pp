@@ -129,7 +129,7 @@ class misp (
   $secure_auth_expire = 300,
   # # Session
   $session_auto_regenerate = false, #TODO
-  $session_defaults = '', #TODO
+  $session_defaults = 'php', #TODO
   $session_timeout = '60', #TODO
   # # Plugin
   $rpz_policy = 0,
@@ -178,7 +178,8 @@ class misp (
   $export_timeout = 10,
   # ApacheShibbAuth
   $shib_default_org = '1',
-  $egroup_role_match = {},) {
+  $egroup_role_match = {},
+) {
 
   contain '::misp::dependencies'
   contain '::misp::install'

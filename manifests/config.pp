@@ -60,7 +60,7 @@ class misp::config inherits misp {
     ensure    => file,
     owner     => $misp::default_high_user,
     group     => $misp::default_high_group,
-    source    => "file://${misp::install_dir}/app/Config/bootstrap.default.php",
+    content   => template('misp/bootstrap.php.erb'),
     subscribe => Exec['Directory permissions'],
   }
 
