@@ -57,7 +57,7 @@ class misp (
   $threatlevel_in_email_subject = true, #TODO
   $email_subject_tlp_string = 'TLP Amber',
   $email_subject_tag = 'tlp', #TODO
-  $email_subject_include_tag_name = true #TODO
+  $email_subject_include_tag_name = true, #TODO
   $email_subject_org = 'ORGNAME', #DELETED? TODO
   $background_jobs = true,
   $cached_attachments = true,
