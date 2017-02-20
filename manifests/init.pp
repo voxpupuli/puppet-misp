@@ -88,7 +88,7 @@ class misp (
   $log_client_ip = false,
   $log_auth = false,
   $mangle_push_to_23 = false, #TODO //advised against, FALSE
-  $delegation: false, #TODO
+  $delegation = false, #TODO
   $show_correlations_on_index = false, #TODO
   $show_proposals_count_on_index = false, #TODO
   $show_sightings_count_on_index =  false, #TODO
@@ -99,7 +99,7 @@ class misp (
   $block_old_event_alert = false,
   $block_old_event_alert_age = 30,
   $rh_shell_fix = false, #TODO
-  $rh_shell_fix_path =  '/opt/rh/rh-php56/root/usr/bin:/opt/rh/rh-php56/root/usr/sbin', #TODO
+  $rh_shell_fix_path = '/opt/rh/rh-php56/root/usr/bin:/opt/rh/rh-php56/root/usr/sbin', #TODO
   $tmpdir = '/tmp', #TODO
   $custom_css = '', #TODO
   $proposals_block_attributes = false, #TODO
