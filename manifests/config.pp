@@ -47,6 +47,16 @@ class misp::config inherits misp {
     subscribe => Exec['Directory permissions'],
   }
 
+  file {["${misp::install_dir}/app/tmp/logs/"] :
+    ensure    => directory,
+    mode      => '0666',
+    owner     => $misp::default_user,
+    group     => $misp::default_group,
+    recurse   => true,
+    seltype   => 'httpd_sys_rw_content_t',
+    subscribe => Exec['Directory permissions'],
+  }
+
   file {["${misp::install_dir}/app/tmp","${misp::install_dir}/app/webroot/img/orgs", "${misp::install_dir}/app/webroot/img/custom"] :
     ensure    => directory,
     owner     => $misp::default_user,
