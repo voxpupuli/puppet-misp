@@ -5,7 +5,7 @@ class misp::config inherits misp {
 
   # PHP ini memory configuration
 
-  php::config { 'php-ini':
+  php::fpm::config { 'php-ini':
     require => Package[rh-php56],
     file => '/etc/opt/rh/rh-php56/php.ini',
     config => [
