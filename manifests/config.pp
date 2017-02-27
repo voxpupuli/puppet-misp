@@ -5,10 +5,10 @@ class misp::config inherits misp {
 
   # PHP ini memory configuration
 
-  augeas { 'php.ini':
+  php::config { 'php-ini':
     require => Package[rh-php56],
-    context => '/etc/opt/rh/rh-php56/php.ini/PHP',
-    changes => [
+    file => '/etc/opt/rh/rh-php56/php.ini',
+    config => [
       "set max_execution_time ${misp::php_max_execution_time}",
       "set memory_limit ${misp::php_memory_limit}M",
       "set upload_max_filesize ${misp::php_upload_max_filesize}M",
