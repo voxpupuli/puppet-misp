@@ -90,7 +90,7 @@ class misp (
   $enable_org_blacklisting = false,
   $log_client_ip = false,
   $log_auth = false,
-  $mangle_push_to_23 = false,  //advised against, FALSE
+  $mangle_push_to_23 = false,  # Advised against, FALSE
   $delegation = false, 
   $show_correlations_on_index = false, 
   $show_proposals_count_on_index = false, 
