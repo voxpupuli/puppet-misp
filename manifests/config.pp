@@ -3,6 +3,21 @@ class misp::config inherits misp {
 
   require '::misp::install'
 
+  # PHP ini memory configuration
+
+  augeas { "php.ini":
+    require => Package[rh-php56],
+    user    => $misp::default_high_user,
+    group   => $misp::default_high_group,
+    context => "/etc/opt/rh/rh-php56/php.ini/PHP",
+    changes => [
+      "set max_execution_time ${misp::php_max_execution_time}",
+      "set memory_limit ${misp::php_memory_limit}M",
+      "set upload_max_filesize ${misp::php_upload_max_filesize}M",
+      "set post_max_size ${misp::php_post_max_size}M",
+    ];
+  }
+
   # Apache permissions
 
   file { "${misp::install_dir}/app/Plugin/CakeResque/Config/config.php":

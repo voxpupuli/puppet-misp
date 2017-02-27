@@ -6,7 +6,7 @@ class misp::service inherits misp {
   service { 'rh-php56-php-fpm':
     ensure    => 'running',
     enable    => true,
-    subscribe => File['/etc/opt/rh/rh-php56/php.d/99-redis.ini'], #Needs the subscribe, cannot notify a service
+    subscribe => [File['/etc/opt/rh/rh-php56/php.d/99-redis.ini'], Augeas["php.ini"]], #Needs the subscribe, cannot notify a service
   }
 
   service { 'haveged':

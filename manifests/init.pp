@@ -13,6 +13,11 @@ class misp (
   $stix_git_tag = 'v1.1.1.4',
   $cybox_git_repo = 'git://github.com/CybOXProject/python-cybox.git',
   $cybox_git_tag = 'v2.1.0.12',
+  # # PHP config
+  $php_max_execution_time = 300,
+  $php_memory_limit = 512,
+  $php_upload_max_filesize = 50,
+  $php_post_max_size = 50,
   # # Services
   $webservername = 'httpd',
   $redis_server = true,
