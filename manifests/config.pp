@@ -7,8 +7,6 @@ class misp::config inherits misp {
 
   augeas { 'php.ini':
     require => Package[rh-php56],
-    user    => $misp::default_high_user,
-    group   => $misp::default_high_group,
     context => '/etc/opt/rh/rh-php56/php.ini/PHP',
     changes => [
       "set max_execution_time ${misp::php_max_execution_time}",
