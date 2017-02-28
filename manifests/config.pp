@@ -85,7 +85,7 @@ class misp::config inherits misp {
     group     => $misp::default_group,
     recurse   => true,
     seltype   => 'httpd_log_t',
-    subscribe => selinux::fcontext[tmp_fcontext],
+    subscribe => selinux::fcontext['tmp_fcontext'],
   }
 
   file { "${misp::config_dir}/bootstrap.php":
