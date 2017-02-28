@@ -71,7 +71,8 @@ class misp::config inherits misp {
     subscribe => Exec['Directory permissions'],
   }
 
-  selinux::fcontext{'/var/www/MISP/app/tmp/logs(/.*)?' :
+  selinux::fcontext{'tmp_fcontext' :
+    pathspec  => '/var/www/MISP/app/tmp/logs(/.*)?',
     filetype  => 'a',
     seltype   => 'httpd_log_t' ,
     subscribe => File["${misp::install_dir}/app/tmp","${misp::install_dir}/app/webroot/img/orgs", "${misp::install_dir}/app/webroot/img/custom"] ,
@@ -84,7 +85,7 @@ class misp::config inherits misp {
     group     => $misp::default_group,
     recurse   => true,
     seltype   => 'httpd_log_t',
-    subscribe => selinux::fcontext['/var/www/MISP/app/tmp/logs(/.*)?'],
+    subscribe => selinux::fcontext[tmp_fcontext],
   }
 
   file { "${misp::config_dir}/bootstrap.php":
