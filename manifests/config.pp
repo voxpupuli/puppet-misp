@@ -2,7 +2,8 @@
 class misp::config inherits misp {
 
   require '::misp::install'
-
+  include selinux
+  
   # PHP ini memory configuration
 
   #php::fpm::config { 'php-ini':
@@ -60,23 +61,30 @@ class misp::config inherits misp {
     subscribe => Exec['Directory permissions'],
   }
 
-  file {["${misp::install_dir}/app/tmp/logs/"] :
+  file {["${misp::install_dir}/app/tmp","${misp::install_dir}/app/webroot/img/orgs", "${misp::install_dir}/app/webroot/img/custom"] :
     ensure    => directory,
-    mode      => '0666',
     owner     => $misp::default_user,
     group     => $misp::default_group,
+    mode      => '0666',
     recurse   => true,
     seltype   => 'httpd_sys_rw_content_t',
     subscribe => Exec['Directory permissions'],
   }
 
-  file {["${misp::install_dir}/app/tmp","${misp::install_dir}/app/webroot/img/orgs", "${misp::install_dir}/app/webroot/img/custom"] :
+  selinux::fcontext{'/var/www/MISP/app/tmp/logs(/.*)?' :
+    filetype  => 'a',
+    seltype   => 'httpd_log_t' ,
+    subscribe => File["${misp::install_dir}/app/tmp","${misp::install_dir}/app/webroot/img/orgs", "${misp::install_dir}/app/webroot/img/custom"] ,
+  }
+
+  file {"${misp::install_dir}/app/tmp/logs/" :
     ensure    => directory,
+    mode      => '0666',
     owner     => $misp::default_user,
     group     => $misp::default_group,
     recurse   => true,
-    seltype   => 'httpd_sys_rw_content_t',
-    subscribe => Exec['Directory permissions'],
+    seltype   => 'httpd_log_t',
+    subscribe => Selinux::fcontext['/var/www/MISP/app/tmp/logs(/.*)?'],
   }
 
   file { "${misp::config_dir}/bootstrap.php":

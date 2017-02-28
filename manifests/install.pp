@@ -123,4 +123,20 @@ class misp::install inherits misp {
     mode      => '0755',
     subscribe => Vcsrepo[$misp::install_dir],
   }
+
+  # Logrotate
+
+  file {'/etc/logrotate.d/misp':
+    ensure => file,
+    source => "puppet:///modules/${module_name}/misp.logrotate",
+    owner  => $misp::default_high_user,
+    group  => $misp::default_high_group,
+    mode   => '0755',
+  }
+
+  selinux::module{ 'mymodule':
+    ensure    => 'present',
+    source_te => 'puppet:///modules/${module_name}/misplogrotate.te',
+    builder   => 'simple'
+  }
 }
