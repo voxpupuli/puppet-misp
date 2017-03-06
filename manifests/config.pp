@@ -2,7 +2,6 @@
 class misp::config inherits misp {
 
   require '::misp::install'
-  include selinux
 
   # Apache permissions
 
@@ -52,27 +51,27 @@ class misp::config inherits misp {
     ensure    => directory,
     owner     => $misp::default_user,
     group     => $misp::default_group,
-    mode      => '0666',
+    mode      => '0750',
     recurse   => true,
     seltype   => 'httpd_sys_rw_content_t',
     subscribe => Exec['Directory permissions'],
   }
 
   selinux::fcontext{'tmp_fcontext' :
-    pathspec  => '/var/www/MISP/app/tmp/logs(/.*)?',
-    filetype  => 'a',
-    seltype   => 'httpd_log_t' ,
+    pathname  => '/var/www/MISP/app/tmp/logs(/.*)?',
+    filemode  => 'a',
+    context   => 'httpd_log_t' ,
     subscribe => File["${misp::install_dir}/app/tmp","${misp::install_dir}/app/webroot/img/orgs", "${misp::install_dir}/app/webroot/img/custom"] ,
     notify    => File["${misp::install_dir}/app/tmp/logs/"],
   }
 
   file {"${misp::install_dir}/app/tmp/logs/" :
-    ensure    => directory,
-    mode      => '0666',
-    owner     => $misp::default_user,
-    group     => $misp::default_group,
-    recurse   => true,
-    seltype   => 'httpd_log_t',
+    ensure  => directory,
+    mode    => '0750',
+    owner   => $misp::default_user,
+    group   => $misp::default_group,
+    recurse => true,
+    seltype => 'httpd_log_t',
   }
 
   file { "${misp::config_dir}/bootstrap.php":

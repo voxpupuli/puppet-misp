@@ -20,9 +20,11 @@
         * [SMIME](#smime)
         * [Proxy](#proxy)
         * [Secure Authentication](#secure-auth)
+        * [Session](#session)
         * [Plugin](#plugin)
         * [Apache Shibboleth Authentication](#apacheshibbauth)          
     * [Services](#services)
+    * [GnuPG](#gnupg)
     
 
 This module installs and configures MISP (Malware Information Sharing Platform) on CentOS 7.
@@ -59,7 +61,7 @@ This module needs the following packages:
     * gcc: Needed for compiling Python modules
     * git: Needed for pulling the MISP code and other git repositories which MISP depends on
     * zip, redis, haveged and maria db
-    * python-devel, python-pip, python-lxml, python-dateutil, python-six, python-lm, importlib [pip], Crypt_GPG [pear]: Python related packages
+    * python-devel, python2-pip, python-lxml, python-dateutil, python-six, python-lm, importlib [pip], Crypt_GPG [pear]: Python related packages
     * rh-php56, rh-php56-php-fpm, rh-php56-php-devel, rh-php56-php-mysqlnd, rh-php56-php-mbstring, php-pecl-redis, php-pear: PHP 5.6 related packages
     * php-mbstring: Python package required by Crypt_GPG
     * libxslt-devel', 'zlib-devel
@@ -92,7 +94,7 @@ And the module will use all parameters with default values, these values are spe
 
 ```puppet
 class {'::misp':
-    git_tag          => 'v2.4.52',
+    git_tag          => 'v2.4.67',
     email            => 'someone.someother@somewhere.ch',
     contact          => 'someone.someother@somewhere.ch',
     salt             => 'Rooraenietu8Eeyo<Qu2eeNfterd-dd+',
@@ -109,7 +111,7 @@ the installation of MISP itself, for the database, for the configuration and for
 
 ### MISP installation
   
-* `misp_git_tag` - Version of MISP that will be installed. By default "v2.4.51".
+* `misp_git_tag` - Version of MISP that will be installed. By default "v2.4.67".
 * `install_dir` - Directory in which MISP will be installed. By default "/var/www/MISP/".
 * `config_dir` - Directory in which the configuration of MISP should be located. By default "install_dir/app/Config/".
 * `stix_git_repo`- Git url of the STIX module. By default "git://github.com/STIXProject/python-stix.git".
@@ -152,37 +154,59 @@ By default set to "Rooraenietu8Eeyo<Qu2eeNfterd-dd+".
 * `auth_method` - Authentication method used for the instance. Empty means default user-password login method. Empty by default.
 * `password_policy_length` - Password length requirement. By default set to 6.
 * `password_policy_complexity` - Password complexity requirement. By default set to '/((?=.*\\d)|(?=.*\\W+))(?![\\n])(?=.*[A-Z])(?=.*[a-z]).*$/'.
+* `sanitise_attribute_on_delete` - Enabling this setting will sanitise the contents of an attribute on a soft delete. By default set to false.
 
 #### MISP
+* `live` - If set to false the instance will only be accessible by site admins. By default true.
+* `maintenance_message` - The message that users will see if the instance is not live. By default set to "Great things 
+are happening! MISP is undergoing maintenance, but will return shortly. You can contact the administration at $email.".
 * `footermidleft` - Footer text prepending the "Powered by MISP" text. Empty by default.
 * `footermidright` - Footer text following the "Powered by MISP" text. Empty by default.
+* `footer_logo` - This setting allows you to display a logo on the right side of the footer. Empty by default.
+* `home_logo` - If set, this setting allows you to display a logo as the home icon. Upload it as a custom image in the file management tool. 
+Empty by default.
+* `main_logo` - If set, the image specified here will replace the main MISP logo on the login screen. Upload it as a custom image in the file 
+management tool. Empty by default.
+* `org` - The organisation tag of the hosting organisation. This is used in the e-mail subjects. By defualt set to 'ORGNAME'.
 * `host_org_id` - The hosting organisation of this instance. If this is not selected then replication instances cannot be added. 
 By default is set to 1, meaning the first Organisation in the system.
-* `email_subject_org` - The organisation tag of the hosting organisation. This is used in the e-mail subjects. By defualt set to 'ORGNAME'.
 * `showorg` - Setting this setting to 'false' will hide all organisation names / logos. By default set to true.
-* `background_jobs` - Enables the use of MISP's background processing. By default set to true.
-* `cached_attachments` - Allow the XML caches to include the encoded attachments. By default set to true.
+* `extended_alert_subject` - Enabling this flag will allow the event description to be transmitted in the alert e-mail's subject. 
+By default set to false.
+* `threatlevel_in_email_subject` -      Put the event threat level in the notification E-mail subject. By default set to true.
+* `email_subject_tlp_string` - This is the TLP string in alert e-mail sent when an event is published. By default 'TLP Amber'.
+* `email_subject_tag` - If this tag is set on an event it's value will be sent in the E-mail subject. If the tag is not set the email_subject_TLP_string 
+will be used. By default set to 'tlp'.
+* `email_subject_include_tag_name` -    Include in name of the email_subject_tag in the subject. When false only the tag value is used.
+By default set to false.
 * `email` - The e-mail address that MISP should use for all notifications. By default "root@localhost".
+* `disable_emailing` - When enabled, no outgoing e-mails will be sent by MISP. By default set to false.
+* `cached_attachments` - Allow the XML caches to include the encoded attachments. By default set to true.
 * `contact` - The e-mail address that MISP should include as a contact address for the instance's support team. By default "root@localhost"
+* `background_jobs` - Enables the use of MISP's background processing. By default set to true.
 * `cveurl` - Turn Vulnerability type attributes into links linking to the provided CVE lookup. By default set to 'http://cve.circl.lu/cve/',
 * `disablerestalert` - When enabled notification e-mails will not be sent when an event is created via the REST interface. 
 By defualt set to false.
 * `default_event_distribution` - The default distribution setting for events (0-3). 0 meanse your organisation only, 1 means this
-community only, 2 means contacted communities and 3 is all communities. By defualt set to 1.
+community only, 2 means contacted communities and 3 is all communities. By default set to 1.
 * `default_attribute_distribution` - The default distribution setting for attributes, set it to 'event' if you would like 
 the attributes to default to the event distribution level. (0-3 or "event"). By default set to 'event'.
+* `default_event_threat_level` - The default threat level setting when creating events. By default set to 1.
 * `tagging` - Enable the tagging feature of MISP. By default set to true.
 * `full_tags_on_event_index` - Show the full tag names on the event index. By default set to true.
-* `footer_logo` - This setting allows you to display a logo on the right side of the footer. Empty by default.
+* `welcome_text_top` - Used on the login page, before the MISP logo. Empty by default.
+* `welcome_text_bottom` -   Used on the login page, after the MISP logo. Empty by default.
+* `welcome_logo` - Used on the login page, to the left of the MISP logo, upload it as a custom image in the file management tool. Empty by default.
+* `welcome_logo2` - Used on the login page, to the right of the MISP logo, upload it as a custom image in the file management tool. Empty by default.
 * `take_ownership_xml_import` - Allows users to take ownership of an event uploaded via the "Add MISP XML" button. 
 By default set to false.
+* `terms_download` - Choose whether the terms and conditions should be displayed inline (false) or offered as a 
+download (true). By default set to false.
+* `terms_file` - The filename of the terms and conditions file. Make sure that the file is located in your MISP/app/files/terms directory. Empty by default.
+* `showorgalternate` - True enables the alternate org fields for the event index (source org and member org) instead of 
+the traditional way of showing only an org field. By default set to false. 
 * `unpublishedprivate` - True will deny access to unpublished events to users outside the organization of the submitter 
 except site admins. By default set to false.
-* `disable_emailing` - When enabled, no outgoing e-mails will be sent by MISP. By default set to false.
-* `live` - If set to false the instance will only be accessible by site admins. By default true.
-* `extended_alert_subject` - Enabling this flag will allow the event description to be transmitted in the alert e-mail's subject. 
-By default set to false.
-* `default_event_threat_level` - The default threat level setting when creating events. By default set to 1.
 * `new_user_text` - The message sent to the user after an account creation. By default set to "Dear new MISP user,\\n\\nWe 
 would hereby like to welcome you to the $org MISP community.\\n\\n Use the credentials below to log into MISP at $misp, 
 where you will be prompted to manually change your password to something of your own choice.\\n\\nUsername: $username\\n
@@ -199,19 +223,47 @@ By default set to false.
 By default set to false.
 * `log_client_ip` - All log entries will include the IP address of the user. By default set to false.
 * `log_auth` - MISP will log all successful authentications using API keys. By default set to false.
+* `mangle_push_to_23` - When enabled, your 2.4+ instance can push events to MISP 2.3 installations. This is highly advised against and will result in degraded events 
+and lost information. Use this at your own risk. By default set to false.
+* `delegation` - This feature allows users to created org only events and ask another organisation to take owenership of the event. This allows organisations 
+to remain anonymous by asking a partner to publish an event for them. By default set to false.
+* `enable_advanced_correlations` - Enable some performance heavy correlations (currently CIDR correlation). By default set to false.
+* `show_correlations_on_index` - When enabled, the number of correlations visible to the currently logged in user will be visible on the event index UI. 
+This comes at a performance cost but can be very useful to see correlating events at a glance. By default set to false.
+* `show_proposals_count_on_index` - When enabled, the number of proposals for the events are shown on the index. By default set to false.
+* `show_sightings_count_on_index` - When enabled, the aggregate number of attribute sightings within the event becomes visible to the currently logged 
+in user on the event index UI. By default set to false.
+* `show_discussions_count_on_index` - When enabled, the aggregate number of discussion posts for the event becomes visible to the currently logged in user on 
+the event index UI. By default set to false.
 * `disable_user_self_management` - When enabled only Org and Site admins can edit a user's profile. By default set to false.
+* `block_event_alert` - Enable this setting to start blocking alert e-mails for events with a certain tag. Define the tag in MISP.block_event_alert_tag.
+By default set to false.
+* `block_event_alert_tag` - If the MISP.block_event_alert setting is set, alert e-mails for events tagged with the tag defined by this setting will be blocked.
+By default set to 'no-alerts="true"'.
 * `block_old_event_alert` - Enable this setting to start blocking alert e-mails for old events. By default set to false.
 * `block_old_event_alert_age` - This setting will control how old an event can be for it to be alerted on, measured in days.
-  By default set to 30.
-* `maintenance_message` - The message that users will see if the instance is not live. By default set to "Great things 
-are happening! MISP is undergoing maintenance, but will return shortly. You can contact the administration at $email.".
-* `email_subject_tlp_string` - This is the TLP string in alert e-mail sent when an event is published. By default 'TLP Amber'.
-* `terms_download` - Choose whether the terms and conditions should be displayed inline (false) or offered as a 
-download (true). By default set to false.
-* `showorgalternate` - True enables the alternate org fields for the event index (source org and member org) instead of 
-the traditional way of showing only an org field. By default set to false. 
+By default set to 30.
+* `rh_shell_fix` - If you are running CentOS or RHEL using SCL and are having issues with the Background workers not responding to start/stop/restarts 
+via the worker interface, enable this setting. This will pre-pend the shell execution commands with the default path to rh-php56 
+(/opt/rh/rh-php56/root/usr/bin:/opt/rh/rh-php56/root/usr/sbin). By default set to false.
+* `rh_shell_fix_path` - If you have rh_shell_fix enabled, the default PATH for rh-php56 is added (/opt/rh/rh-php56/root/usr/bin:/opt/rh/rh-php56/root/usr/sbin). 
+If you prefer to use a different path, you can set it here. By default set to '/opt/rh/rh-php56/root/usr/bin:/opt/rh/rh-php56/root/usr/sbin'
+* `tmpdir` - Please indicate the temp directory you wish to use for certain functionalities in MISP. By default this is set to /tmp and will be used among others 
+to store certain temporary files extracted from imports during the import process.
+* `custom_css` - If you would like to customise the css, simply drop a css file in the /var/www/MISP/webroot/css directory and enter the name here. Empty by default.
+* `proposals_block_attributes` - Enable this setting to allow blocking attributes from to_ids sensitive exports if a proposal has been made to it to remove the 
+IDS flag or to remove the attribute altogether. This is a powerful tool to deal with false-positives efficiently. By default set to true.
+* `incoming_tags_disabled_by_default` - Enable this settings if new tags synced / added via incoming events from any source should not be selectable by users by default.
+By default set to false.
+* `completely_disable_correlation` - *WARNING* This setting will completely disable the correlation on this instance and remove any existing saved correlations. 
+Enabling this will trigger a full recorrelation of all data which is an extremely long and costly procedure. Only enable this if you know what you're doing.
+By default set to false.
+* `allow_disabling_correlation` - *WARNING* This setting will give event creators the possibility to disable the correlation of individual events / attributes that they have created.
+By default set to false.
 
 #### GPG
+* `gpg_binary` - The location of the GPG executable. If you would like to use a different gpg executable than /usr/bin/gpg, you can set it here. If the default is fine, 
+just keep the setting suggested by MISP. By default set to '/usr/bin/gpg'
 * `gpg_onlyencrypted` - Allow (false) unencrypted e-mails to be sent to users that don't have a PGP key. 
 By default set to false.
 * `gpg_email` - The e-mail address that the instance's PGP key is tied to. By default "no-reply@localhost".
@@ -240,19 +292,16 @@ By default set to 5.
 * `secure_auth_expire` - The duration (in seconds) of how long the user will be locked out when the allowed number of login 
 attempts are exhausted. By default set to 300.
 
+#### Session
+* `session_auto_regenerate` - Set to true to automatically regenerate sessions on activity. (Recommended). By default set to false.
+* `session_defaults` - The session type used by MISP. The default setting is php, which will use the session settings configured in php.ini for the session 
+data (supported options: php, database). The recommended option is php and setting your PHP up to use redis sessions via your php.ini. Just add 'session.save_handler = redis' 
+and "session.save_path = 'tcp://localhost:6379'" (replace the latter with your redis connection) to. By default set to 'php'.
+* `session_timeout` - The timeout duration of sessions (in MINUTES). Keep in mind that autoregenerate can be used to extend the session on user activity.
+By default set to 60.
+
 #### Plugin
-* `customAuth_disable_logout` - Disable the logout button for users authenticate with the external auth mechanism.
-By default set to true.
-* `zeromq_enable` - Enables or disables the pub/sub feature of MISP. By default set to false.
-* `zeromq_port` - The port that the pub/sub feature will use. By default set to 50000.
-* `zeromq_redis_host`- Location of the Redis db used by MISP and the Python PUB script to queue data to be published. 
-By default set to 'localhost'.
-* `zeromq_redis_port` - The port that Redis is listening on. By default set to 6379.
-* `zeromq_redis_password` - The password, if set for Redis. Emtpy by default.
-* `zeromq_redis_database` - The database to be used for queuing messages for the pub/sub functionality. By default set to '1'.
-* `zeromq_redis_namespace` - The namespace to be used for queuing messages for the pub/sub functionality. By default 
-set to 'mispq'.
-* `RPZ_policy` - The default policy action for the values added to the RPZ. 0 means DROP, 1 NXDOMAIN, 2 NODATA and 3 walled-garden. 
+* `rpz_policy` - The default policy action for the values added to the RPZ. 0 means DROP, 1 NXDOMAIN, 2 NODATA and 3 walled-garden. 
 By default set to 0.
 * `rpz_walled_garden` - The default walled garden used by the RPZ export. By default set to '127.0.0.1'.
 * `rpz_serial` - The serial in the SOA portion of the zone file. By default set to '$date00'.
@@ -263,12 +312,44 @@ By default set to 0.
 * `rpz_ttl` - The TTL of the zone file. By default set to '1w'.
 * `rpz_ns` - The RPZ ns. By default set to 'localhost'.
 * `rpz_email` - The e-mail address specified in the SOA portion of the zone file. By default set to 'root.localhost'.
+* `zeromq_enable` - Enables or disables the pub/sub feature of MISP. By default set to false.
+* `zeromq_port` - The port that the pub/sub feature will use. By default set to 50000.
+* `zeromq_redis_host`- Location of the Redis db used by MISP and the Python PUB script to queue data to be published. 
+By default set to 'localhost'.
+* `zeromq_redis_port` - The port that Redis is listening on. By default set to 6379.
+* `zeromq_redis_password` - The password, if set for Redis. Emtpy by default.
+* `zeromq_redis_database` - The database to be used for queuing messages for the pub/sub functionality. By default set to '1'.
+* `zeromq_redis_namespace` - The namespace to be used for queuing messages for the pub/sub functionality. By default 
+set to 'mispq'.
 * `sightings_anonymise` - Enabling the anonymisation of sightings will simply aggregate all sightings instead of showing 
 the organisations that have reported a sighting. By default set to false.
 * `sightings_policy` - This setting defines who will have access to seeing the reported sightings. 0 means event owner, 
 1 event owner and sighting reporter and 2 means everyone. By default set to 0.
 * `sightings_enable` - When enabled, users can use the UI or the appropriate APIs to submit sightings data about indicators. 
 By default set to false.
+* `sightings_range` - Set the range in which sightings will be taken into account when generating graphs. For example a sighting with a sighted_date of 7 
+years ago might not be relevant anymore. Setting given in number of days, default is 365 days.
+* `customauth_enable` - Enable this functionality if you would like to handle the authentication via an external tool and authenticate with MISP using a custom header.
+By default set to false.
+* `customauth_header` - Set the header that MISP should look for here. If left empty it will default to the Authorization header. By default set to 'Authorization'.
+* `customauth_use_header_namespace` - Use a header namespace for the auth header - default setting is enabled.
+* `customauth_required` -   If this setting is enabled then the only way to authenticate will be using the custom header. Altnertatively you can run in mixed mode 
+that will log users in via the header if found, otherwise users will be redirected to the normal login page. By default set to false.
+* `customauth_only_allow_source` - If you are using an external tool to authenticate with MISP and would like to only allow the tool's url as a valid point of 
+entry then set this field. Empty by default.
+* `customauth_name` - The name of the authentication method, this is cosmetic only and will be shown on the user creation page and logs. 
+By default set to 'External authentication'
+* `customauth_disable_logout` - Disable the logout button for users authenticate with the external auth mechanism.
+By default set to true.
+* `customauth_custom_password_reset` - Provide your custom authentication users with an external URL to the authentication system to reset their passwords. Empty by default.
+* `customauth_custom_logout` - Provide a custom logout URL for your users that will log them out using the authentication system you use. Empty by default.
+* `enrichment_services_enable` - Enable/disable the enrichment services. By default set to true.
+* `enrichment_services_url` - The url used to access the enrichment services. By default set to 'http://127.0.0.1'.
+* `enrichment_services_port` - The port used to access the enrichment services. By default set to 6666.
+* `enrichment_timeout` - Set a timeout for the enrichment services. By default set to 10.
+* `enrichment_hover_enable` - Enable/disable the hover over information retrieved from the enrichment modules. 
+By default set to true.
+* `enrichment_hover_timeout` - Set a timeout for the hover services. By default set to  5.
 * `export_services_enable` - Enable/disable the import services. By default set to true.
 * `export_services_url` - The url used to access the export services. By default set to 'http://127.0.0.1'.
 * `export_services_port` - The port used to access the export services. By default set to 6666.
@@ -277,13 +358,6 @@ By default set to false.
 * `import_services_url` - The url used to access the import services. By default set to 'http://127.0.0.1'.
 * `import_services_port` - The port used to access the import services. By default set to 6666.
 * `import_timeout` - Set a timeout for the import services. By default set to 10.
-* `enrichment_services_enable` - Enable/disable the enrichment services. By default set to true.
-* `enrichment_services_url` - The url used to access the enrichment services. By default set to 'http://127.0.0.1'.
-* `enrichment_services_port` - The port used to access the enrichment services. By default set to 6666.
-* `enrichment_timeout` - Set a timeout for the enrichment services. By default set to 10.
-* `enrichment_hover_enable` - Enable/disable the hover over information retrieved from the enrichment modules. 
-By default set to true.
-* `enrichment_hover_timeout` - Set a timeout for the hover services. By default set to  5.
 
 #### ApacheShibbAuth
 * `shib_default_org` - Default organisation for user creation when using Shibboleth authentication plugin. By default set to 1.
@@ -295,3 +369,23 @@ Empty by default ({}).
 * `webservername` = The name of the service of the web server on top of which MISP is running. By default httpd.
 * `redis_server` = If the redis database will be installed locally or not, meaning that the redis server will be installed. 
 By default true.
+
+### GnuPG
+
+To set up GPG fist you need to generate a gpg key with:
+```bash
+gpg --gen-key
+```
+Note that the email should be the email set up in the GnuPG part of the configuration (gpg_email parameter), and the same applies for the password (gpg_password parameter). There are known cases of errors when using it with a password (instead of passwordless as in the default configuration). If it gives an error run is as root.
+
+Then move the key to the directory set up as home directory (gpg_homedir parameter), set apache as owner and group and the selinux context httpd_sys_rw_content_t. 
+```bash
+mv ~/.gnupg /var/www/MISP/
+chown -R apache:apache /var/www/MISP/.gnupg
+chcon -R -t httpd_sys_rw_content_t /var/www/MISP/.gnupg
+```
+
+Finally export the public key to the webroot
+```bash
+sudo -u apache gpg --homedir /var/www/MISP/.gnupg --export --armor YOUR-EMAIL > /var/www/MISP/app/webroot/gpg.asc
+```

@@ -1,4 +1,4 @@
-module misplogrotate 1.0;
+module local_misplogrotate 1.0;
 require {
 	type logrotate_t;
 	type httpd_sys_content_t;
