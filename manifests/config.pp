@@ -3,19 +3,6 @@ class misp::config inherits misp {
 
   require '::misp::install'
   include selinux
-  
-  # PHP ini memory configuration
-
-  #php::fpm::config { 'php-ini':
-  #  require => Package[rh-php56],
-  #  file    => '/etc/opt/rh/rh-php56/php.ini',
-  #  config  => [
-  #    "set max_execution_time ${misp::php_max_execution_time}",
-  #    "set memory_limit ${misp::php_memory_limit}M",
-  #    "set upload_max_filesize ${misp::php_upload_max_filesize}M",
-  #    "set post_max_size ${misp::php_post_max_size}M",
-  #  ];
-  #}
 
   # Apache permissions
 

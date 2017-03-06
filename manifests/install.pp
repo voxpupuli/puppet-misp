@@ -134,9 +134,8 @@ class misp::install inherits misp {
     mode   => '0755',
   }
 
-  selinux::module{ 'mymodule':
-    ensure    => 'present',
-    source_te => 'puppet:///modules/${module_name}/misplogrotate.te',
-    builder   => 'simple'
+  selinux::module{ 'misp_logrotate':
+    source => 'puppet:///modules/${module_name}/misplogrotate.te',
+    subscribe => File['/etc/logrotate.d/misp'],
   }
 }
