@@ -126,16 +126,16 @@ class misp::install inherits misp {
 
   # Logrotate
 
-  file {'/etc/logrotate.d/misp':
-    ensure => file,
-    source => "puppet:///modules/${module_name}/misp.logrotate",
-    owner  => $misp::default_high_user,
-    group  => $misp::default_high_group,
-    mode   => '0755',
-  }
+  #file {'/etc/logrotate.d/misp':
+  #  ensure => file,
+  #  source => "puppet:///modules/${module_name}/misp.logrotate",
+  #  owner  => $misp::default_high_user,
+  #  group  => $misp::default_high_group,
+  #  mode   => '0755',
+  #}
 
-  selinux::module{ 'misplogrotate':
-    source    => "puppet:///modules/${module_name}/misplogrotate.te",
-    subscribe => File['/etc/logrotate.d/misp'],
-  }
+  #selinux::module{ 'misplogrotate':
+  #  source    => "puppet:///modules/${module_name}/misplogrotate.te",
+  #  subscribe => File['/etc/logrotate.d/misp'],
+  #}
 }

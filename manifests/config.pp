@@ -55,15 +55,16 @@ class misp::config inherits misp {
     recurse   => true,
     seltype   => 'httpd_sys_rw_content_t',
     subscribe => Exec['Directory permissions'],
+    notify    => File["${misp::install_dir}/app/tmp/logs/"],#Comment for logrotate usage
   }
 
-  selinux::fcontext{'tmp_fcontext' :
-    pathname  => '/var/www/MISP/app/tmp/logs(/.*)?',
-    filemode  => 'a',
-    context   => 'httpd_log_t' ,
-    subscribe => File["${misp::install_dir}/app/tmp","${misp::install_dir}/app/webroot/img/orgs", "${misp::install_dir}/app/webroot/img/custom"] ,
-    notify    => File["${misp::install_dir}/app/tmp/logs/"],
-  }
+  #selinux::fcontext{'tmp_fcontext' :
+  #  pathname  => '/var/www/MISP/app/tmp/logs(/.*)?',
+  #  filemode  => 'a',
+  #  context   => 'httpd_log_t' ,
+  #  subscribe => File["${misp::install_dir}/app/tmp","${misp::install_dir}/app/webroot/img/orgs", "${misp::install_dir}/app/webroot/img/custom"] ,
+  #  notify    => File["${misp::install_dir}/app/tmp/logs/"],
+  #}
 
   file {"${misp::install_dir}/app/tmp/logs/" :
     ensure  => directory,
@@ -71,7 +72,8 @@ class misp::config inherits misp {
     owner   => $misp::default_user,
     group   => $misp::default_group,
     recurse => true,
-    seltype => 'httpd_log_t',
+    #seltype => 'httpd_log_t', #Uncomment for logrotate usage
+    seltype => 'httpd_sys_rw_content_t',
   }
 
   file { "${misp::config_dir}/bootstrap.php":
