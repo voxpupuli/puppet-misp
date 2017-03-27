@@ -5,7 +5,7 @@ status() {
   workers=( $(redis-cli smembers resque:workers) )
   ret_code=$?
   num_workers=${#workers[@]}
-  if [ $num_workers -eq 5 ]; then
+  if [ $num_workers -ne 5 ]; then
     return "$((5-$num_workers))"
   fi
 
