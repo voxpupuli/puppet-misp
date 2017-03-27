@@ -4,6 +4,11 @@ status() {
   # Get the list of MISP background workers from Redis
   workers=( $(redis-cli smembers resque:workers) )
   ret_code=$?
+  num_workers=${#workers[@]}
+  if [ $num_workers -eq 5 ]; then
+    return "$((5-$num_workers))"
+  fi
+
   if [ $ret_code -eq 0 ]; then
     # Extract PIDs from worker names
     pids=`echo "${workers[@]}" | tr ' ' '\n' | sed -n 's/.*:\([0-9]\+\):.*/\1/p' | tr '\n' ' '`
