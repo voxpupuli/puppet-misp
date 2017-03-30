@@ -8,7 +8,7 @@
 class misp (
   # MISP installation
   # # MISP repositories
-  $misp_git_tag = 'v2.4.67',
+  $misp_git_tag = 'v2.4.69',
   $stix_git_repo = 'git://github.com/STIXProject/python-stix.git',
   $stix_git_tag = 'v1.1.1.4',
   $cybox_git_repo = 'git://github.com/CybOXProject/python-cybox.git',

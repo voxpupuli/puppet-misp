@@ -85,8 +85,8 @@ class misp::install inherits misp {
 
   exec {'CakeResque install':
     command     => '/usr/bin/php composer.phar install',
-    environment => ["COMPOSER_HOME=${misp::install_dir}/app/"],
     cwd         => "${misp::install_dir}/app/",
+    environment => ["COMPOSER_HOME=${misp::install_dir}/app/"],
     refreshonly => true,
     notify      => File['/etc/opt/rh/rh-php56/php-fpm.d/redis.ini', '/etc/opt/rh/rh-php56/php-fpm.d/timezone.ini'],
   }
