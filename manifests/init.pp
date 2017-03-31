@@ -27,7 +27,7 @@ class misp (
   $site_admin_debug = false,
   # # MISP puppet configuration
   $install_dir = '/var/www/MISP/',
-  $config_dir = "/var/www/MISP/app/Config/",
+  $config_dir = '/var/www/MISP/app/Config/',
   $timezone = 'UTC',
   $default_user = 'apache',
   $default_group = 'apache',
