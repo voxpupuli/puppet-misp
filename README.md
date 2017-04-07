@@ -1,5 +1,12 @@
 # MISP MODULE
 
+[![Build Status](https://travis-ci.org/voxpupuli/puppet-misp.png?branch=master)](https://travis-ci.org/voxpupuli/puppet-misp)
+[![Code Coverage](https://coveralls.io/repos/github/voxpupuli/puppet-misp/badge.svg?branch=master)](https://coveralls.io/github/voxpupuli/puppet-misp)
+[![Puppet Forge](https://img.shields.io/puppetforge/v/puppet/misp.svg)](https://forge.puppetlabs.com/puppet/misp)
+[![Puppet Forge - downloads](https://img.shields.io/puppetforge/dt/puppet/misp.svg)](https://forge.puppetlabs.com/puppet/misp)
+[![Puppet Forge - endorsement](https://img.shields.io/puppetforge/e/puppet/misp.svg)](https://forge.puppetlabs.com/puppet/misp)
+[![Puppet Forge - scores](https://img.shields.io/puppetforge/f/puppet/misp.svg)](https://forge.puppetlabs.com/puppet/misp)
+
 #### Table of Contents
 
 1. [Overview](#overview)
