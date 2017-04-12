@@ -15,7 +15,7 @@ describe 'misp::install' do
         it {
           is_expected.to contain_vcsrepo('/var/www/MISP/').
           with_ensure('present').
-          with_revision(%r{v2.4.69})
+          with_revision(%r{v2.4.[0-9]*})
         }
 
         it {
