@@ -8,7 +8,7 @@
 class misp (
   # MISP installation
   # # MISP repositories
-  $misp_git_tag = 'v2.4.69',
+  $misp_git_tag = 'v2.4.71',
   $stix_git_repo = 'git://github.com/STIXProject/python-stix.git',
   $stix_git_tag = 'v1.1.1.4',
   $cybox_git_repo = 'git://github.com/CybOXProject/python-cybox.git',
@@ -81,8 +81,8 @@ class misp (
   $unpublishedprivate = false,
   $new_user_text = "Dear new MISP user,\\n\\nWe would hereby like to welcome you to the \$org MISP community.\\n\\n Use the credentials below to log into MISP at \$misp, where you will be prompted to manually change your password to something of your own choice.\\n\\nUsername: \$username\\nPassword: \$password\\n\\nIf you have any questions, don\'t hesitate to contact us at: \$contact.\\n\\nBest regards,\\nYour \$org MISP support team",
   $password_reset_text = "Dear MISP user,\\n\\nA password reset has been triggered for your account. Use the below provided temporary password to log into MISP at \$misp, where you will be prompted to manually change your password to something of your own choice.\\n\\nUsername: \$username\\nYour temporary password: \$password\\n\\nIf you have any questions, don\'t hesitate to contact us at: \$contact.\\n\\nBest regards,\\nYour \$org MISP support team",
-  $enable_event_blacklisting = false,
-  $enable_org_blacklisting = false,
+  $enable_event_blacklisting = true,
+  $enable_org_blacklisting = true,
   $log_client_ip = true,
   $log_auth = false,
   $mangle_push_to_23 = false,  # Advised against, FALSE
