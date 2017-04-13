@@ -103,7 +103,7 @@ describe 'misp::config' do
           is_expected.to contain_file('/var/www/MISP/app/Config//core.php').
             with_ensure('file').
             with_owner('root').
-            with_group('apache').
+            with_group('apache'). 
             that_subscribes_to('Exec[Directory permissions]')
         end
 
