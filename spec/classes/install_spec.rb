@@ -8,7 +8,6 @@ describe 'misp::install' do
       end
       it { is_expected.to compile.with_all_deps }
       it { is_expected.to contain_class('Misp::Install').that_requires('Class[Misp::Dependencies]') }
-
       context 'With default values' do
         it do
           is_expected.to contain_vcsrepo('/var/www/MISP/').
@@ -28,7 +27,7 @@ describe 'misp::install' do
             with_ensure('present').
             with_source(%r{git://github.com/CybOXProject/python-cybox.git}).
             with_revision(%r{v2.1.0.12})
-        end 
+        end
 
         it do
           is_expected.to contain_vcsrepo('/var/www/MISP//app/files/scripts/python-stix').
