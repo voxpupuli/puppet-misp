@@ -6,6 +6,7 @@ describe 'misp' do
       let(:facts) do
         facts
       end
+
       it { is_expected.to compile.with_all_deps }
       it { is_expected.to contain_class('Misp') }
       it { is_expected.to contain_class('Misp::Dependencies') }

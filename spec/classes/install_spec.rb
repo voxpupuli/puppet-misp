@@ -6,6 +6,7 @@ describe 'misp::install' do
       let(:facts) do
         facts
       end
+
       it { is_expected.to compile.with_all_deps }
       it { is_expected.to contain_class('Misp::Install').that_requires('Class[Misp::Dependencies]') }
       context 'With default values' do
