@@ -141,6 +141,52 @@ those cases. By default apache.
 * `db_port` - Port to connect to the database in the specified host. By default 3306.
 * `db_password` - Password used to access the database. By default is empty.
 
+This module does not install the MariaDB server. However, if that was needed it could be done, in your manifest, in a similar manner as the following puppet fragment:
+
+```puppet
+  $mysql_passwd = mysql_password('mispdb')
+
+  class {'mariadb::server':
+    root_password => 'mispdb',
+    users                         => {
+      'misp@localhost' => {
+        ensure                   => 'present',
+        max_connections_per_hour => '0',
+        max_queries_per_hour     => '0',
+        max_updates_per_hour     => '0',
+        max_user_connections     => '0',
+        password_hash            => $mysql_passwd,
+        tls_options              => ['NONE'],
+      },
+    },
+    grants => {
+      'misp@localhost/misp.*' => {
+        ensure     => 'present',
+        options    => ['GRANT'],
+        privileges => ['ALL'],
+        table      => 'misp.*',
+        user       => 'misp@localhost',
+      },
+      'misp@localhost/*.*' => {
+        ensure     => 'present',
+        options    => ['GRANT'],
+        privileges => ['USAGE'],
+        table      => '*.*',
+        user       => 'misp@localhost',
+        options    => "IDENTIFIED BY ${$mysql_passwd}",
+      },
+    },
+    databases   => {
+      'misp'  => {
+        ensure  => 'present',
+        charset => 'utf8',
+      },
+    },
+  }
+```
+
+Note that it requires the edestecd-mariadb module.
+
 ### MISP configuration
 
 #### Site Configuration
