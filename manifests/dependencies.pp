@@ -10,6 +10,7 @@ class misp::dependencies inherits misp {
     'rh-php56', 'rh-php56-php-fpm', 'rh-php56-php-devel', 'rh-php56-php-mysqlnd', 'rh-php56-php-mbstring', 'php-pear',# PHP related packages
     'php-mbstring', #Required for Crypt_GPG
     'haveged',
+    'sclo-php56-php-pecl-redis', # Redis connection from PHP
   ],
     { 'ensure' => 'present' }
   )
@@ -18,11 +19,6 @@ class misp::dependencies inherits misp {
     package { 'redis':
       ensure => present,
     }
-  }
-
-  exec {'php56 redis': # Needed to install redis for php 5.6; php-pecl-redis installs it for php 5.4
-    command => '/usr/bin/scl enable rh-php56  "pecl install redis-2.2.8"',
-    unless  => '/usr/bin/scl enable rh-php56  "pecl list | grep redis"',
   }
 
   exec {'Crypt_GPG':
