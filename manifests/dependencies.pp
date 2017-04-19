@@ -34,6 +34,7 @@ class misp::dependencies inherits misp {
   }
 
   exec {'pip install importlib':
+    require => Package[python2-pip],
     command => '/usr/bin/pip install importlib',
     unless  => '/usr/bin/pip list | grep importlib',
   }
