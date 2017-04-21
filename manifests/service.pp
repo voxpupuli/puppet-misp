@@ -24,6 +24,7 @@ class misp::service inherits misp {
     unless  => "/usr/bin/su -s /bin/bash ${misp::default_user} -c '/usr/bin/scl enable rh-php56 ${misp::install_dir}/app/Console/worker/status.sh'",
     user    => $misp::default_high_user,
     group   => $misp::default_high_group,
+    require => Service[redis],
   }
 
   exec {'restart bg workers':
@@ -32,5 +33,6 @@ class misp::service inherits misp {
     group       => $misp::default_high_group,
     refreshonly => true,
     subscribe   => Exec['CakeResque install'],
+    require => Service[redis],
   }
 }
