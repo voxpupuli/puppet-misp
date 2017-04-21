@@ -33,6 +33,6 @@ class misp::service inherits misp {
     group       => $misp::default_high_group,
     refreshonly => true,
     subscribe   => Exec['CakeResque install'],
-    require => Service[redis],
+    require     => Service[redis],
   }
 }
