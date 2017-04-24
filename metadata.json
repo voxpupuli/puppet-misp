@@ -7,6 +7,12 @@
   "source": "https://github.com/voxpupuli/puppet-misp",
   "project_page": "https://github.com/voxpupuli/puppet-misp",
   "issues_url": "https://github.com/voxpupuli/puppet-misp/issues",
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 3.8.7 < 5.0.0"
+    }
+  ],
   "dependencies": [
     {
       "name": "puppetlabs-stdlib",
