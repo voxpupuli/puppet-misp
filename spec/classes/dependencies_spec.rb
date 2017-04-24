@@ -28,10 +28,9 @@ describe 'misp::dependencies' do
       it { is_expected.to contain_package('php-mbstring') }
       it { is_expected.to contain_package('haveged') }
       it { is_expected.to contain_package('sclo-php56-php-pecl-redis') }
+      it { is_expected.to contain_package('php-pear-Crypt-GPG') }
       context 'With default values' do
         it { is_expected.to contain_package('redis') }
-        it { is_expected.to contain_exec('Crypt_GPG') }
-        it { is_expected.to contain_exec('pip install importlib') }
       end
     end
   end
