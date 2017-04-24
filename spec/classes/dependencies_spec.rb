@@ -28,7 +28,7 @@ describe 'misp::dependencies' do
       it { is_expected.to contain_package('php-mbstring') }
       it { is_expected.to contain_package('haveged') }
       it { is_expected.to contain_package('sclo-php56-php-pecl-redis') }
-      it { is_expected.to contain_package('php-pear-Crypt-GPG') }
+      it { is_expected.to contain_package('php-pear-crypt-gpg') }
       context 'With default values' do
         it { is_expected.to contain_package('redis') }
       end

@@ -11,7 +11,7 @@ class misp::dependencies inherits misp {
     'php-mbstring', #Required for Crypt_GPG
     'haveged',
     'sclo-php56-php-pecl-redis', # Redis connection from PHP
-    'php-pear-Crypt-GPG', # Crypto GPG 
+    'php-pear-crypt-gpg', # Crypto GPG 
   ],
     { 'ensure' => 'present' }
   )

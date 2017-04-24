@@ -10,7 +10,7 @@ class misp::install inherits misp {
     provider   => git,
     submodules => true,
     force      => false,
-    source     => 'git://github.com/MISP/MISP.git',
+    source     => 'https://github.com/MISP/MISP.git',
     revision   => $misp::misp_git_tag,
   }
 
