@@ -11,6 +11,7 @@ class misp::dependencies inherits misp {
     'php-mbstring', #Required for Crypt_GPG
     'haveged',
     'sclo-php56-php-pecl-redis', # Redis connection from PHP
+    'php-pear-Crypt-GPG', # Crypto GPG 
   ],
     { 'ensure' => 'present' }
   )
@@ -20,15 +21,7 @@ class misp::dependencies inherits misp {
       ensure => present,
     }
   }
-
-  exec {'Crypt_GPG':
-    user    => root,
-    command => '/usr/bin/pear update-channels pear.php.net && /usr/bin/scl enable rh-php56 "pear install Crypt_GPG"',
-    creates => '/usr/bin/Crypt_GPG',
-    unless  => '/usr/bin/scl enable rh-php56 "pear list | grep Crypt_GPG"',
-    require => Package['php-pear'],
-  }
-
+  
   exec {'pip install importlib':
     require => Package[python2-pip],
     command => '/usr/bin/pip install importlib',
