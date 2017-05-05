@@ -68,10 +68,12 @@ This module needs the following packages:
     * gcc: Needed for compiling Python modules
     * git: Needed for pulling the MISP code and other git repositories which MISP depends on
     * zip, redis, haveged and maria db
-    * python-devel, python2-pip, python-lxml, python-dateutil, python-six, python-lm, importlib [pip], Crypt_GPG [pear]: Python related packages
+    * python-devel, python2-pip, python-lxml, python-dateutil, python-six,: Python related packages
     * rh-php56, rh-php56-php-fpm, rh-php56-php-devel, rh-php56-php-mysqlnd, rh-php56-php-mbstring, php-pecl-redis, php-pear: PHP 5.6 related packages
-    * php-mbstring: Python package required by Crypt_GPG
+    * php-mbstring, php-pear-crypt-gpg: Python package required by Crypt_GPG
+    * sclo-php56-php-pecl-redis: Redis related packages
     * libxslt-devel', 'zlib-devel
+    * haveged
 
 The services needed by MISP are:
 
@@ -118,12 +120,12 @@ the installation of MISP itself, for the database, for the configuration and for
 
 ### MISP installation
   
-* `misp_git_tag` - Version of MISP that will be installed. By default "v2.4.67".
+* `misp_git_tag` - Version of MISP that will be installed. By default "v2.4.71".
 * `install_dir` - Directory in which MISP will be installed. By default "/var/www/MISP/".
-* `config_dir` - Directory in which the configuration of MISP should be located. By default "install_dir/app/Config/".
-* `stix_git_repo`- Git url of the STIX module. By default "git://github.com/STIXProject/python-stix.git".
+* `config_dir` - Directory in which the configuration of MISP should be located. By default "/var/www/MISP/app/Config/".
+* `stix_git_repo`- Git url of the STIX module. By default "https://github.com/STIXProject/python-stix.git".
 * `stix_git_tag`- Version of the STIX module. By default "v1.1.1.4".
-* `cybox_git_repo`- Git url of the CyBox repository. By default "git://github.com/CybOXProject/python-cybox.git".
+* `cybox_git_repo`- Git url of the CyBox repository. By default "https://github.com/CybOXProject/python-cybox.git".
 * `cybox_git_tag`- Version of the CyBox module. By default "v2.1.0.12".
 * `timezone`- Timezone where the instance has been placed. By default "UTC".
 * `default_user`- User as which to run the installation of MISP. By default apache.
@@ -137,7 +139,7 @@ those cases. By default apache.
 
 * `db_name` - Name of the database. By default "misp".
 * `db_user` - Name of the user with rights on the database. By defeault "misp".
-* `db_host` - Name of the host in which the database is located. By default "misp.com".
+* `db_host` - Name of the host in which the database is located. By default "localhost".
 * `db_port` - Port to connect to the database in the specified host. By default 3306.
 * `db_password` - Password used to access the database. By default is empty.
 
@@ -211,8 +213,9 @@ By default set to "Rooraenietu8Eeyo<Qu2eeNfterd-dd+".
 
 #### MISP
 * `live` - If set to false the instance will only be accessible by site admins. By default true.
-* `maintenance_message` - The message that users will see if the instance is not live. By default set to "Great things 
-are happening! MISP is undergoing maintenance, but will return shortly. You can contact the administration at $email.".
+* `enable_advanced_correlations` - Enable some performance heavy correlations (currently CIDR correlation). By default false.
+* `maintenance_message` - The message that users will see if the instance is not live. By default set to 'Great things are happening! MISP is undergoing maintenance, 
+but will return shortly. You can contact the administration at \\$email.'.
 * `footermidleft` - Footer text prepending the "Powered by MISP" text. Empty by default.
 * `footermidright` - Footer text following the "Powered by MISP" text. Empty by default.
 * `footer_logo` - This setting allows you to display a logo on the right side of the footer. Empty by default.
@@ -225,12 +228,12 @@ management tool. Empty by default.
 By default is set to 1, meaning the first Organisation in the system.
 * `showorg` - Setting this setting to 'false' will hide all organisation names / logos. By default set to true.
 * `extended_alert_subject` - Enabling this flag will allow the event description to be transmitted in the alert e-mail's subject. 
-By default set to false.
-* `threatlevel_in_email_subject` -      Put the event threat level in the notification E-mail subject. By default set to true.
+By default set to true.
+* `threatlevel_in_email_subject` - Put the event threat level in the notification E-mail subject. By default set to true.
 * `email_subject_tlp_string` - This is the TLP string in alert e-mail sent when an event is published. By default 'TLP Amber'.
 * `email_subject_tag` - If this tag is set on an event it's value will be sent in the E-mail subject. If the tag is not set the email_subject_TLP_string 
 will be used. By default set to 'tlp'.
-* `email_subject_include_tag_name` -    Include in name of the email_subject_tag in the subject. When false only the tag value is used.
+* `email_subject_include_tag_name` - Include in name of the email_subject_tag in the subject. When false only the tag value is used.
 By default set to false.
 * `email` - The e-mail address that MISP should use for all notifications. By default "root@localhost".
 * `disable_emailing` - When enabled, no outgoing e-mails will be sent by MISP. By default set to false.
@@ -260,21 +263,13 @@ download (true). By default set to false.
 the traditional way of showing only an org field. By default set to false. 
 * `unpublishedprivate` - True will deny access to unpublished events to users outside the organization of the submitter 
 except site admins. By default set to false.
-* `new_user_text` - The message sent to the user after an account creation. By default set to "Dear new MISP user,\\n\\nWe 
-would hereby like to welcome you to the $org MISP community.\\n\\n Use the credentials below to log into MISP at $misp, 
-where you will be prompted to manually change your password to something of your own choice.\\n\\nUsername: $username\\n
-Password: $password\\n\\nIf you have any questions, don\'t hesitate to contact us at: $contact.\\n\\nBest regards,\\nYour 
-$org MISP support team".
-* `password_reset_text` - The message sent to the users when a password reset is triggered. By default set to "Dear MISP user,
-\\n\\nA password reset has been triggered for your account. Use the below provided temporary password to log into MISP 
-at $misp, where you will be prompted to manually change your password to something of your own choice.\\n\\nUsername: 
-$username\\nYour temporary password: $password\\n\\nIf you have any questions, don\'t hesitate to contact us at: 
-$contact.\\n\\nBest regards,\\nYour $org MISP support team".
+* `new_user_text` - The message sent to the user after an account creation. By default set to 'Dear new MISP user,\\n\\nWe would hereby like to welcome you to the \\$org MISP community.\\n\\n Use the credentials below to log into MISP at \\$misp, where you will be prompted to manually change your password to something of your own choice.\\n\\nUsername: \\$username\\nPassword: \\$password\\n\\nIf you have any questions, don\'t hesitate to contact us at: \\$contact.\\n\\nBest regards,\\nYour \\$org MISP support team'.
+* `password_reset_text` - The message sent to the users when a password reset is triggered. By default set to 'Dear MISP user,\\n\\nA password reset has been triggered for your account. Use the below provided temporary password to log into MISP at \\$misp, where you will be prompted to manually change your password to something of your own choice.\\n\\nUsername: \\$username\\nYour temporary password: \\$password\\n\\nIf you have any questions, don\'t hesitate to contact us at: \\$contact.\\n\\nBest regards,\\nYour \\$org MISP support team'.
 * `enable_event_blacklisting` - Enable the blacklisting of event UUIDs to prevent them from being pushed to your instance. 
-By default set to false.
+By default set to true.
 * `enable_org_blacklisting` - Enable blacklisting of organisation UUIDs to prevent them from creating events. 
-By default set to false.
-* `log_client_ip` - All log entries will include the IP address of the user. By default set to false.
+By default set to true.
+* `log_client_ip` - All log entries will include the IP address of the user. By default set to true.
 * `log_auth` - MISP will log all successful authentications using API keys. By default set to false.
 * `mangle_push_to_23` - When enabled, your 2.4+ instance can push events to MISP 2.3 installations. This is highly advised against and will result in degraded events 
 and lost information. Use this at your own risk. By default set to false.
