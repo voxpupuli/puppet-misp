@@ -18,6 +18,7 @@ $config = array (
      ),
   'MISP' =>
     array (
+      'uuid' => '<%= @uuid -%>',
       'baseurl' => 'https://<%= @fqdn -%>',
       'live'  => <%= @live -%>,
       'enable_advanced_correlations' => <%= @enable_advanced_correlations -%>,
@@ -81,6 +82,9 @@ $config = array (
       'incoming_tags_disabled_by_default' => <%= @incoming_tags_disabled_by_default -%>,
       'completely_disable_correlation' => <%= @completely_disable_correlation -%>,
       'allow_disabling_correlation' => <%= @allow_disabling_correlation -%>,
+      'redis_host' => '<%= @redis_host -%>',
+      'redis_port' => <%= @redis_port -%>,
+      'redis_database' => <%= @redis_database -%>,
     ),
   'GnuPG' =>
     array (
@@ -165,6 +169,10 @@ $config = array (
       'Export_timeout' => <%= @export_timeout -%>,
       'Export_services_url' => '<%= @export_services_url -%>',
       'Export_services_port' => <%= @export_services_port -%>,
+      'Cortex_services_enable' => <%= @cortex_services_enable -%>,
+      'Cortex_services_url' => '<%= @cortex_services_url -%>',
+      'Cortex_services_port' => <%= @cortex_services_port -%>,
+      'Cortex_timeout' => <%= @cortex_timeout -%>,
   ),
   // Uncomment the following to enable client SSL certificate authentication
   /*

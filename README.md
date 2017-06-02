@@ -134,6 +134,7 @@ the installation of MISP itself, for the database, for the configuration and for
 those cases. By default root.
 * `default_high_group`- In some cases root permissions are need in the installation, this group will be used in 
 those cases. By default apache.
+* `uuid` - The MISP instance UUID. This UUID is used to identify this instance. By default set to 0.
 
 ### Database configuration
 
@@ -188,6 +189,11 @@ This module does not install the MariaDB server. However, if that was needed it 
 ```
 
 Note that it requires the edestecd-mariadb module.
+
+#### Redis
+* `redis_host` -    The host running the redis server to be used for generic MISP tasks such as caching. This is not to be confused by the redis server used by the background processing.. By default set to localhost ('127.0.01').
+* `redis_port` -    The port used by the redis server to be used for generic MISP tasks such as caching. This is not to be confused by the redis server used by the background processing.. By default set to 6379.
+* `redis_database` - The database on the redis server to be used for generic MISP tasks. If you run more than one MISP instance, please make sure to use a different database on each instance.. By default set to 13.
 
 ### MISP configuration
 
@@ -406,6 +412,10 @@ By default set to true.
 * `import_services_url` - The url used to access the import services. By default set to 'http://127.0.0.1'.
 * `import_services_port` - The port used to access the import services. By default set to 6666.
 * `import_timeout` - Set a timeout for the import services. By default set to 10.
+* `cortex_services_enable` -    Enable/disable the import services. By default set to false.
+* `cortex_services_url` -   The url used to access Cortex. By default, it is accessible at http://cortex-url/api.
+* `cortex_services_port` - The port used to access Cortex. By default, this is port 9000.
+* `cortex_timeout` - Set a timeout for the import services. By default set to 120.
 
 #### ApacheShibbAuth
 * `shib_default_org` - Default organisation for user creation when using Shibboleth authentication plugin. By default set to 1.
