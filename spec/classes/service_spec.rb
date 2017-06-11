@@ -6,6 +6,7 @@ describe 'misp::service' do
       let(:facts) do
         facts
       end
+
       it { is_expected.to compile.with_all_deps }
       it { is_expected.to contain_class('Misp::Service').that_requires('Class[Misp::Config]') }
 
