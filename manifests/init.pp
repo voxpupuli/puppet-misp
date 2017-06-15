@@ -22,6 +22,10 @@ class misp (
   $db_host = 'localhost',
   $db_port = '3306',
   $db_password = '',
+  # # Redis DB
+  $redis_host = '127.0.0.1',
+  $redis_port = 6379,
+  $redis_database = 13,
   # # config.php
   $debug = 0,
   $site_admin_debug = false,
@@ -42,6 +46,7 @@ class misp (
   $password_policy_complexity = '/((?=.*\\d)|(?=.*\\W+))(?![\\n])(?=.*[A-Z])(?=.*[a-z]).*$/',
   $sanitise_attribute_on_delete = false,
   # # MISP parameters
+  $uuid = 0,
   $live = true,
   $enable_advanced_correlations = false,
   $maintenance_message = 'Great things are happening! MISP is undergoing maintenance, but will return shortly. You can contact the administration at \\$email.',
@@ -176,6 +181,10 @@ class misp (
   $export_services_port = 6666,
   $export_services_enable = true,
   $export_timeout = 10,
+  $cortex_services_enable = false,
+  $cortex_services_url = 'http://127.0.0.1/api',
+  $cortex_services_port = 9000,
+  $cortex_timeout = 120,
   # ApacheShibbAuth
   $shib_default_org = '1',
   $egroup_role_match = {},
