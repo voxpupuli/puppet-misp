@@ -23,7 +23,7 @@ class misp (
   $db_port = '3306',
   $db_password = '',
   # # Redis DB
-  $redis_host = '127.0.01',
+  $redis_host = '127.0.0.1',
   $redis_port = 6379,
   $redis_database = 13,
   # # config.php
