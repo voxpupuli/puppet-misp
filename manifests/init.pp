@@ -13,6 +13,8 @@ class misp (
   $stix_git_tag = 'v1.1.1.4',
   $cybox_git_repo = 'https://github.com/CybOXProject/python-cybox.git',
   $cybox_git_tag = 'v2.1.0.12',
+  $mixbox_git_repo = 'https://github.com/CybOXProject/mixbox.git',
+  $mixbox_git_tag = 'v1.0.2',
   # # Services
   $webservername = 'httpd',
   $redis_server = true,
