@@ -15,10 +15,4 @@ class misp::dependencies inherits misp {
   ],
     { 'ensure' => 'present' }
   )
-
-  if $misp::redis_server {
-    package { 'redis':
-      ensure => present,
-    }
-  }
 }

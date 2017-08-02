@@ -14,9 +14,16 @@ class misp::service inherits misp {
     enable => true,
   }
 
-  service { 'redis':
-    ensure => 'running',
-    enable => true,
+  if $misp::redis_server {
+    # redis module needed when using password for ease of set up
+    class { '::redis':
+        service_ensure => true,
+        service_enable => true,
+        bind           => $misp::redis_host,
+        requirepass    => $misp::redis_password,
+        port           => $misp::redis_port,
+        notify         => Exec['start bg workers', 'restart bg workers'],
+    }
   }
 
   exec {'start bg workers':
@@ -24,7 +31,6 @@ class misp::service inherits misp {
     unless  => "/usr/bin/su -s /bin/bash ${misp::default_user} -c '/usr/bin/scl enable rh-php56 ${misp::install_dir}/app/Console/worker/status.sh'",
     user    => $misp::default_high_user,
     group   => $misp::default_high_group,
-    require => Service[redis],
   }
 
   exec {'restart bg workers':
@@ -33,6 +39,5 @@ class misp::service inherits misp {
     group       => $misp::default_high_group,
     refreshonly => true,
     subscribe   => Exec['CakeResque install'],
-    require     => Service[redis],
   }
 }

@@ -28,6 +28,7 @@ class misp (
   $redis_host = '127.0.0.1',
   $redis_port = 6379,
   $redis_database = 13,
+  $redis_password = undef,
   # # config.php
   $debug = 0,
   $site_admin_debug = false,
