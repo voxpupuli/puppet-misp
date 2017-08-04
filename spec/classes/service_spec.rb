@@ -22,13 +22,11 @@ describe 'misp::service' do
           with_enable('true')
       end
 
-      it do
-        is_expected.to contain_service('redis').
-          with_ensure('running').
-          with_enable('true')
-      end
-
       context 'With default values' do
+        it do
+          is_expected.to contain_class('redis')
+        end
+
         it do
           is_expected.to contain_exec('start bg workers').
             with_command(%r{(apache).*(/var/www/MISP/)}).

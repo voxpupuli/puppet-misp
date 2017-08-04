@@ -13,6 +13,8 @@ class misp (
   $stix_git_tag = 'v1.1.1.4',
   $cybox_git_repo = 'https://github.com/CybOXProject/python-cybox.git',
   $cybox_git_tag = 'v2.1.0.12',
+  $mixbox_git_repo = 'https://github.com/CybOXProject/mixbox.git',
+  $mixbox_git_tag = 'v1.0.2',
   # # Services
   $webservername = 'httpd',
   $redis_server = true,
@@ -26,6 +28,7 @@ class misp (
   $redis_host = '127.0.0.1',
   $redis_port = 6379,
   $redis_database = 13,
+  $redis_password = undef,
   # # config.php
   $debug = 0,
   $site_admin_debug = false,

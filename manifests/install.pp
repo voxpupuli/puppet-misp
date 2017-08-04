@@ -19,7 +19,7 @@ class misp::install inherits misp {
     cwd         => $misp::install_dir,
     refreshonly => true,
     subscribe   => Vcsrepo[$misp::install_dir],
-    notify      => Vcsrepo["${misp::install_dir}/app/files/scripts/python-cybox","${misp::install_dir}/app/files/scripts/python-stix"],
+    notify      => Vcsrepo["${misp::install_dir}/app/files/scripts/python-cybox","${misp::install_dir}/app/files/scripts/python-stix", "${misp::install_dir}/app/files/scripts/mixbox"],
   }
 
   vcsrepo { "${misp::install_dir}/app/files/scripts/python-cybox":
@@ -38,6 +38,14 @@ class misp::install inherits misp {
     revision => $misp::stix_git_tag,
   }
 
+  vcsrepo { "${misp::install_dir}/app/files/scripts/mixbox":
+    ensure   => present,
+    provider => git,
+    force    => false,
+    source   => $misp::mixbox_git_repo,
+    revision => $misp::mixbox_git_tag,
+  }
+
   exec {'python-cybox config':
     command     => '/usr/bin/git config core.filemode false && /usr/bin/python setup.py install',
     cwd         => "${misp::install_dir}/app/files/scripts/python-cybox/",
@@ -54,6 +62,15 @@ class misp::install inherits misp {
     umask       => '0022',
     refreshonly => true,
     subscribe   => Vcsrepo["${misp::install_dir}/app/files/scripts/python-stix"],
+  }
+
+  exec {'mixbox config':
+    command     => '/usr/bin/git config core.filemode false && /usr/bin/python setup.py install',
+    cwd         => "${misp::install_dir}/app/files/scripts/mixbox/",
+    unless      => '/usr/bin/pip list | grep mixbox',
+    umask       => '0022',
+    refreshonly => true,
+    subscribe   => Vcsrepo["${misp::install_dir}/app/files/scripts/mixbox"],
   }
 
   # CakePHP
