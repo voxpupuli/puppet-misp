@@ -66,6 +66,7 @@ class misp (
   $email_subject_tag = 'tlp',
   $email_subject_include_tag_name = true,
   $background_jobs = true,
+  $attachments_dir = 'app/files',
   $cached_attachments = true,
   $email = 'root@localhost',# This address is used as sender (from) when sending notifications
   $disable_emailing = false,
