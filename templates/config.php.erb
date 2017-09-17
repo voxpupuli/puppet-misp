@@ -15,6 +15,7 @@ $config = array (
      'password_policy_length' => <%= @password_policy_length -%>,
      'password_policy_complexity' => '<%= @password_policy_complexity -%>',
      'sanitise_attribute_on_delete' => <%= @sanitise_attribute_on_delete -%>,
+     'require_password_confirmation' => <%= @require_password_confirmation -%>,
      ),
   'MISP' =>
     array (
@@ -34,8 +35,9 @@ $config = array (
       'threatlevel_in_email_subject' => <%= @threatlevel_in_email_subject -%>,
       'email_subject_TLP_string' => '<%= @email_subject_tlp_string -%>',
       'email_subject_tag' => '<%= @email_subject_tag -%>',
-      'email_subject_include_tag_name' => '<%= @email_subject_include_tag_name -%>',
+      'email_subject_include_tag_name' => <%= @email_subject_include_tag_name -%>,
       'background_jobs' => <%= @background_jobs -%>,
+      'attachments_dir' => '<%= @attachments_dir -%>',
       'cached_attachments' => <%= @cached_attachments -%>,
       'email' => '<%= @email -%>',
       'disable_emailing' => <%= @disable_emailing -%>,

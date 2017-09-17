@@ -48,6 +48,7 @@ class misp (
   $password_policy_length = 6,
   $password_policy_complexity = '/((?=.*\\d)|(?=.*\\W+))(?![\\n])(?=.*[A-Z])(?=.*[a-z]).*$/',
   $sanitise_attribute_on_delete = false,
+  $require_password_confirmation = false,
   # # MISP parameters
   $uuid = 0,
   $live = true,
@@ -66,6 +67,7 @@ class misp (
   $email_subject_tag = 'tlp',
   $email_subject_include_tag_name = true,
   $background_jobs = true,
+  $attachments_dir = 'app/files',
   $cached_attachments = true,
   $email = 'root@localhost',# This address is used as sender (from) when sending notifications
   $disable_emailing = false,
