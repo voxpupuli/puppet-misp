@@ -1,14 +1,23 @@
-# Change log
+# Changelog
 
 All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
-These should not impact the functionality of the module.
+These should not affect the functionality of the module.
+
+## [v0.4.0](https://github.com/voxpupuli/puppet-misp/tree/v0.4.0) (2017-09-17)
+[Full Changelog](https://github.com/voxpupuli/puppet-misp/compare/v0.3.0...v0.4.0)
+
+**Merged pull requests:**
+
+- Config changes to comply with MISP version 2.4.79  [\#17](https://github.com/voxpupuli/puppet-misp/pull/17) ([ppanero](https://github.com/ppanero))
+- Version update [\#16](https://github.com/voxpupuli/puppet-misp/pull/16) ([ppanero](https://github.com/ppanero))
 
 ## [v0.3.0](https://github.com/voxpupuli/puppet-misp/tree/v0.3.0) (2017-06-24)
 [Full Changelog](https://github.com/voxpupuli/puppet-misp/compare/v0.2.3...v0.3.0)
 
 **Merged pull requests:**
 
+- release 0.3.0 [\#15](https://github.com/voxpupuli/puppet-misp/pull/15) ([bastelfreak](https://github.com/bastelfreak))
 - Features [\#14](https://github.com/voxpupuli/puppet-misp/pull/14) ([ppanero](https://github.com/ppanero))
 - README updated [\#12](https://github.com/voxpupuli/puppet-misp/pull/12) ([ppanero](https://github.com/ppanero))
 
