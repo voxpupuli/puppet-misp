@@ -15,6 +15,8 @@ class misp (
   $cybox_git_tag = 'v2.1.0.12',
   $mixbox_git_repo = 'https://github.com/CybOXProject/mixbox.git',
   $mixbox_git_tag = 'v1.0.2',
+  $pydeep_git_repo = 'https://github.com/kbandla/pydeep.git',
+  $pydeep_git_tag = '0.2',
   # # Services
   $webservername = 'httpd',
   $redis_server = true,
