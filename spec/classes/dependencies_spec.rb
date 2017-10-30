@@ -13,8 +13,6 @@ describe 'misp::dependencies' do
       it { is_expected.to contain_package('git') }
       it { is_expected.to contain_package('zip') }
       it { is_expected.to contain_package('mariadb') }
-      it { is_expected.to contain_package('python-devel') }
-      it { is_expected.to contain_package('python2-pip') }
       it { is_expected.to contain_package('python-lxml') }
       it { is_expected.to contain_package('python-dateutil') }
       it { is_expected.to contain_package('python-six') }
