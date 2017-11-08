@@ -118,6 +118,7 @@ class misp (
   $incoming_tags_disabled_by_default = false,
   $completely_disable_correlation = false,
   $allow_disabling_correlation = false,
+  $event_view_filter_fields = 'id, uuid, value, comment, type, category, Tag.name',
   # # GPG
   $gpg_binary = '/usr/bin/gpg',
   $gpg_onlyencrypted = false,
@@ -163,6 +164,10 @@ class misp (
   $zeromq_redis_password = '',
   $zeromq_redis_database = '1',
   $zeromq_redis_namespace = 'mispq',
+  $zeromq_event_notifications_enable = false,
+  $zeromq_object_notifications_enable = false,
+  $zeromq_object_reference_notifications_enable = false,
+  $zeromq_attribute_notifications_enable = false,
   $sightings_enable = false,
   $sightings_policy = 0,
   $sightings_anonymise = false,

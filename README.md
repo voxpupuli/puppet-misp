@@ -315,6 +315,7 @@ Enabling this will trigger a full recorrelation of all data which is an extremel
 By default set to false.
 * `allow_disabling_correlation` - *WARNING* This setting will give event creators the possibility to disable the correlation of individual events / attributes that they have created.
 By default set to false.
+*`event_view_filter_fields`* - Specify which fields to filter on when you search on the event view. Default values are : "id, uuid, value, comment, type, category, Tag.name"
 
 #### GPG
 * `gpg_binary` - The location of the GPG executable. If you would like to use a different gpg executable than /usr/bin/gpg, you can set it here. If the default is fine, 
@@ -377,6 +378,10 @@ By default set to 'localhost'.
 * `zeromq_redis_database` - The database to be used for queuing messages for the pub/sub functionality. By default set to '1'.
 * `zeromq_redis_namespace` - The namespace to be used for queuing messages for the pub/sub functionality. By default 
 set to 'mispq'.
+* `zeromq_event_notifications_enable` - Enables or disables the publishing of any event creations/edits/deletions. By default is set to false.
+* `zeromq_object_notifications_enable` - Enables or disables the publishing of any object creations/edits/deletions. By default is set to false.              
+* `zeromq_object_reference_notifications_enable` - Enables or disables the publishing of any object reference creations/deletions. By default is set to false.                 
+* `zeromq_attribute_notifications_enable` - Enables or disables the publishing of any attribute creations/edits/soft deletions. By default is set to false.
 * `sightings_anonymise` - Enabling the anonymisation of sightings will simply aggregate all sightings instead of showing 
 the organisations that have reported a sighting. By default set to false.
 * `sightings_policy` - This setting defines who will have access to seeing the reported sightings. 0 means event owner, 

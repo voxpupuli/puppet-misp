@@ -89,6 +89,7 @@ $config = array (
       'redis_port' => <%= @redis_port -%>,
       'redis_database' => <%= @redis_database -%>,
       'redis_password' => '<%= @redis_password -%>',
+      'event_view_filter_fields' => '<%= @event_view_filter_fields -%>'
     ),
   'GnuPG' =>
     array (
@@ -146,6 +147,10 @@ $config = array (
       'ZeroMQ_redis_password' => '<%= @zeromq_redis_password -%>',
       'ZeroMQ_redis_database' => '<%= @zeromq_redis_database -%>',
       'ZeroMQ_redis_namespace' => '<%= @zeromq_redis_namespace -%>',
+      'ZeroMQ_event_notifications_enable' => <%= @zeromq_event_notifications_enable -%>,
+      'ZeroMQ_object_notifications_enable' => <%= @zeromq_object_notifications_enable -%>,
+      'ZeroMQ_object_reference_notifications_enable' => <%= @zeromq_object_reference_notifications_enable -%>,
+      'ZeroMQ_attribute_notifications_enable' => <%= @zeromq_attribute_notifications_enable -%>,
       'Sightings_enable' => <%= @sightings_enable -%>,
       'Sightings_policy' => <%= @sightings_policy -%>,
       'Sightings_anonymise' => <%= @sightings_anonymise -%>,
