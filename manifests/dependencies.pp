@@ -25,10 +25,15 @@ class misp::dependencies inherits misp {
       { 'ensure' => 'present' }
     )
   }
-
   else {
     ::python::pip { 'pymisp' :
       pkgname => 'pymisp',
     }
+  }
+
+  if $misp::lief {
+    ensure_packages( [$misp::lief_package_name],
+      { 'ensure' => 'present' }
+    )
   }
 }

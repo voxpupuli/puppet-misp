@@ -18,6 +18,8 @@ class misp (
   $pydeep_git_repo = 'https://github.com/kbandla/pydeep.git',
   $pydeep_git_tag = '0.2',
   $pymisp_rpm = false,
+  $lief = false,
+  $lief_package_name = '',
   # # Services
   $webservername = 'httpd',
   $redis_server = true,

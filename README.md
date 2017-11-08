@@ -135,6 +135,9 @@ those cases. By default root.
 * `default_high_group`- In some cases root permissions are need in the installation, this group will be used in 
 those cases. By default apache.
 * `uuid` - The MISP instance UUID. This UUID is used to identify this instance. By default set to 0.
+* `pymisp_rpm` - Boolean to indicate if pymisp should be installed or not (The RPM needs to be available for the machine). By default is set to false.
+* `lief` - Boolean to indicate if lief should be installed or not (The RPM needs to be available for the machine). By default is set to false.
+* `lief_package_name` - String containing the package name for lief.
 
 ### Database configuration
 
