@@ -18,7 +18,11 @@ class misp::dependencies inherits misp {
     { 'ensure' => 'present' }
   )
 
-  include '::python'
+  class { '::python' :
+    version => 'system',
+    pip     => 'present',
+    dev     => 'present',
+  }
 
   if $misp::pymisp_rpm {
     ensure_packages( ['pymisp'],
