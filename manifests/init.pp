@@ -16,7 +16,7 @@ class misp (
   $mixbox_git_repo = 'https://github.com/CybOXProject/mixbox.git',
   $mixbox_git_tag = 'v1.0.2',
   $pydeep_git_repo = 'https://github.com/kbandla/pydeep.git',
-  $pydeep_git_tag = '0.2',
+  $pydeep_git_tag = 'e4ce348566293475016ca7fa9fb7fc4f61f1997f', # Using SHA from latest commit in 0.2 tag, because there is also a 0.2 branch
   $pymisp_rpm = false,
   $lief = false,
   $lief_package_name = '',
