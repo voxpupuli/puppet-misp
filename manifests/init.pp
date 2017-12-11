@@ -205,6 +205,7 @@ class misp (
   $cortex_services_port = 9000,
   $cortex_timeout = 120,
   # ApacheShibbAuth
+  $shib_use_default_org = false,
   $shib_default_org = '1',
   $egroup_role_match = {},
 ) {
