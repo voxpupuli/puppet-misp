@@ -385,6 +385,8 @@ set to 'mispq'.
 * `zeromq_object_notifications_enable` - Enables or disables the publishing of any object creations/edits/deletions. By default is set to false.              
 * `zeromq_object_reference_notifications_enable` - Enables or disables the publishing of any object reference creations/deletions. By default is set to false.                 
 * `zeromq_attribute_notifications_enable` - Enables or disables the publishing of any attribute creations/edits/soft deletions. By default is set to false.
+* `zeromq_audit_notifications_enable` - Enables or disables the publishing of log entries to the ZMQ pubsub feed. Keep in mind, this can get pretty verbose depending on your logging settings. By default its set to false.
+* `syslog` - Enable this setting to pass all audit log entries directly to syslog. Keep in mind, this is verbose and will include user, organisation, event data. By default is set to false.
 * `sightings_anonymise` - Enabling the anonymisation of sightings will simply aggregate all sightings instead of showing 
 the organisations that have reported a sighting. By default set to false.
 * `sightings_policy` - This setting defines who will have access to seeing the reported sightings. 0 means event owner, 

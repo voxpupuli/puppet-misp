@@ -170,6 +170,8 @@ class misp (
   $zeromq_object_notifications_enable = false,
   $zeromq_object_reference_notifications_enable = false,
   $zeromq_attribute_notifications_enable = false,
+  $zeromq_audit_notifications_enable = false,
+  $syslog = false,
   $sightings_enable = false,
   $sightings_policy = 0,
   $sightings_anonymise = false,
