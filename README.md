@@ -219,6 +219,7 @@ By default set to "Rooraenietu8Eeyo<Qu2eeNfterd-dd+".
 * `password_policy_length` - Password length requirement. By default set to 6.
 * `password_policy_complexity` - Password complexity requirement. By default set to '/((?=.*\\d)|(?=.*\\W+))(?![\\n])(?=.*[A-Z])(?=.*[a-z]).*$/'.
 * `sanitise_attribute_on_delete` - Enabling this setting will sanitise the contents of an attribute on a soft delete. By default set to false.
+* `hide_organisation_index_from_users` - Enabling this setting will block the organisation index from being visible to anyone besides site administrators on the current instance. Keep in mind that users can still see organisations that produce data via events, proposals, event history log entries, etc. By default is set to false.
 
 #### MISP
 * `live` - If set to false the instance will only be accessible by site admins. By default true.

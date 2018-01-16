@@ -54,6 +54,7 @@ class misp (
   $password_policy_complexity = '/((?=.*\\d)|(?=.*\\W+))(?![\\n])(?=.*[A-Z])(?=.*[a-z]).*$/',
   $sanitise_attribute_on_delete = false,
   $require_password_confirmation = false,
+  $hide_organisation_index_from_users = false,
   # # MISP parameters
   $uuid = 0,
   $live = true,
