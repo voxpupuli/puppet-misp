@@ -264,6 +264,7 @@ the attributes to default to the event distribution level. (0-3 or "event"). By 
 * `welcome_text_bottom` -   Used on the login page, after the MISP logo. Empty by default.
 * `welcome_logo` - Used on the login page, to the left of the MISP logo, upload it as a custom image in the file management tool. Empty by default.
 * `welcome_logo2` - Used on the login page, to the right of the MISP logo, upload it as a custom image in the file management tool. Empty by default.
+* `title_text` - Used in the page title, after the name of the page. By default is set to 'MISP'.
 * `take_ownership_xml_import` - Allows users to take ownership of an event uploaded via the "Add MISP XML" button. 
 By default set to false.
 * `terms_download` - Choose whether the terms and conditions should be displayed inline (false) or offered as a 
