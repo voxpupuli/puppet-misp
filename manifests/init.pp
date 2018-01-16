@@ -90,6 +90,7 @@ class misp (
   $welcome_text_bottom = '',
   $welcome_logo = '',
   $welcome_logo2 = '',
+  $title_text = 'MISP',
   $take_ownership_xml_import = false,
   $terms_download = false,
   $terms_file = '',
