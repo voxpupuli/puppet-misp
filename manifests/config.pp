@@ -25,7 +25,7 @@ class misp::config inherits misp {
     owner     => $misp::default_user,
     group     => $misp::default_group,
     seltype   => 'httpd_sys_rw_content_t',
-    recurse   => false,
+    recurse   => true,
     subscribe => Exec['Directory permissions'],
     notify    => File["${misp::install_dir}/app/files/terms","${misp::install_dir}/app/files/scripts/tmp"],
   }

@@ -19,7 +19,7 @@ class misp::install inherits misp {
     cwd         => $misp::install_dir,
     refreshonly => true,
     subscribe   => Vcsrepo[$misp::install_dir],
-    notify      => Vcsrepo["${misp::install_dir}/app/files/scripts/python-cybox","${misp::install_dir}/app/files/scripts/python-stix", "${misp::install_dir}/app/files/scripts/mixbox"],
+    notify      => Vcsrepo["${misp::install_dir}/app/files/scripts/python-cybox","${misp::install_dir}/app/files/scripts/python-stix", "${misp::install_dir}/app/files/scripts/mixbox", "${misp::install_dir}/app/files/scripts/pydeep"],
   }
 
   vcsrepo { "${misp::install_dir}/app/files/scripts/python-cybox":
@@ -44,6 +44,14 @@ class misp::install inherits misp {
     force    => false,
     source   => $misp::mixbox_git_repo,
     revision => $misp::mixbox_git_tag,
+  }
+
+  vcsrepo { "${misp::install_dir}/app/files/scripts/pydeep":
+    ensure   => present,
+    provider => git,
+    force    => false,
+    source   => $misp::pydeep_git_repo,
+    revision => $misp::pydeep_git_tag,
   }
 
   exec {'python-cybox config':
@@ -71,6 +79,15 @@ class misp::install inherits misp {
     umask       => '0022',
     refreshonly => true,
     subscribe   => Vcsrepo["${misp::install_dir}/app/files/scripts/mixbox"],
+  }
+
+  exec {'pydeep build':
+    command     => '/usr/bin/python setup.py build && /usr/bin/python setup.py install',
+    cwd         => "${misp::install_dir}/app/files/scripts/pydeep/",
+    unless      => '/usr/bin/pip list | grep pydeep',
+    umask       => '0022',
+    refreshonly => true,
+    subscribe   => Vcsrepo["${misp::install_dir}/app/files/scripts/pydeep"],
   }
 
   # CakePHP
