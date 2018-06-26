@@ -12,7 +12,6 @@ fixtures:
     python: 'https://github.com/stankevich/puppet-python'
     epel:
       repo: 'https://github.com/stahnma/puppet-module-epel.git'
-      ref: '1.2.2'
 
   symlinks:
     "misp": "#{source_dir}"
