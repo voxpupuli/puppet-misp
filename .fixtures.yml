@@ -9,3 +9,11 @@ fixtures:
     selinux_core:
       repo: https://github.com/puppetlabs/puppetlabs-selinux_core.git
       puppet_version: ">= 6.0.0"
+    python: 'https://github.com/stankevich/puppet-python'
+    epel:
+      repo: 'https://github.com/stahnma/puppet-module-epel.git'
+      ref: '1.2.2'
+
+  symlinks:
+    "misp": "#{source_dir}"
+

@@ -16,6 +16,7 @@ $config = array (
      'password_policy_complexity' => '<%= @password_policy_complexity -%>',
      'sanitise_attribute_on_delete' => <%= @sanitise_attribute_on_delete -%>,
      'require_password_confirmation' => <%= @require_password_confirmation -%>,
+     'hide_organisation_index_from_users' => <%= @hide_organisation_index_from_users -%>,
      ),
   'MISP' =>
     array (
@@ -23,6 +24,8 @@ $config = array (
       'baseurl' => 'https://<%= @fqdn -%>',
       'live'  => <%= @live -%>,
       'enable_advanced_correlations' => <%= @enable_advanced_correlations -%>,
+      'ssdeep_correlation_threshold' => <%= @ssdeep_correlation_threshold -%>,
+      'max_correlations_per_event' => <%= @max_correlations_per_event -%>,
       'maintenance_message' => '<%= @maintenance_message -%>',
       'footermidleft' => '<%= @footermidleft -%>',
       'footermidright' => '<%= @footermidright -%>',
@@ -39,6 +42,7 @@ $config = array (
       'background_jobs' => <%= @background_jobs -%>,
       'attachments_dir' => '<%= @attachments_dir -%>',
       'cached_attachments' => <%= @cached_attachments -%>,
+      'download_attachments_on_load' => <%= @download_attachments_on_load -%>,
       'email' => '<%= @email -%>',
       'disable_emailing' => <%= @disable_emailing -%>,
       'contact' => '<%= @contact -%>',
@@ -54,6 +58,7 @@ $config = array (
       'welcome_text_bottom' => '<%= @welcome_text_bottom -%>',
       'welcome_logo' => '<%= @welcome_logo -%>',
       'welcome_logo2' => '<%= @welcome_logo2 -%>',
+      'title_text' => '<%= @title_text -%>',
       'take_ownership_xml_import' => <%= @take_ownership_xml_import -%>,
       'terms_download' => <%= @terms_download -%>,
       'terms_file' => '<%= @terms_file -%>',
@@ -88,6 +93,8 @@ $config = array (
       'redis_port' => <%= @redis_port -%>,
       'redis_database' => <%= @redis_database -%>,
       'redis_password' => '<%= @redis_password -%>',
+      'event_view_filter_fields' => '<%= @event_view_filter_fields -%>',
+      'deadlock_avoidance' => <%= @deadlock_avoidance -%>
     ),
   'GnuPG' =>
     array (
@@ -124,6 +131,7 @@ $config = array (
       'autoRegenerate' => <%= @session_auto_regenerate -%>,
       'defaults' => '<%= @session_defaults -%>',
       'timeout' => '<%= @session_timeout -%>',
+      'cookie_timeout' => '<%= @session_cookie_timeout -%>'
     ),
   'Plugin' =>
     array (
@@ -136,6 +144,7 @@ $config = array (
       'RPZ_minimum_ttl' => '<%= @rpz_minimum_ttl -%>',
       'RPZ_ttl' => '<%= @rpz_ttl -%>',
       'RPZ_ns' => '<%= @rpz_ns -%>.',
+      'RPZ_ns_alt' => '<%= @rpz_ns_alt -%>',
       'RPZ_email' => '<%= @rpz_email -%>',
       'ZeroMQ_enable' => <%= @zeromq_enable -%>,
       'ZeroMQ_port' => <%= @zeromq_port -%>,
@@ -144,6 +153,14 @@ $config = array (
       'ZeroMQ_redis_password' => '<%= @zeromq_redis_password -%>',
       'ZeroMQ_redis_database' => '<%= @zeromq_redis_database -%>',
       'ZeroMQ_redis_namespace' => '<%= @zeromq_redis_namespace -%>',
+      'ZeroMQ_include_attachments' => <%= @zeromq_include_attachments -%>,
+      'ZeroMQ_event_notifications_enable' => <%= @zeromq_event_notifications_enable -%>,
+      'ZeroMQ_object_notifications_enable' => <%= @zeromq_object_notifications_enable -%>,
+      'ZeroMQ_object_reference_notifications_enable' => <%= @zeromq_object_reference_notifications_enable -%>,
+      'ZeroMQ_attribute_notifications_enable' => <%= @zeromq_attribute_notifications_enable -%>,
+      'ZeroMQ_tag_notifications_enable' => <%= @zeromq_tag_notifications_enable -%>,
+      'ZeroMQ_audit_notifications_enable' => <%= @zeromq_audit_notifications_enable -%>,
+      'syslog' => <%= @syslog -%>,
       'Sightings_enable' => <%= @sightings_enable -%>,
       'Sightings_policy' => <%= @sightings_policy -%>,
       'Sightings_anonymise' => <%= @sightings_anonymise -%>,
@@ -175,8 +192,13 @@ $config = array (
       'Cortex_services_enable' => <%= @cortex_services_enable -%>,
       'Cortex_services_url' => '<%= @cortex_services_url -%>',
       'Cortex_services_port' => <%= @cortex_services_port -%>,
+      'Cortex_authkey' => '<%= @cortex_authkey -%>',
       'Cortex_timeout' => <%= @cortex_timeout -%>,
-  ),
+      'Cortex_ssl_verify_peer' => <%= @cortex_ssl_verify_peer -%>,
+      'Cortex_ssl_verify_host' => <%= @cortex_ssl_verify_host -%>,
+      'Cortex_ssl_allow_self_signed' => <%= @cortex_ssl_allow_self_signed -%>,
+      'Cortex_ssl_cafile' => '<%= @cortex_ssl_cafile -%>'
+    ),
   // Uncomment the following to enable client SSL certificate authentication
   /*
   'CertAuth' =>
@@ -218,6 +240,7 @@ $config = array (
         '<%= key %>' => <%= value %>,
         <% end %>
       ),
+      'UseDefaultOrg'     => '<%= @shib_use_default_org -%>',
       'DefaultOrg'        => '<%= @shib_default_org -%>',
     ),
 

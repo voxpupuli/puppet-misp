@@ -13,8 +13,6 @@ describe 'misp::dependencies' do
       it { is_expected.to contain_package('git') }
       it { is_expected.to contain_package('zip') }
       it { is_expected.to contain_package('mariadb') }
-      it { is_expected.to contain_package('python-devel') }
-      it { is_expected.to contain_package('python2-pip') }
       it { is_expected.to contain_package('python-lxml') }
       it { is_expected.to contain_package('python-dateutil') }
       it { is_expected.to contain_package('python-six') }
@@ -32,6 +30,10 @@ describe 'misp::dependencies' do
       it { is_expected.to contain_package('haveged') }
       it { is_expected.to contain_package('sclo-php56-php-pecl-redis') }
       it { is_expected.to contain_package('php-pear-crypt-gpg') }
+      it { is_expected.to contain_package('python-magic') }
+      it { is_expected.to contain_package('ssdeep') }
+      it { is_expected.to contain_package('ssdeep-libs') }
+      it { is_expected.to contain_package('ssdeep-devel') }
     end
   end
 end
