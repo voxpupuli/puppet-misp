@@ -224,6 +224,7 @@ By default set to "Rooraenietu8Eeyo<Qu2eeNfterd-dd+".
 
 #### MISP
 * `live` - If set to false the instance will only be accessible by site admins. By default true.
+* `language` - The language MISP should use. The default is english.
 * `enable_advanced_correlations` - Enable some performance heavy correlations (currently CIDR correlation). By default false.
 * `max_correlations_per_event` - Sets the maximum number of correlations that can be fetched with a single event. For extreme edge cases this can prevent memory issues. The default value is 5000.
 * `maintenance_message` - The message that users will see if the instance is not live. By default set to 'Great things are happening! MISP is undergoing maintenance, 

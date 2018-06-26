@@ -59,6 +59,7 @@ class misp (
   # # MISP parameters
   $uuid = 0,
   $live = true,
+  $language = 'eng',
   $enable_advanced_correlations = false,
   $ssdeep_correlation_threshold = 40,
   $max_correlations_per_event = 5000,
