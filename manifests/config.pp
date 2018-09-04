@@ -110,13 +110,15 @@ class misp::config inherits misp {
     subscribe => Exec['Directory permissions'],
   }
 
-  exec{'setsebool redis':
-    command   => '/usr/sbin/setsebool -P httpd_can_network_connect on',
-    unless    => '/usr/sbin/getsebool httpd_can_network_connect | grep -e  "--> on"',
-    subscribe => File['/etc/opt/rh/rh-php56/php.d/99-redis.ini'],
-  }
+  if $facts['os']['selinux']['enabled'] {
+    selboolean { 'httpd redis connection':
+      name       => 'httpd_can_network_connect',
+      persistent => true,
+      value      => 'on',
+    }
 
-  Exec['setsebool redis'] ~> Service <| title == $misp::webservername |>
+    Selboolean['httpd redis connection'] ~> Service <| title == $misp::webservername |>
+  }
 
   file{"${misp::install_dir}/app/Console/worker/start.sh":
     owner => $misp::default_high_user,
