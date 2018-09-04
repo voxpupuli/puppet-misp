@@ -110,7 +110,7 @@ class misp::config inherits misp {
     subscribe => Exec['Directory permissions'],
   }
 
-  if $facts['os']['selinux']['enabled'] {
+  if fact('os.selinux.enabled') {
     selboolean { 'httpd redis connection':
       name       => 'httpd_can_network_connect',
       persistent => true,
