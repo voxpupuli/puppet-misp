@@ -125,7 +125,7 @@ describe 'misp::config' do
         end
 
         it do
-          is_expected.to_not contain_selboolean('httpd redis connection')
+          is_expected.not_to contain_selboolean('httpd redis connection')
         end
 
         it do
@@ -140,7 +140,7 @@ describe 'misp::config' do
         end
 
         it do
-          is_expected.to_not contain_selboolean('httpd redis connection').
+          is_expected.not_to contain_selboolean('httpd redis connection').
             that_notifies('Service[httpd]')
         end
       end
