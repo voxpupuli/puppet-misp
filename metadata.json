@@ -1,6 +1,6 @@
 {
   "name": "puppet-misp",
-  "version": "0.6.0",
+  "version": "0.6.1-rc0",
   "author": "Vox Pupuli",
   "summary": "Module to install MISP (Malware Information Sharing Platform)",
   "license": "Apache-2.0",
