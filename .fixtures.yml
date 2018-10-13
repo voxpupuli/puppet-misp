@@ -3,6 +3,3 @@ fixtures:
     stdlib: 'https://github.com/puppetlabs/puppetlabs-stdlib'
     vcsrepo: 'https://github.com/puppetlabs/puppetlabs-vcsrepo'
     redis: 'https://github.com/arioch/puppet-redis'
-  symlinks:
-    "misp": "#{source_dir}"
-
