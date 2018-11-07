@@ -125,8 +125,7 @@ describe 'misp::config' do
         end
 
         it do
-          is_expected.to contain_exec('setsebool redis').
-            that_subscribes_to('File[/etc/opt/rh/rh-php56/php.d/99-redis.ini]')
+          is_expected.not_to contain_selboolean('httpd redis connection')
         end
 
         it do
@@ -141,7 +140,22 @@ describe 'misp::config' do
         end
 
         it do
-          is_expected.to contain_exec('setsebool redis').
+          is_expected.not_to contain_selboolean('httpd redis connection').
+            that_notifies('Service[httpd]')
+        end
+      end
+      context 'With SELinux enabled and webserver defined' do
+        let(:facts) do
+          data = facts
+          ((data[:os] ||= {})[:selinux] ||= {})[:enabled] = true
+          data
+        end
+        let(:pre_condition) do
+          'service{"httpd":}'
+        end
+
+        it do
+          is_expected.to contain_selboolean('httpd redis connection').
             that_notifies('Service[httpd]')
         end
       end
