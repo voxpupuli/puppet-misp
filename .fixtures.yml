@@ -12,6 +12,9 @@ fixtures:
     python: 'https://github.com/stankevich/puppet-python'
     epel:
       repo: 'https://github.com/stahnma/puppet-module-epel.git'
+    yumrepo_core:
+      repo: "git://github.com/puppetlabs/puppetlabs-yumrepo_core"
+      puppet_version: ">= 6.0.0"
 
   symlinks:
     "misp": "#{source_dir}"
