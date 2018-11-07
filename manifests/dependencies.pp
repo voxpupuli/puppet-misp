@@ -18,10 +18,12 @@ class misp::dependencies inherits misp {
     { 'ensure' => 'present' }
   )
 
-  class { '::python' :
-    version => 'system',
-    pip     => 'present',
-    dev     => 'present',
+  if $misp::manage_python {
+    class { '::python' :
+      version => 'system',
+      pip     => 'present',
+      dev     => 'present',
+    }
   }
 
   if $misp::pymisp_rpm {

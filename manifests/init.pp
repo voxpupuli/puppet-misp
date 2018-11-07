@@ -17,6 +17,9 @@ class misp (
   $mixbox_git_tag = 'v1.0.2',
   $pydeep_git_repo = 'https://github.com/kbandla/pydeep.git',
   $pydeep_git_tag = 'e4ce348566293475016ca7fa9fb7fc4f61f1997f', # Using SHA from latest commit in 0.2 tag, because there is also a 0.2 branch
+  # Whether to manage Python or not. Please note that python dev needs to be
+  # present in order to be able to install some of the MISP dependencies
+  $manage_python = true,
   $pymisp_rpm = false,
   $lief = false,
   $lief_package_name = '',
