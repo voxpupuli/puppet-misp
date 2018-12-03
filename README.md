@@ -120,6 +120,7 @@ the installation of MISP itself, for the database, for the configuration and for
 
 ### MISP installation
   
+* `misp_git_repo` - Git url of MISP. By default "https://github.com/MISP/MISP.git".
 * `misp_git_tag` - Version of MISP that will be installed. By default "v2.4.71".
 * `install_dir` - Directory in which MISP will be installed. By default "/var/www/MISP/".
 * `config_dir` - Directory in which the configuration of MISP should be located. By default "/var/www/MISP/app/Config/".
