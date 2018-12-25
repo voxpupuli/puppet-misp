@@ -8,6 +8,7 @@
 class misp (
   # MISP installation
   # # MISP repositories
+  $misp_git_repo = 'https://github.com/MISP/MISP.git',
   $misp_git_tag = 'v2.4.71',
   $stix_git_repo = 'https://github.com/STIXProject/python-stix.git',
   $stix_git_tag = 'v1.1.1.4',
