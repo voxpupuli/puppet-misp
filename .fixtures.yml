@@ -3,6 +3,9 @@ fixtures:
     stdlib: 'https://github.com/puppetlabs/puppetlabs-stdlib'
     vcsrepo: 'https://github.com/puppetlabs/puppetlabs-vcsrepo'
     redis: 'https://github.com/arioch/puppet-redis'
+    python: 'https://github.com/voxpupuli/puppet-python'
+    epel:
+      repo: 'https://github.com/stahnma/puppet-module-epel.git'
     augeas_core:
       repo: https://github.com/puppetlabs/puppetlabs-augeas_core.git
       puppet_version: ">= 6.0.0"
@@ -18,4 +21,3 @@ fixtures:
 
   symlinks:
     "misp": "#{source_dir}"
-
