@@ -9,29 +9,31 @@
 
 #### Table of Contents
 
-1. [Overview](#overview)
-2. [Module Description - What the module does and why it is useful](#module-description)
-3. [Setup - Getting started with the misp module](#setup)
-    * [What misp affects](#what-misp-affects)
-4. [Usage - Configuration options and additional functionality](#usage)
-    * [Basic usage](#basic-usage)
-    * [Another usage example](#another-usage-example)
-5. [Parameters of the MISP Class](#parameters-of-the-misp-class)
-    * [MISP installation](#misp-installation)
-    * [Database configuration](#database-configuration)
-    * [MISP configuration](#misp-configuration)
-        * [Site configuration](#site-configuration)
-        * [Security](#security)
-        * [MISP](#misp)
-        * [GPG](#gpg)
-        * [SMIME](#smime)
-        * [Proxy](#proxy)
-        * [Secure Authentication](#secure-auth)
-        * [Session](#session)
-        * [Plugin](#plugin)
-        * [Apache Shibboleth Authentication](#apacheshibbauth)          
-    * [Services](#services)
-    * [GnuPG](#gnupg)
+- [MISP MODULE](#misp-module)
+      - [Table of Contents](#table-of-contents)
+  - [Module Description](#module-description)
+  - [Setup](#setup)
+    - [What MISP affects](#what-misp-affects)
+  - [Usage](#usage)
+    - [Basic usage](#basic-usage)
+    - [Another usage example](#another-usage-example)
+  - [Parameters of the MIPS Class](#parameters-of-the-mips-class)
+    - [MISP installation](#misp-installation)
+    - [Database configuration](#database-configuration)
+      - [Redis](#redis)
+    - [MISP configuration](#misp-configuration)
+      - [Site Configuration](#site-configuration)
+      - [Security](#security)
+      - [MISP](#misp)
+      - [GPG](#gpg)
+      - [SMIME](#smime)
+      - [Proxy](#proxy)
+      - [SecureAuth](#secureauth)
+      - [Session](#session)
+      - [Plugin](#plugin)
+      - [ApacheShibbAuth](#apacheshibbauth)
+    - [Services](#services)
+    - [GnuPG](#gnupg)
     
 
 This module installs and configures MISP (Malware Information Sharing Platform) on CentOS 7.
@@ -136,6 +138,7 @@ those cases. By default root.
 * `default_high_group`- In some cases root permissions are need in the installation, this group will be used in 
 those cases. By default apache.
 * `uuid` - The MISP instance UUID. This UUID is used to identify this instance. By default set to 0.
+* `manage_python` - Whether to manage python or not. Please note that python dev needs to be present in order to be able to install some of the MISP dependencies.
 * `pymisp_rpm` - Boolean to indicate if pymisp should be installed or not (The RPM needs to be available for the machine). By default is set to false.
 * `lief` - Boolean to indicate if lief should be installed or not (The RPM needs to be available for the machine). By default is set to false.
 * `lief_package_name` - String containing the package name for lief.
@@ -207,7 +210,7 @@ Note that it requires the edestecd-mariadb module.
 without exposing it to other users. The most verbose option of debug and site_admin_debug is used for site admins. 
 By default false.
 
-This two parameters are recommended to be set to 0 and false respectively. However, if needed they can be set to tru to find 
+These two parameters are recommended to be set to 0 and false respectively. However, if needed they can be set to tru to find 
 errors with names/tables in the database. In this case it would be better to just set to true 'site_admin_debug' instead of 
 the whole instance.
 
