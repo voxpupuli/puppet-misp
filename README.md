@@ -328,7 +328,9 @@ By default set to false.
 * `allow_disabling_correlation` - *WARNING* This setting will give event creators the possibility to disable the correlation of individual events / attributes that they have created.
 By default set to false.
 * `event_view_filter_fields`* - Specify which fields to filter on when you search on the event view. Default values are : "id, uuid, value, comment, type, category, Tag.name"
+* `manage_workers`* - Set this to false if you would like to disable MISP managing its own worker processes (for example, if you are managing the workers with a systemd unit).
 * `deadlock_avoidance`* - Only enable this if you have some tools using MISP with extreme high concurency. General performance will be lower as normal as certain transactional queries are avoided in favour of shorter table locks.
+* `allow_unsafe_apikey_named_param`* - Allows passing the API key via the named url parameter "apikey" - highly recommended not to enable this, but if you have some dodgy legacy tools that cannot pass the authorization header it can work as a workaround. Again, only use this as a last resort.
 
 #### GPG
 * `gpg_binary` - The location of the GPG executable. If you would like to use a different gpg executable than /usr/bin/gpg, you can set it here. If the default is fine, 
@@ -362,7 +364,8 @@ By default set to 5.
 attempts are exhausted. By default set to 300.
 
 #### Session
-* `session_auto_regenerate` - Set to true to automatically regenerate sessions on activity. (Recommended). By default set to false.
+* `session_auto_regenerate` - Set to true to automatically regenerate sessions on activity. (Recommended).
+* `session_check_agent` - In case it's set to true checks for the user agent string in each request. This can lead to occasional logouts (not recommended).
 * `session_defaults` - The session type used by MISP. The default setting is php, which will use the session settings configured in php.ini for the session 
 data (supported options: php, database). The recommended option is php and setting your PHP up to use redis sessions via your php.ini. Just add 'session.save_handler = redis' 
 and "session.save_path = 'tcp://localhost:6379'" (replace the latter with your redis connection) to. By default set to 'php'.
@@ -399,6 +402,9 @@ set to 'mispq'.
 * `zeromq_attribute_notifications_enable` - Enables or disables the publishing of any attribute creations/edits/soft deletions. By default is set to false.
 * `zeromq_tag_notifications_enable` - Enables or disables the publishing of any tag creations/edits/deletions as well as tags being attached to / detached from various MISP elements.
 * `zeromq_audit_notifications_enable` - Enables or disables the publishing of log entries to the ZMQ pubsub feed. Keep in mind, this can get pretty verbose depending on your logging settings. By default its set to false.
+* `elasticsearch_logging_enable` - Enabling logging to an ElasticSearch instance
+* `elasticsearch_connection_string` - The URL(s) at which to access ElasticSearch - comma separate if you want to have more than one.
+* `elasticsearch_log_index` - The index in which to place logs
 * `syslog` - Enable this setting to pass all audit log entries directly to syslog. Keep in mind, this is verbose and will include user, organisation, event data. By default is set to false.
 * `sightings_anonymise` - Enabling the anonymisation of sightings will simply aggregate all sightings instead of showing 
 the organisations that have reported a sighting. By default set to false.

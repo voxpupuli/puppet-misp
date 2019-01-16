@@ -177,8 +177,10 @@ define('LOG_ERROR', LOG_ERR);
  */
 Configure::write('Session', array(
 	'timeout'        => <%= @session_timeout -%>,    // Session timeout, default is 1 hour
-	'defaults'       => 'database',
-	'autoRegenerate' => true
+	'cookie_timeout' => <%= @session_cookie_timeout -%>,  // Cookie timeout, default is 1 week
+	'defaults'       => '<%= @session_defaults -%>',
+	'autoRegenerate' => <%= @session_auto_regenerate -%>,
+	'checkAgent' => <%= @session_check_agent -%>
 ));
 
 /**

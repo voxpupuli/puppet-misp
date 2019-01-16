@@ -95,7 +95,9 @@ $config = array (
       'redis_database' => <%= @redis_database -%>,
       'redis_password' => '<%= @redis_password -%>',
       'event_view_filter_fields' => '<%= @event_view_filter_fields -%>',
-      'deadlock_avoidance' => <%= @deadlock_avoidance -%>
+      'manage_workers' => '<%= @manage_workers -%>',
+      'deadlock_avoidance' => <%= @deadlock_avoidance -%>,
+      'allow_unsafe_apikey_named_param' => <%= @allow_unsafe_apikey_named_param -%>,
     ),
   'GnuPG' =>
     array (
@@ -130,6 +132,7 @@ $config = array (
   'Session' =>
     array (
       'autoRegenerate' => <%= @session_auto_regenerate -%>,
+      'checkAgent' => '<%= @session_check_agent -%>',
       'defaults' => '<%= @session_defaults -%>',
       'timeout' => '<%= @session_timeout -%>',
       'cookie_timeout' => '<%= @session_cookie_timeout -%>'
@@ -161,6 +164,9 @@ $config = array (
       'ZeroMQ_attribute_notifications_enable' => <%= @zeromq_attribute_notifications_enable -%>,
       'ZeroMQ_tag_notifications_enable' => <%= @zeromq_tag_notifications_enable -%>,
       'ZeroMQ_audit_notifications_enable' => <%= @zeromq_audit_notifications_enable -%>,
+      'ElasticSearch_logging_enable' => <%= @elasticsearch_logging_enable -%>,
+      'ElasticSearch_connection_string' => <%= @elasticsearch_connection_string -%>,
+      'ElasticSearch_log_index' => <%= @elasticsearch_log_index -%>,
       'syslog' => <%= @syslog -%>,
       'Sightings_enable' => <%= @sightings_enable -%>,
       'Sightings_policy' => <%= @sightings_policy -%>,

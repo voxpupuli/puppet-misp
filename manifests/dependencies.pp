@@ -5,7 +5,7 @@ class misp::dependencies inherits misp {
     'gcc', # Needed for compiling Python modules
     'git', # Needed for pulling the MISP code and those for some dependencies
     'zip', 'mariadb',
-    'python-lxml', 'python-dateutil', 'python-six', # Python related packages
+    'python-lxml', 'python-dateutil', 'python-six', 'python-zmq', # Python related packages
     'libxslt-devel', 'zlib-devel',
     'rh-php56', 'rh-php56-php-fpm', 'rh-php56-php-devel', 'rh-php56-php-mysqlnd', 'rh-php56-php-mbstring', 'php-pear', 'rh-php56-php-xml', 'rh-php56-php-bcmath', # PHP related packages
     'php-mbstring', #Required for Crypt_GPG
