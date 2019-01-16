@@ -19,7 +19,7 @@ class misp::install inherits misp {
     cwd         => $misp::install_dir,
     refreshonly => true,
     subscribe   => Vcsrepo[$misp::install_dir],
-    notify      => Vcsrepo["${misp::install_dir}/app/files/scripts/python-cybox","${misp::install_dir}/app/files/scripts/python-stix", "${misp::install_dir}/app/files/scripts/mixbox", "${misp::install_dir}/app/files/scripts/maec", "${misp::install_dir}/app/files/scripts/pydeep"],
+    notify      => Vcsrepo["${misp::install_dir}/app/files/scripts/python-cybox","${misp::install_dir}/app/files/scripts/python-stix", "${misp::install_dir}/app/files/scripts/mixbox", "${misp::install_dir}/app/files/scripts/python-maec", "${misp::install_dir}/app/files/scripts/pydeep"],
   }
 
   vcsrepo { "${misp::install_dir}/app/files/scripts/python-cybox":
