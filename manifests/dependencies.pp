@@ -19,7 +19,7 @@ class misp::dependencies inherits misp {
   )
 
   if $misp::manage_python {
-    class { '::python' :
+    class { 'python' :
       version => 'system',
       pip     => 'present',
       dev     => 'present',
