@@ -9,29 +9,31 @@
 
 #### Table of Contents
 
-1. [Overview](#overview)
-2. [Module Description - What the module does and why it is useful](#module-description)
-3. [Setup - Getting started with the misp module](#setup)
-    * [What misp affects](#what-misp-affects)
-4. [Usage - Configuration options and additional functionality](#usage)
-    * [Basic usage](#basic-usage)
-    * [Another usage example](#another-usage-example)
-5. [Parameters of the MISP Class](#parameters-of-the-misp-class)
-    * [MISP installation](#misp-installation)
-    * [Database configuration](#database-configuration)
-    * [MISP configuration](#misp-configuration)
-        * [Site configuration](#site-configuration)
-        * [Security](#security)
-        * [MISP](#misp)
-        * [GPG](#gpg)
-        * [SMIME](#smime)
-        * [Proxy](#proxy)
-        * [Secure Authentication](#secure-auth)
-        * [Session](#session)
-        * [Plugin](#plugin)
-        * [Apache Shibboleth Authentication](#apacheshibbauth)          
-    * [Services](#services)
-    * [GnuPG](#gnupg)
+- [MISP MODULE](#misp-module)
+      - [Table of Contents](#table-of-contents)
+  - [Module Description](#module-description)
+  - [Setup](#setup)
+    - [What MISP affects](#what-misp-affects)
+  - [Usage](#usage)
+    - [Basic usage](#basic-usage)
+    - [Another usage example](#another-usage-example)
+  - [Parameters of the MIPS Class](#parameters-of-the-mips-class)
+    - [MISP installation](#misp-installation)
+    - [Database configuration](#database-configuration)
+      - [Redis](#redis)
+    - [MISP configuration](#misp-configuration)
+      - [Site Configuration](#site-configuration)
+      - [Security](#security)
+      - [MISP](#misp)
+      - [GPG](#gpg)
+      - [SMIME](#smime)
+      - [Proxy](#proxy)
+      - [SecureAuth](#secureauth)
+      - [Session](#session)
+      - [Plugin](#plugin)
+      - [ApacheShibbAuth](#apacheshibbauth)
+    - [Services](#services)
+    - [GnuPG](#gnupg)
     
 
 This module installs and configures MISP (Malware Information Sharing Platform) on CentOS 7.
@@ -136,6 +138,10 @@ those cases. By default root.
 * `default_high_group`- In some cases root permissions are need in the installation, this group will be used in 
 those cases. By default apache.
 * `uuid` - The MISP instance UUID. This UUID is used to identify this instance. By default set to 0.
+* `manage_python` - Whether to manage python or not. Please note that python dev needs to be present in order to be able to install some of the MISP dependencies.
+* `pymisp_rpm` - Boolean to indicate if pymisp should be installed or not (The RPM needs to be available for the machine). By default is set to false.
+* `lief` - Boolean to indicate if lief should be installed or not (The RPM needs to be available for the machine). By default is set to false.
+* `lief_package_name` - String containing the package name for lief.
 
 ### Database configuration
 
@@ -204,7 +210,7 @@ Note that it requires the edestecd-mariadb module.
 without exposing it to other users. The most verbose option of debug and site_admin_debug is used for site admins. 
 By default false.
 
-This two parameters are recommended to be set to 0 and false respectively. However, if needed they can be set to tru to find 
+These two parameters are recommended to be set to 0 and false respectively. However, if needed they can be set to tru to find 
 errors with names/tables in the database. In this case it would be better to just set to true 'site_admin_debug' instead of 
 the whole instance.
 
@@ -217,10 +223,13 @@ By default set to "Rooraenietu8Eeyo<Qu2eeNfterd-dd+".
 * `password_policy_length` - Password length requirement. By default set to 6.
 * `password_policy_complexity` - Password complexity requirement. By default set to '/((?=.*\\d)|(?=.*\\W+))(?![\\n])(?=.*[A-Z])(?=.*[a-z]).*$/'.
 * `sanitise_attribute_on_delete` - Enabling this setting will sanitise the contents of an attribute on a soft delete. By default set to false.
+* `hide_organisation_index_from_users` - Enabling this setting will block the organisation index from being visible to anyone besides site administrators on the current instance. Keep in mind that users can still see organisations that produce data via events, proposals, event history log entries, etc. By default is set to false.
 
 #### MISP
 * `live` - If set to false the instance will only be accessible by site admins. By default true.
+* `language` - The language MISP should use. The default is english.
 * `enable_advanced_correlations` - Enable some performance heavy correlations (currently CIDR correlation). By default false.
+* `max_correlations_per_event` - Sets the maximum number of correlations that can be fetched with a single event. For extreme edge cases this can prevent memory issues. The default value is 5000.
 * `maintenance_message` - The message that users will see if the instance is not live. By default set to 'Great things are happening! MISP is undergoing maintenance, 
 but will return shortly. You can contact the administration at \\$email.'.
 * `footermidleft` - Footer text prepending the "Powered by MISP" text. Empty by default.
@@ -245,6 +254,7 @@ By default set to false.
 * `email` - The e-mail address that MISP should use for all notifications. By default "root@localhost".
 * `disable_emailing` - When enabled, no outgoing e-mails will be sent by MISP. By default set to false.
 * `cached_attachments` - Allow the XML caches to include the encoded attachments. By default set to true.
+* `download_attachments_on_load` - Always download attachments when loaded by a user in a browser.
 * `contact` - The e-mail address that MISP should include as a contact address for the instance's support team. By default "root@localhost"
 * `background_jobs` - Enables the use of MISP's background processing. By default set to true.
 * `cveurl` - Turn Vulnerability type attributes into links linking to the provided CVE lookup. By default set to 'http://cve.circl.lu/cve/',
@@ -261,6 +271,7 @@ the attributes to default to the event distribution level. (0-3 or "event"). By 
 * `welcome_text_bottom` -   Used on the login page, after the MISP logo. Empty by default.
 * `welcome_logo` - Used on the login page, to the left of the MISP logo, upload it as a custom image in the file management tool. Empty by default.
 * `welcome_logo2` - Used on the login page, to the right of the MISP logo, upload it as a custom image in the file management tool. Empty by default.
+* `title_text` - Used in the page title, after the name of the page. By default is set to 'MISP'.
 * `take_ownership_xml_import` - Allows users to take ownership of an event uploaded via the "Add MISP XML" button. 
 By default set to false.
 * `terms_download` - Choose whether the terms and conditions should be displayed inline (false) or offered as a 
@@ -283,6 +294,7 @@ and lost information. Use this at your own risk. By default set to false.
 * `delegation` - This feature allows users to created org only events and ask another organisation to take owenership of the event. This allows organisations 
 to remain anonymous by asking a partner to publish an event for them. By default set to false.
 * `enable_advanced_correlations` - Enable some performance heavy correlations (currently CIDR correlation). By default set to false.
+* `ssdeep_correlation_threshold` - Set the ssdeep score at which to consider two ssdeep hashes as correlating [1-100].
 * `show_correlations_on_index` - When enabled, the number of correlations visible to the currently logged in user will be visible on the event index UI. 
 This comes at a performance cost but can be very useful to see correlating events at a glance. By default set to false.
 * `show_proposals_count_on_index` - When enabled, the number of proposals for the events are shown on the index. By default set to false.
@@ -315,6 +327,10 @@ Enabling this will trigger a full recorrelation of all data which is an extremel
 By default set to false.
 * `allow_disabling_correlation` - *WARNING* This setting will give event creators the possibility to disable the correlation of individual events / attributes that they have created.
 By default set to false.
+* `event_view_filter_fields`* - Specify which fields to filter on when you search on the event view. Default values are : "id, uuid, value, comment, type, category, Tag.name"
+* `manage_workers`* - Set this to false if you would like to disable MISP managing its own worker processes (for example, if you are managing the workers with a systemd unit).
+* `deadlock_avoidance`* - Only enable this if you have some tools using MISP with extreme high concurency. General performance will be lower as normal as certain transactional queries are avoided in favour of shorter table locks.
+* `allow_unsafe_apikey_named_param`* - Allows passing the API key via the named url parameter "apikey" - highly recommended not to enable this, but if you have some dodgy legacy tools that cannot pass the authorization header it can work as a workaround. Again, only use this as a last resort.
 
 #### GPG
 * `gpg_binary` - The location of the GPG executable. If you would like to use a different gpg executable than /usr/bin/gpg, you can set it here. If the default is fine, 
@@ -348,12 +364,14 @@ By default set to 5.
 attempts are exhausted. By default set to 300.
 
 #### Session
-* `session_auto_regenerate` - Set to true to automatically regenerate sessions on activity. (Recommended). By default set to false.
+* `session_auto_regenerate` - Set to true to automatically regenerate sessions on activity. (Recommended).
+* `session_check_agent` - In case it's set to true checks for the user agent string in each request. This can lead to occasional logouts (not recommended).
 * `session_defaults` - The session type used by MISP. The default setting is php, which will use the session settings configured in php.ini for the session 
 data (supported options: php, database). The recommended option is php and setting your PHP up to use redis sessions via your php.ini. Just add 'session.save_handler = redis' 
 and "session.save_path = 'tcp://localhost:6379'" (replace the latter with your redis connection) to. By default set to 'php'.
 * `session_timeout` - The timeout duration of sessions (in MINUTES). Keep in mind that autoregenerate can be used to extend the session on user activity.
 By default set to 60.
+* `session_cookie_timeout` - The expiration of the cookie (in MINUTES). The session timeout gets refreshed frequently, however the cookies do not. Generally it is recommended to have a much higher cookie_timeout than timeout.
 
 #### Plugin
 * `rpz_policy` - The default policy action for the values added to the RPZ. 0 means DROP, 1 NXDOMAIN, 2 NODATA and 3 walled-garden. 
@@ -365,6 +383,7 @@ By default set to 0.
 * `rpz_expiry` - The expiry specified in the SOA portion of the zone file. By default set to '30d'.
 * `rpz_minimum_ttl` - The minimum TTL specified in the SOA portion of the zone file. By default set to '1h'.
 * `rpz_ttl` - The TTL of the zone file. By default set to '1w'.
+* `rpz_ns_alt` - Alternate nameserver. By default is empty.
 * `rpz_ns` - The RPZ ns. By default set to 'localhost'.
 * `rpz_email` - The e-mail address specified in the SOA portion of the zone file. By default set to 'root.localhost'.
 * `zeromq_enable` - Enables or disables the pub/sub feature of MISP. By default set to false.
@@ -376,6 +395,17 @@ By default set to 'localhost'.
 * `zeromq_redis_database` - The database to be used for queuing messages for the pub/sub functionality. By default set to '1'.
 * `zeromq_redis_namespace` - The namespace to be used for queuing messages for the pub/sub functionality. By default 
 set to 'mispq'.
+* `zeromq_include_attachments` - Enable this setting to include the base64 encoded payloads of malware-samples/attachments in the output.
+* `zeromq_event_notifications_enable` - Enables or disables the publishing of any event creations/edits/deletions. By default is set to false.
+* `zeromq_object_notifications_enable` - Enables or disables the publishing of any object creations/edits/deletions. By default is set to false.
+* `zeromq_object_reference_notifications_enable` - Enables or disables the publishing of any object reference creations/deletions. By default is set to false.
+* `zeromq_attribute_notifications_enable` - Enables or disables the publishing of any attribute creations/edits/soft deletions. By default is set to false.
+* `zeromq_tag_notifications_enable` - Enables or disables the publishing of any tag creations/edits/deletions as well as tags being attached to / detached from various MISP elements.
+* `zeromq_audit_notifications_enable` - Enables or disables the publishing of log entries to the ZMQ pubsub feed. Keep in mind, this can get pretty verbose depending on your logging settings. By default its set to false.
+* `elasticsearch_logging_enable` - Enabling logging to an ElasticSearch instance
+* `elasticsearch_connection_string` - The URL(s) at which to access ElasticSearch - comma separate if you want to have more than one.
+* `elasticsearch_log_index` - The index in which to place logs
+* `syslog` - Enable this setting to pass all audit log entries directly to syslog. Keep in mind, this is verbose and will include user, organisation, event data. By default is set to false.
 * `sightings_anonymise` - Enabling the anonymisation of sightings will simply aggregate all sightings instead of showing 
 the organisations that have reported a sighting. By default set to false.
 * `sightings_policy` - This setting defines who will have access to seeing the reported sightings. 0 means event owner, 
@@ -416,7 +446,12 @@ By default set to true.
 * `cortex_services_enable` -    Enable/disable the import services. By default set to false.
 * `cortex_services_url` -   The url used to access Cortex. By default, it is accessible at http://cortex-url/api.
 * `cortex_services_port` - The port used to access Cortex. By default, this is port 9000.
+* `cortex_authkey` - Set an authentication key to be passed to Cortex.
 * `cortex_timeout` - Set a timeout for the import services. By default set to 120.
+* `cortex_ssl_verify_peer` - Set to false to disable SSL verification. This is not recommended.
+* `cortex_ssl_verify_host` - Set to false if you wish to ignore hostname match errors when validating certificates.
+* `cortex_ssl_allow_self_signed` - Set to true to enable self-signed certificates to be accepted. This requires `cortex_ssl_verify_peer` to be enabled.
+* `cortex_ssl_cafile` - Set to the absolute path of the Certificate Authority file that you wish to use for verifying SSL certificates.
 
 #### ApacheShibbAuth
 * `shib_default_org` - Default organisation for user creation when using Shibboleth authentication plugin. By default set to 1.

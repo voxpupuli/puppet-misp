@@ -27,14 +27,14 @@ describe 'misp::install' do
           is_expected.to contain_vcsrepo('/var/www/MISP//app/files/scripts/python-cybox').
             with_ensure('present').
             with_source(%r{https://github.com/CybOXProject/python-cybox.git}).
-            with_revision(%r{v2.1.0.12})
+            with_revision(%r{v2.1.0.17})
         end
 
         it do
           is_expected.to contain_vcsrepo('/var/www/MISP//app/files/scripts/python-stix').
             with_ensure('present').
             with_source(%r{https://github.com/STIXProject/python-stix.git}).
-            with_revision(%r{v1.1.1.4})
+            with_revision(%r{v1.2.0.6})
         end
 
         it do
