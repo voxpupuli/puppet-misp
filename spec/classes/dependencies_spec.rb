@@ -35,5 +35,17 @@ describe 'misp::dependencies' do
       it { is_expected.to contain_package('ssdeep-libs') }
       it { is_expected.to contain_package('ssdeep-devel') }
     end
+
+    context "on #{os} with `ensure => latest` resources" do
+      let(:facts) do
+        facts
+      end
+
+      let(:pre_condition) do
+        'package { "git": ensure => latest }'
+      end
+
+      it { is_expected.to compile.with_all_deps }
+    end
   end
 end

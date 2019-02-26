@@ -1,7 +1,7 @@
 
 class misp::dependencies inherits misp {
 
-  ensure_packages( [
+  [
     'gcc', # Needed for compiling Python modules
     'git', # Needed for pulling the MISP code and those for some dependencies
     'zip', 'mariadb',
@@ -11,12 +11,12 @@ class misp::dependencies inherits misp {
     'php-mbstring', #Required for Crypt_GPG
     'haveged',
     'sclo-php56-php-pecl-redis', # Redis connection from PHP
-    'php-pear-crypt-gpg', # Crypto GPG 
+    'php-pear-crypt-gpg', # Crypto GPG
     'python-magic', # Advance attachment handler
     'ssdeep', 'ssdeep-libs', 'ssdeep-devel', #For pydeep
-  ],
-    { 'ensure' => 'present' }
-  )
+  ].each |String $pkg| {
+    ensure_resource('package', $pkg)
+  }
 
   if $misp::manage_python {
     class { 'python' :
@@ -27,9 +27,7 @@ class misp::dependencies inherits misp {
   }
 
   if $misp::pymisp_rpm {
-    ensure_packages( ['pymisp'],
-      { 'ensure' => 'present' }
-    )
+    ensure_resource('package', 'pymisp')
   } else {
     python::pip { 'pymisp' :
       pkgname => 'pymisp',
@@ -37,8 +35,6 @@ class misp::dependencies inherits misp {
   }
 
   if $misp::lief {
-    ensure_packages( [$misp::lief_package_name],
-      { 'ensure' => 'present' }
-    )
+    ensure_resource('package', $misp::lief_package_name)
   }
 }
