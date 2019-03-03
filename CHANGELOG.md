@@ -4,6 +4,31 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v1.0.0](https://github.com/voxpupuli/puppet-misp/tree/v1.0.0) (2019-03-03)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-misp/compare/v0.6.0...v1.0.0)
+
+**Breaking changes:**
+
+- modulesync 2.5.1 and drop Puppet 4 [\#42](https://github.com/voxpupuli/puppet-misp/pull/42) ([bastelfreak](https://github.com/bastelfreak))
+- Added new configuration options and dependencies [\#29](https://github.com/voxpupuli/puppet-misp/pull/29) ([liviuvalsan](https://github.com/liviuvalsan))
+
+**Implemented enhancements:**
+
+- Make MISP Git repository configurable [\#39](https://github.com/voxpupuli/puppet-misp/pull/39) ([bmcbm](https://github.com/bmcbm))
+
+**Fixed bugs:**
+
+- Fix dependency collisions on non-present ensure [\#44](https://github.com/voxpupuli/puppet-misp/pull/44) ([ananace](https://github.com/ananace))
+
+**Closed issues:**
+
+- Duplicate declarations for dependencies if they are `ensure =\> installed` [\#43](https://github.com/voxpupuli/puppet-misp/issues/43)
+
+**Merged pull requests:**
+
+- modulesync 2.2.0 and allow puppet 6.x [\#38](https://github.com/voxpupuli/puppet-misp/pull/38) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [v0.6.0](https://github.com/voxpupuli/puppet-misp/tree/v0.6.0) (2018-09-06)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-misp/compare/v0.5.0...v0.6.0)
