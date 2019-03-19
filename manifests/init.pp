@@ -160,7 +160,7 @@ class misp (
   $secure_auth_amount = 5,
   $secure_auth_expire = 300,
   # # Session
-  $session_auto_regenerate = true,
+  $session_auto_regenerate = false,
   $session_check_agent = false,
   $session_defaults = 'php',
   $session_timeout = '60',
