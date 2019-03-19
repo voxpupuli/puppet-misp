@@ -130,6 +130,7 @@ the installation of MISP itself, for the database, for the configuration and for
 * `stix_git_tag`- Version of the STIX module. By default "v1.1.1.4".
 * `cybox_git_repo`- Git url of the CyBox repository. By default "https://github.com/CybOXProject/python-cybox.git".
 * `cybox_git_tag`- Version of the CyBox module. By default "v2.1.0.12".
+* `cake_resque_version`- Version of Cake Resque. By default "4.1.2".
 * `timezone`- Timezone where the instance has been placed. By default "UTC".
 * `default_user`- User as which to run the installation of MISP. By default apache.
 * `default_group`- Group as which to run the installation of MISP. By default apache.

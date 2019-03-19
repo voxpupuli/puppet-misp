@@ -20,6 +20,7 @@ class misp (
   $maec_git_tag = 'v4.1.0.14',
   $pydeep_git_repo = 'https://github.com/kbandla/pydeep.git',
   $pydeep_git_tag = 'e4ce348566293475016ca7fa9fb7fc4f61f1997f', # Using SHA from latest commit in 0.2 tag, because there is also a 0.2 branch
+  $cake_resque_version = '4.1.2',
   # Whether to manage Python or not. Please note that python dev needs to be
   # present in order to be able to install some of the MISP dependencies
   $manage_python = true,
