@@ -265,7 +265,8 @@ By defualt set to false.
 community only, 2 means contacted communities and 3 is all communities. By default set to 1.
 * `default_attribute_distribution` - The default distribution setting for attributes, set it to 'event' if you would like
 the attributes to default to the event distribution level. (0-3 or "event"). By default set to 'event'.
-* `default_event_threat_level` - The default threat level setting when creating events. By default set to 1.
+* `default_event_threat_level` - The default threat level setting when creating events. By default set to 4 (undefined).
+* `default_event_tag_collection` - The tag collection to be applied to all events created manually.
 * `tagging` - Enable the tagging feature of MISP. By default set to true.
 * `full_tags_on_event_index` - Show the full tag names on the event index. By default set to true.
 * `welcome_text_top` - Used on the login page, before the MISP logo. Empty by default.
