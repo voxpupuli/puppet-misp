@@ -9,7 +9,7 @@ class misp (
   # MISP installation
   # # MISP repositories
   $misp_git_repo = 'https://github.com/MISP/MISP.git',
-  $misp_git_tag = 'v2.4.71',
+  $misp_git_tag = 'v2.4.102',
   $stix_git_repo = 'https://github.com/STIXProject/python-stix.git',
   $stix_git_tag = 'v1.2.0.6',
   $cybox_git_repo = 'https://github.com/CybOXProject/python-cybox.git',
@@ -20,6 +20,7 @@ class misp (
   $maec_git_tag = 'v4.1.0.14',
   $pydeep_git_repo = 'https://github.com/kbandla/pydeep.git',
   $pydeep_git_tag = 'e4ce348566293475016ca7fa9fb7fc4f61f1997f', # Using SHA from latest commit in 0.2 tag, because there is also a 0.2 branch
+  $cake_resque_version = '4.1.2',
   # Whether to manage Python or not. Please note that python dev needs to be
   # present in order to be able to install some of the MISP dependencies
   $manage_python = true,
@@ -68,6 +69,7 @@ class misp (
   $enable_advanced_correlations = false,
   $ssdeep_correlation_threshold = 40,
   $max_correlations_per_event = 5000,
+  $python_bin = undef,
   $maintenance_message = 'Great things are happening! MISP is undergoing maintenance, but will return shortly. You can contact the administration at \\$email.',
   $footermidleft = '',
   $footermidright = '',
@@ -93,7 +95,8 @@ class misp (
   $extended_alert_subject = true,
   $default_event_distribution = '1',
   $default_attribute_distribution = 'event',
-  $default_event_threat_level = '1',
+  $default_event_threat_level = '4',
+  $default_event_tag_collection = 0,
   $tagging = true,
   $full_tags_on_event_index = true,
   $welcome_text_top = '',
@@ -158,7 +161,7 @@ class misp (
   $secure_auth_amount = 5,
   $secure_auth_expire = 300,
   # # Session
-  $session_auto_regenerate = true,
+  $session_auto_regenerate = false,
   $session_check_agent = false,
   $session_defaults = 'php',
   $session_timeout = '60',

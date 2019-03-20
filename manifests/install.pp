@@ -119,7 +119,7 @@ class misp::install inherits misp {
   }
 
   exec {'CakeResque kamisama':
-    command     => '/usr/bin/php composer.phar require kamisama/cake-resque:4.1.2',
+    command     => "/usr/bin/php composer.phar require kamisama/cake-resque:${misp::cake_resque_version}",
     cwd         => "${misp::install_dir}/app/",
     environment => ["COMPOSER_HOME=${misp::install_dir}/app/"],
     refreshonly => true,

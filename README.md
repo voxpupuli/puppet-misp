@@ -130,6 +130,7 @@ the installation of MISP itself, for the database, for the configuration and for
 * `stix_git_tag`- Version of the STIX module. By default "v1.1.1.4".
 * `cybox_git_repo`- Git url of the CyBox repository. By default "https://github.com/CybOXProject/python-cybox.git".
 * `cybox_git_tag`- Version of the CyBox module. By default "v2.1.0.12".
+* `cake_resque_version`- Version of Cake Resque. By default "4.1.2".
 * `timezone`- Timezone where the instance has been placed. By default "UTC".
 * `default_user`- User as which to run the installation of MISP. By default apache.
 * `default_group`- Group as which to run the installation of MISP. By default apache.
@@ -230,6 +231,7 @@ By default set to "Rooraenietu8Eeyo<Qu2eeNfterd-dd+".
 * `language` - The language MISP should use. The default is english.
 * `enable_advanced_correlations` - Enable some performance heavy correlations (currently CIDR correlation). By default false.
 * `max_correlations_per_event` - Sets the maximum number of correlations that can be fetched with a single event. For extreme edge cases this can prevent memory issues. The default value is 5000.
+* `python_bin` - The path to the Python binary. It is highly recommended to install all the python dependencies in a virtualenv.
 * `maintenance_message` - The message that users will see if the instance is not live. By default set to 'Great things are happening! MISP is undergoing maintenance,
 but will return shortly. You can contact the administration at \\$email.'.
 * `footermidleft` - Footer text prepending the "Powered by MISP" text. Empty by default.
@@ -264,7 +266,8 @@ By defualt set to false.
 community only, 2 means contacted communities and 3 is all communities. By default set to 1.
 * `default_attribute_distribution` - The default distribution setting for attributes, set it to 'event' if you would like
 the attributes to default to the event distribution level. (0-3 or "event"). By default set to 'event'.
-* `default_event_threat_level` - The default threat level setting when creating events. By default set to 1.
+* `default_event_threat_level` - The default threat level setting when creating events. By default set to 4 (undefined).
+* `default_event_tag_collection` - The tag collection to be applied to all events created manually.
 * `tagging` - Enable the tagging feature of MISP. By default set to true.
 * `full_tags_on_event_index` - Show the full tag names on the event index. By default set to true.
 * `welcome_text_top` - Used on the login page, before the MISP logo. Empty by default.

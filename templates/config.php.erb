@@ -25,6 +25,7 @@ $config = array (
       'live'  => <%= @live -%>,
       'language' => '<%= @language -%>',
       'enable_advanced_correlations' => <%= @enable_advanced_correlations -%>,
+<% unless @python_bin.nil? -%>      'python_bin' => '<%= @python_bin -%>',<%= "\n" %><% end -%>
       'ssdeep_correlation_threshold' => <%= @ssdeep_correlation_threshold -%>,
       'max_correlations_per_event' => <%= @max_correlations_per_event -%>,
       'maintenance_message' => '<%= @maintenance_message -%>',
@@ -53,6 +54,7 @@ $config = array (
       'default_event_distribution' => '<%= @default_event_distribution -%>',
       'default_attribute_distribution' => '<%= @default_attribute_distribution -%>',
       'default_event_threat_level' => '<%= @default_event_threat_level -%>',
+      'default_event_tag_collection' => <%= @default_event_tag_collection -%>,
       'tagging' => <%= @tagging -%>,
       'full_tags_on_event_index' => <%= @full_tags_on_event_index -%>,
       'welcome_text_top' => '<%= @welcome_text_top -%>',
@@ -132,10 +134,10 @@ $config = array (
   'Session' =>
     array (
       'autoRegenerate' => <%= @session_auto_regenerate -%>,
-      'checkAgent' => '<%= @session_check_agent -%>',
+      'checkAgent' => <%= @session_check_agent -%>,
       'defaults' => '<%= @session_defaults -%>',
       'timeout' => '<%= @session_timeout -%>',
-      'cookie_timeout' => '<%= @session_cookie_timeout -%>'
+      'cookie_timeout' => <%= @session_cookie_timeout -%>
     ),
   'Plugin' =>
     array (
@@ -165,8 +167,8 @@ $config = array (
       'ZeroMQ_tag_notifications_enable' => <%= @zeromq_tag_notifications_enable -%>,
       'ZeroMQ_audit_notifications_enable' => <%= @zeromq_audit_notifications_enable -%>,
       'ElasticSearch_logging_enable' => <%= @elasticsearch_logging_enable -%>,
-      'ElasticSearch_connection_string' => <%= @elasticsearch_connection_string -%>,
-      'ElasticSearch_log_index' => <%= @elasticsearch_log_index -%>,
+      'ElasticSearch_connection_string' => '<%= @elasticsearch_connection_string -%>',
+      'ElasticSearch_log_index' => '<%= @elasticsearch_log_index -%>',
       'syslog' => <%= @syslog -%>,
       'Sightings_enable' => <%= @sightings_enable -%>,
       'Sightings_policy' => <%= @sightings_policy -%>,

@@ -12,6 +12,7 @@ class misp::dependencies inherits misp {
     'haveged',
     'sclo-php56-php-pecl-redis', # Redis connection from PHP
     'php-pear-crypt-gpg', # Crypto GPG
+    'php-pear-Console-CommandLine',
     'python-magic', # Advance attachment handler
     'ssdeep', 'ssdeep-libs', 'ssdeep-devel', #For pydeep
   ].each |String $pkg| {
