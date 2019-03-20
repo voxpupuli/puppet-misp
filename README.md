@@ -231,6 +231,7 @@ By default set to "Rooraenietu8Eeyo<Qu2eeNfterd-dd+".
 * `language` - The language MISP should use. The default is english.
 * `enable_advanced_correlations` - Enable some performance heavy correlations (currently CIDR correlation). By default false.
 * `max_correlations_per_event` - Sets the maximum number of correlations that can be fetched with a single event. For extreme edge cases this can prevent memory issues. The default value is 5000.
+* `python_bin` - The path to the Python binary. It is highly recommended to install all the python dependencies in a virtualenv.
 * `maintenance_message` - The message that users will see if the instance is not live. By default set to 'Great things are happening! MISP is undergoing maintenance,
 but will return shortly. You can contact the administration at \\$email.'.
 * `footermidleft` - Footer text prepending the "Powered by MISP" text. Empty by default.

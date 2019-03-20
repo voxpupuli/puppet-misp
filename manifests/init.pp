@@ -69,6 +69,7 @@ class misp (
   $enable_advanced_correlations = false,
   $ssdeep_correlation_threshold = 40,
   $max_correlations_per_event = 5000,
+  $python_bin = undef,
   $maintenance_message = 'Great things are happening! MISP is undergoing maintenance, but will return shortly. You can contact the administration at \\$email.',
   $footermidleft = '',
   $footermidright = '',

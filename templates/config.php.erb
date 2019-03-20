@@ -25,6 +25,7 @@ $config = array (
       'live'  => <%= @live -%>,
       'language' => '<%= @language -%>',
       'enable_advanced_correlations' => <%= @enable_advanced_correlations -%>,
+<% unless @python_bin.nil? -%>      'python_bin' => '<%= @python_bin -%>',<%= "\n" %><% end -%>
       'ssdeep_correlation_threshold' => <%= @ssdeep_correlation_threshold -%>,
       'max_correlations_per_event' => <%= @max_correlations_per_event -%>,
       'maintenance_message' => '<%= @maintenance_message -%>',
