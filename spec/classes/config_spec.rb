@@ -13,7 +13,7 @@ describe 'misp::config' do
         it do
           is_expected.to contain_file('/var/www/MISP//app/Plugin/CakeResque/Config/config.php').
             with_ensure('file').
-            with_owner('root').
+            with_owner('apache').
             with_group('apache').
             with_source(%r{/var/www/MISP/}).
             that_subscribes_to('Exec[CakeResque install]')
@@ -95,7 +95,7 @@ describe 'misp::config' do
         it do
           is_expected.to contain_file('/var/www/MISP/app/Config//bootstrap.php').
             with_ensure('file').
-            with_owner('root').
+            with_owner('apache').
             with_group('apache').
             that_subscribes_to('Exec[Directory permissions]')
         end
@@ -103,7 +103,7 @@ describe 'misp::config' do
         it do
           is_expected.to contain_file('/var/www/MISP/app/Config//core.php').
             with_ensure('file').
-            with_owner('root').
+            with_owner('apache').
             with_group('apache').
             that_subscribes_to('Exec[Directory permissions]')
         end
@@ -119,7 +119,7 @@ describe 'misp::config' do
         it do
           is_expected.to contain_file('/var/www/MISP/app/Config//database.php').
             with_ensure('file').
-            with_owner('root').
+            with_owner('apache').
             with_group('apache').
             that_subscribes_to('Exec[Directory permissions]')
         end

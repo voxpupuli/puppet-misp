@@ -25,6 +25,9 @@ $config = array (
       'live'  => <%= @live -%>,
       'language' => '<%= @language -%>',
       'enable_advanced_correlations' => <%= @enable_advanced_correlations -%>,
+<% if @python_bin -%>
+      'python_bin' => '<%= @python_bin %>',
+<% end -%>
       'ssdeep_correlation_threshold' => <%= @ssdeep_correlation_threshold -%>,
       'max_correlations_per_event' => <%= @max_correlations_per_event -%>,
       'maintenance_message' => '<%= @maintenance_message -%>',
@@ -165,8 +168,8 @@ $config = array (
       'ZeroMQ_tag_notifications_enable' => <%= @zeromq_tag_notifications_enable -%>,
       'ZeroMQ_audit_notifications_enable' => <%= @zeromq_audit_notifications_enable -%>,
       'ElasticSearch_logging_enable' => <%= @elasticsearch_logging_enable -%>,
-      'ElasticSearch_connection_string' => <%= @elasticsearch_connection_string -%>,
-      'ElasticSearch_log_index' => <%= @elasticsearch_log_index -%>,
+      'ElasticSearch_connection_string' => '<%= @elasticsearch_connection_string -%>',
+      'ElasticSearch_log_index' => '<%= @elasticsearch_log_index -%>',
       'syslog' => <%= @syslog -%>,
       'Sightings_enable' => <%= @sightings_enable -%>,
       'Sightings_policy' => <%= @sightings_policy -%>,
