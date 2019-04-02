@@ -1,0 +1,22 @@
+<%- |
+  String $php_version,
+  String $user,
+  String $group,
+  Stdlib::Unixpath $install_dir,
+  Array[String] $services = [],
+  Array[String] $scls = [],
+  | -%>
+[Unit]
+Description=MISP's background workers
+After=rh-<%= $php_version %>-php-fpm.service <%= $services.filter |$s| { $s != undef }.map |$s| { "${s}.service" }.join(' ') -%>
+
+[Service]
+Type=forking
+User=<%= $user %>
+Group=<%= $group %>
+ExecStart=/usr/bin/scl enable rh-<%= $php_version %> <%= $scls.join(' ') %> <%= $install_dir %>/app/Console/worker/start.sh
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

@@ -4,37 +4,33 @@ class misp::dependencies inherits misp {
   [
     'gcc', # Needed for compiling Python modules
     'git', # Needed for pulling the MISP code and those for some dependencies
-    'zip', 'mariadb',
-    'python-lxml', 'python-dateutil', 'python-six', 'python-zmq', # Python related packages
+    'zip',
     'libxslt-devel', 'zlib-devel',
-    'rh-php56', 'rh-php56-php-fpm', 'rh-php56-php-devel', 'rh-php56-php-mysqlnd', 'rh-php56-php-mbstring', 'php-pear', 'rh-php56-php-xml', 'rh-php56-php-bcmath', # PHP related packages
-    'php-mbstring', #Required for Crypt_GPG
-    'haveged',
-    'sclo-php56-php-pecl-redis', # Redis connection from PHP
-    'php-pear-crypt-gpg', # Crypto GPG
-    'python-magic', # Advance attachment handler
     'ssdeep', 'ssdeep-libs', 'ssdeep-devel', #For pydeep
+
+    # PHP packages
+    "rh-${misp::php_version}", "rh-${misp::php_version}-php-fpm", "rh-${misp::php_version}-php-devel",
+    "rh-${misp::php_version}-php-mysqlnd", "rh-${misp::php_version}-php-mbstring", "rh-${misp::php_version}-php-pear",
+    "rh-${misp::php_version}-php-xml", "rh-${misp::php_version}-php-bcmath",
+
+    # Redis connection from PHP
+    "sclo-${misp::php_version}-php-pecl-redis4",
   ].each |String $pkg| {
     ensure_resource('package', $pkg)
   }
 
   if $misp::manage_python {
-    class { 'python' :
-      version => 'system',
-      pip     => 'present',
-      dev     => 'present',
-    }
+    ensure_packages( ['rh-python36', 'rh-python36-python-devel', 'rh-python36-python-pip', 'rh-python36-python-six'] )
   }
 
   if $misp::pymisp_rpm {
     ensure_resource('package', 'pymisp')
-  } else {
-    python::pip { 'pymisp' :
-      pkgname => 'pymisp',
-    }
   }
 
-  if $misp::lief {
+  if $misp::build_lief {
+    ensure_resource('package', ['devtoolset-7', 'cmake3'], {})
+  }
+  elsif $misp::lief {
     ensure_resource('package', $misp::lief_package_name)
   }
 }

@@ -8,23 +8,35 @@
 class misp (
   # MISP installation
   # # MISP repositories
-  $misp_git_repo = 'https://github.com/MISP/MISP.git',
-  $misp_git_tag = 'v2.4.71',
-  $stix_git_repo = 'https://github.com/STIXProject/python-stix.git',
-  $stix_git_tag = 'v1.2.0.6',
-  $cybox_git_repo = 'https://github.com/CybOXProject/python-cybox.git',
-  $cybox_git_tag = 'v2.1.0.17',
-  $mixbox_git_repo = 'https://github.com/CybOXProject/mixbox.git',
-  $mixbox_git_tag = 'v1.0.3',
-  $maec_git_repo = 'https://github.com/MAECProject/python-maec.git',
-  $maec_git_tag = 'v4.1.0.14',
-  $pydeep_git_repo = 'https://github.com/kbandla/pydeep.git',
-  $pydeep_git_tag = 'e4ce348566293475016ca7fa9fb7fc4f61f1997f', # Using SHA from latest commit in 0.2 tag, because there is also a 0.2 branch
+  String $misp_git_repo = 'https://github.com/MISP/MISP.git',
+  String $misp_git_tag = 'v2.4.105',
+  String $stix_git_repo = 'https://github.com/STIXProject/python-stix.git',
+  String $stix_git_tag = 'v1.2.0.6',
+  String $cybox_git_repo = 'https://github.com/CybOXProject/python-cybox.git',
+  String $cybox_git_tag = '85f975a89119e63bc2d7a67513b0f18e358c468f', # MISP requires an unreleased version
+  String $mixbox_git_repo = 'https://github.com/CybOXProject/mixbox.git',
+  String $mixbox_git_tag = 'v1.0.3',
+  String $maec_git_repo = 'https://github.com/MAECProject/python-maec.git',
+  String $maec_git_tag = 'v4.1.0.14',
+  String $pydeep_git_repo = 'https://github.com/kbandla/pydeep.git',
+  String $pydeep_git_tag = '60b0a00ba7f30cfa21ff92d871799685bc612cad',
+  String $lief_git_repo = 'https://github.com/lief-project/LIEF.git',
+  String $lief_git_tag = '0.9.0',
+  #
+  Boolean $install_mariadb = true,
+  String $mariadb_service = 'rh-mariadb102-mariadb',
+  Boolean $manage_scl = true,
+  Array[String] $worker_scls = ['rh-mariadb102'],
+  String $redis_service = 'redis',
+  String $php_version = 'php72',
+  Boolean $manage_haveged = true,
   # Whether to manage Python or not. Please note that python dev needs to be
   # present in order to be able to install some of the MISP dependencies
-  $manage_python = true,
-  $pymisp_rpm = false,
-  $lief = false,
+  Boolean $manage_python = true,
+  Boolean $use_venv = true,
+  Boolean $pymisp_rpm = false,
+  Boolean $lief = false,
+  Boolean $build_lief = false,
   $lief_package_name = '',
   # # Services
   $webservername = 'httpd',
@@ -46,6 +58,8 @@ class misp (
   # # MISP puppet configuration
   $install_dir = '/var/www/MISP/',
   $config_dir = '/var/www/MISP/app/Config/',
+  Stdlib::Unixpath $venv_dir = "${install_dir}/venv",
+  Optional[String] $python_bin = $use_venv ? { true => "${venv_dir}/bin/python3", false => undef },
   $timezone = 'UTC',
   $default_user = 'apache',
   $default_group = 'apache',

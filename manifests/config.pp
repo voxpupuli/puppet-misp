@@ -7,8 +7,8 @@ class misp::config inherits misp {
 
   file { "${misp::install_dir}/app/Plugin/CakeResque/Config/config.php":
     ensure    => file,
-    owner     => $misp::default_high_user,
-    group     => $misp::default_high_group,
+    owner     => $misp::default_user,
+    group     => $misp::default_group,
     source    => "file://${misp::install_dir}/INSTALL/setup/config.php",
     subscribe => Exec['CakeResque install'],
   }
@@ -38,7 +38,7 @@ class misp::config inherits misp {
     recurse => false,
   }
 
-  file {"${misp::install_dir}/app/Plugin/CakeResque/tmp" :
+  file {"${misp::install_dir}/app/Plugin/CakeResque/tmp":
     ensure    => directory,
     owner     => $misp::default_user,
     group     => $misp::default_group,
@@ -78,24 +78,24 @@ class misp::config inherits misp {
 
   file { "${misp::config_dir}/bootstrap.php":
     ensure    => file,
-    owner     => $misp::default_high_user,
-    group     => $misp::default_high_group,
+    owner     => $misp::default_user,
+    group     => $misp::default_group,
     content   => template('misp/bootstrap.php.erb'),
     subscribe => Exec['Directory permissions'],
   }
 
   file { "${misp::config_dir}/core.php":
     ensure    => file,
-    owner     => $misp::default_high_user,
-    group     => $misp::default_high_group,
+    owner     => $misp::default_user,
+    group     => $misp::default_group,
     content   => template('misp/core.php.erb'),
     subscribe => Exec['Directory permissions'],
   }
 
   file{"${misp::config_dir}/database.php":
     ensure    => file,
-    owner     => $misp::default_high_user,
-    group     => $misp::default_high_group,
+    owner     => $misp::default_user,
+    group     => $misp::default_group,
     mode      => '0640',
     content   => template('misp/database.php.erb'),
     subscribe => Exec['Directory permissions'],
@@ -105,6 +105,7 @@ class misp::config inherits misp {
     ensure    => file,
     owner     => $misp::default_user,
     group     => $misp::default_group,
+    mode      => '0640',
     content   => template('misp/config.php.erb'),
     seltype   => 'httpd_sys_rw_content_t',
     subscribe => Exec['Directory permissions'],
@@ -118,11 +119,5 @@ class misp::config inherits misp {
     }
 
     Selboolean['httpd redis connection'] ~> Service <| title == $misp::webservername |>
-  }
-
-  file{"${misp::install_dir}/app/Console/worker/start.sh":
-    owner => $misp::default_high_user,
-    group => $misp::default_high_group,
-    mode  => '+x',
   }
 }
