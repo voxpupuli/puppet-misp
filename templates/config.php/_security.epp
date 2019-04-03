@@ -1,0 +1,39 @@
+<%- |
+  Type[Class[misp]] $context,
+| -%>
+  'Security' =>
+    array (
+     'level' => '<%= $context[security_level] %>',
+     'salt' => '<%= $context[security_salt] %>',
+     'cipherSeed' => '<%= $context[security_cipher_seed] %>',
+     'syslog' => <%= $context[security_syslog] %>,
+     'allow_unsafe_apikey_named_param' => <%= $context[security_allow_unsafe_apikey_named_param] %>,
+<%- if $context[security_require_password_confirmation] != undef { -%>
+     'require_password_confirmation' => <%= $context[security_require_password_confirmation] %>,
+<%- } -%>
+<%- if $context[security_sanitise_attribute_on_delete] != undef { -%>
+     'sanitise_attribute_on_delete' => <%= $context[security_sanitise_attribute_on_delete] %>,
+<%- } -%>
+<%- if $context[security_hide_organisation_index_from_users] != undef { -%>
+     'hide_organisation_index_from_users' => <%= $context[security_hide_organisation_index_from_users] %>,
+<%- } -%>
+<%- if $context[security_allow_cors] != undef { -%>
+     'allow_cors' => <%= $context[security_allow_cors] %>,
+<%- } -%>
+<%- if $context[security_cors_origins] != undef { -%>
+     'cors_origins' => '<%= $context[security_cors_origins] %>',
+<%- } -%>
+<%- if $context[security_password_policy_length] != undef { -%>
+     'password_policy_length' => <%= $context[security_password_policy_length] %>,
+<%- } -%>
+<%- if $context[security_password_policy_complexity] != undef { -%>
+     'password_policy_complexity' => '<%= $context[security_password_policy_complexity] %>',
+<%- } -%>
+<%- if $context[security_auth_method] { -%>
+  <%- if $context[security_auth_method] =~ String { -%>
+     'auth'=>array('<%= $context[security_auth_method] %>'),
+  <%- } else { -%>
+     'auth'=>array(<%= $context[security_auth_method].map |String $method| { "'${method}'" }.join(', ') %>),
+  <%- } -%>
+<%- } -%>
+  ),

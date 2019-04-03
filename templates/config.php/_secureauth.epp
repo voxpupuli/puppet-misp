@@ -1,0 +1,8 @@
+<%- |
+  Type[Class[misp]] $context,
+| -%>
+  'SecureAuth' =>
+    array (
+      'amount' => <%= $context[secure_auth_amount] %>,
+      'expire' => <%= $context[secure_auth_expire] %>,
+  ),

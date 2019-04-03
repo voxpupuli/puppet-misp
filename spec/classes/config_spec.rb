@@ -11,7 +11,7 @@ describe 'misp::config' do
       it { is_expected.to contain_class('Misp::Config').that_requires('Class[Misp::Install]') }
       context 'With default values' do
         it do
-          is_expected.to contain_file('/var/www/MISP//app/Plugin/CakeResque/Config/config.php').
+          is_expected.to contain_file('/var/www/MISP/app/Plugin/CakeResque/Config/config.php').
             with_ensure('file').
             with_owner('apache').
             with_group('apache').
@@ -21,37 +21,37 @@ describe 'misp::config' do
 
         it do
           is_expected.to contain_exec('Directory permissions').
-            with_command(%r{(root).*(apache).*(/var/www/MISP/)}).
+            with_command(%r{(root).*(apache).*(/var/www/MISP)}).
             with_refreshonly('true').
-            that_requires('File[/var/www/MISP//app/Plugin/CakeResque/Config/config.php]').
+            that_requires('File[/var/www/MISP/app/Plugin/CakeResque/Config/config.php]').
             that_subscribes_to('Exec[CakeResque install]')
         end
 
         it do
-          is_expected.to contain_file('/var/www/MISP//app/files').
+          is_expected.to contain_file('/var/www/MISP/app/files').
             with_ensure('directory').
             with_owner('apache').
             with_group('apache').
             that_subscribes_to('Exec[Directory permissions]').
-            that_notifies(['File[/var/www/MISP//app/files/terms]', 'File[/var/www/MISP//app/files/scripts/tmp]'])
+            that_notifies(['File[/var/www/MISP/app/files/terms]', 'File[/var/www/MISP/app/files/scripts/tmp]'])
         end
 
         it do
-          is_expected.to contain_file('/var/www/MISP//app/files/scripts/tmp').
+          is_expected.to contain_file('/var/www/MISP/app/files/scripts/tmp').
             with_ensure('directory').
             with_owner('apache').
             with_group('apache')
         end
 
         it do
-          is_expected.to contain_file('/var/www/MISP//app/files/terms').
+          is_expected.to contain_file('/var/www/MISP/app/files/terms').
             with_ensure('directory').
             with_owner('apache').
             with_group('apache')
         end
 
         it do
-          is_expected.to contain_file('/var/www/MISP//app/Plugin/CakeResque/tmp').
+          is_expected.to contain_file('/var/www/MISP/app/Plugin/CakeResque/tmp').
             with_ensure('directory').
             with_owner('apache').
             with_group('apache').
@@ -59,41 +59,41 @@ describe 'misp::config' do
         end
 
         it do
-          is_expected.to contain_file('/var/www/MISP//app/tmp').
+          is_expected.to contain_file('/var/www/MISP/app/tmp').
             with_ensure('directory').
             with_owner('apache').
             with_group('apache').
             that_subscribes_to('Exec[Directory permissions]').
-            that_notifies('File[/var/www/MISP//app/tmp/logs/]')
+            that_notifies('File[/var/www/MISP/app/tmp/logs/]')
         end
 
         it do
-          is_expected.to contain_file('/var/www/MISP//app/webroot/img/orgs').
+          is_expected.to contain_file('/var/www/MISP/app/webroot/img/orgs').
             with_ensure('directory').
             with_owner('apache').
             with_group('apache').
             that_subscribes_to('Exec[Directory permissions]').
-            that_notifies('File[/var/www/MISP//app/tmp/logs/]')
+            that_notifies('File[/var/www/MISP/app/tmp/logs/]')
         end
 
         it do
-          is_expected.to contain_file('/var/www/MISP//app/webroot/img/custom').
+          is_expected.to contain_file('/var/www/MISP/app/webroot/img/custom').
             with_ensure('directory').
             with_owner('apache').
             with_group('apache').
             that_subscribes_to('Exec[Directory permissions]').
-            that_notifies('File[/var/www/MISP//app/tmp/logs/]')
+            that_notifies('File[/var/www/MISP/app/tmp/logs/]')
         end
 
         it do
-          is_expected.to contain_file('/var/www/MISP//app/tmp/logs/').
+          is_expected.to contain_file('/var/www/MISP/app/tmp/logs/').
             with_ensure('directory').
             with_owner('apache').
             with_group('apache')
         end
 
         it do
-          is_expected.to contain_file('/var/www/MISP/app/Config//bootstrap.php').
+          is_expected.to contain_file('/var/www/MISP/app/Config/bootstrap.php').
             with_ensure('file').
             with_owner('apache').
             with_group('apache').
@@ -101,7 +101,7 @@ describe 'misp::config' do
         end
 
         it do
-          is_expected.to contain_file('/var/www/MISP/app/Config//core.php').
+          is_expected.to contain_file('/var/www/MISP/app/Config/core.php').
             with_ensure('file').
             with_owner('apache').
             with_group('apache').
@@ -109,7 +109,7 @@ describe 'misp::config' do
         end
 
         it do
-          is_expected.to contain_file('/var/www/MISP/app/Config//config.php').
+          is_expected.to contain_file('/var/www/MISP/app/Config/config.php').
             with_ensure('file').
             with_owner('apache').
             with_group('apache').
@@ -117,7 +117,7 @@ describe 'misp::config' do
         end
 
         it do
-          is_expected.to contain_file('/var/www/MISP/app/Config//database.php').
+          is_expected.to contain_file('/var/www/MISP/app/Config/database.php').
             with_ensure('file').
             with_owner('apache').
             with_group('apache').
@@ -129,7 +129,7 @@ describe 'misp::config' do
         end
 
         it do
-          is_expected.to contain_file('/var/www/MISP//app/Console/worker/start.sh').
+          is_expected.to contain_file('/var/www/MISP/app/Console/worker/start.sh').
             with_owner('root').
             with_group('apache')
         end

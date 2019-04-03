@@ -1,0 +1,21 @@
+<%- |
+  Type[Class[misp]] $context,
+| -%>
+  'SMIME' =>
+    array (
+<%- if $context[smime_enabled] != undef { -%>
+      'enabled' => <%= $context[smime_enabled] %>,
+<%- } -%>
+<%- if $context[smime_email] != undef { -%>
+      'email' => '<%= $context[smime_email] %>',
+<%- } -%>
+<%- if $context[smime_cert_public_sign] != undef { -%>
+      'cert_public_sign' => '<%= $context[smime_cert_public_sign] %>',
+<%- } -%>
+<%- if $context[smime_key_sign] != undef { -%>
+      'key_sign' => '<%= $context[smime_key_sign] %>',
+<%- } -%>
+<%- if $context[smime_password] != undef { -%>
+      'password' => '<%= $context[smime_password] %>',
+<%- } -%>
+  ),

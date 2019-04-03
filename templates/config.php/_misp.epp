@@ -1,0 +1,203 @@
+<%- |
+  Type[Class[misp]] $context,
+| -%>
+  'MISP' =>
+    array (
+      'baseurl' => '<%= $context[baseurl] %>' ,
+      'external_baseurl' => '<%= $context[external_baseurl] %>' ,
+      'live' => <%= $context[live] %>,
+      'language' => '<%= $context[language] %>',
+      'enable_advanced_correlations' => <%= $context[enable_advanced_correlations] %>,
+      'host_org_id' => <%= $context[host_org_id] %>,
+      'uuid' => '<%= $context[uuid] %>',
+      'showorg' => <%= $context[showorg] %>,
+      'email' => '<%= $context[email] %>',
+      'disable_emailing' => <%= $context[disable_emailing] %>,
+      'default_event_distribution' => <%= $context[default_event_distribution] %>,
+      'default_attribute_distribution' => '<%= $context[default_attribute_distribution] %>',
+      'default_event_tag_collection' => <%= $context[default_event_tag_collection] %>,
+      'proposals_block_attributes' => <%= $context[proposals_block_attributes] %>,
+      'completely_disable_correlation' => <%= $context[completely_disable_correlation] %>,
+      'allow_disabling_correlation' => <%= $context[allow_disabling_correlation] %>,
+      'redis_host' => '<%= $context[redis_host] %>',
+      'redis_port' => <%= $context[redis_port] %>,
+      'redis_database' => <%= $context[redis_database] %>,
+      'redis_password' => '<%= $context[redis_password] %>',
+<%- if $context[python_bin] != undef { -%>
+      'python_bin' => '<%= $context[python_bin] %>',
+<%- } -%>
+<%- if $context[disable_auto_logout] != undef { -%>
+      'disable_auto_logout' => <%= $context[disable_auto_logout] %>,
+<%- } -%>
+<%- if $context[ssdeep_correlation_threshold] != undef { -%>
+      'ssdeep_correlation_threshold' => <%= $context[ssdeep_correlation_threshold] %>,
+<%- } -%>
+<%- if $context[max_correlations_per_event] != undef { -%>
+      'max_correlations_per_event' => <%= $context[max_correlations_per_event] %>,
+<%- } -%>
+<%- if $context[disable_cached_exports] != undef { -%>
+      'disable_cached_exports' => <%= $context[disable_cached_exports] %>,
+<%- } -%>
+<%- if $context[org] != undef { -%>
+      'org' => '<%= $context[org] %>',
+<%- } -%>
+<%- if $context[background_jobs] != undef { -%>
+      'background_jobs' => <%= $context[background_jobs] %>,
+<%- } -%>
+<%- if $context[cached_attachments] != undef { -%>
+      'cached_attachments' => <%= $context[cached_attachments] %>,
+<%- } -%>
+<%- if $context[contact] != undef { -%>
+      'contact' => '<%= $context[contact] %>',
+<%- } -%>
+<%- if $context[cveurl] != undef { -%>
+      'cveurl' => '<%= $context[cveurl] %>',
+<%- } -%>
+<%- if $context[disablerestalert] != undef { -%>
+      'disablerestalert' => <%= $context[disablerestalert] %>,
+<%- } -%>
+<%- if $context[extended_alert_subject] != undef { -%>
+      'extended_alert_subject' => <%= $context[extended_alert_subject] %>,
+<%- } -%>
+<%- if $context[default_event_threat_level] != undef { -%>
+      'default_event_threat_level' => '<%= $context[default_event_threat_level] %>',
+<%- } -%>
+<%- if $context[tagging] != undef { -%>
+      'tagging' => <%= $context[tagging] %>,
+<%- } -%>
+<%- if $context[new_user_text] != undef { -%>
+      'newUserText' => "<%= $context[new_user_text] %>",
+<%- } -%>
+<%- if $context[password_reset_text] != undef { -%>
+      'passwordResetText' => "<%= $context[password_reset_text] %>",
+<%- } -%>
+<%- if $context[enable_event_blacklisting] != undef { -%>
+      'enableEventBlacklisting' => <%= $context[enable_event_blacklisting] %>,
+<%- } -%>
+<%- if $context[enable_org_blacklisting] != undef { -%>
+      'enableOrgBlacklisting' => <%= $context[enable_org_blacklisting] %>,
+<%- } -%>
+<%- if $context[log_client_ip] != undef { -%>
+      'log_client_ip' => <%= $context[log_client_ip] %>,
+<%- } -%>
+<%- if $context[log_auth] != undef { -%>
+      'log_auth' => <%= $context[log_auth] %>,
+<%- } -%>
+<%- if $context[delegation] != undef { -%>
+      'delegation' => <%= $context[delegation] %>,
+<%- } -%>
+<%- if $context[show_correlations_on_index] != undef { -%>
+      'showCorrelationsOnIndex' => <%= $context[show_correlations_on_index] %>,
+<%- } -%>
+<%- if $context[show_proposals_count_on_index] != undef { -%>
+      'showProposalsCountOnIndex' => <%= $context[show_proposals_count_on_index] %>,
+<%- } -%>
+<%- if $context[show_sightings_count_on_index] != undef { -%>
+      'showSightingsCountOnIndex' => <%= $context[show_sightings_count_on_index] %>,
+<%- } -%>
+<%- if $context[show_discussions_count_on_index] != undef { -%>
+      'showDiscussionsCountOnIndex' => <%= $context[show_discussions_count_on_index] %>,
+<%- } -%>
+<%- if $context[disable_user_self_management] != undef { -%>
+      'disableUserSelfManagement' => <%= $context[disable_user_self_management] %>,
+<%- } -%>
+<%- if $context[block_event_alert] != undef { -%>
+      'block_event_alert' => <%= $context[block_event_alert] %>,
+<%- } -%>
+<%- if $context[block_event_alert_tag] != undef { -%>
+      'block_event_alert_tag' => '<%= $context[block_event_alert_tag] %>',
+<%- } -%>
+<%- if $context[block_old_event_alert] != undef { -%>
+      'block_old_event_alert' => <%= $context[block_old_event_alert] %>,
+<%- } -%>
+<%- if $context[block_old_event_alert_age] != undef { -%>
+      'block_old_event_alert_age' => <%= $context[block_old_event_alert_age] %>,
+<%- } -%>
+<%- if $context[tmpdir] != undef { -%>
+      'tmpdir' => '<%= $context[tmpdir] %>',
+<%- } -%>
+<%- if $context[incoming_tags_disabled_by_default] != undef { -%>
+      'incoming_tags_disabled_by_default' => <%= $context[incoming_tags_disabled_by_default] %>,
+<%- } -%>
+<%- if $context[deadlock_avoidance] != undef { -%>
+      'deadlock_avoidance' => <%= $context[deadlock_avoidance] %>,
+<%- } -%>
+<%- if $context[maintenance_message] != undef { -%>
+      'maintenance_message' => '<%= $context[maintenance_message] %>',
+<%- } -%>
+<%- if $context[footermidleft] != undef { -%>
+      'footermidleft' => '<%= $context[footermidleft] %>',
+<%- } -%>
+<%- if $context[footermidright] != undef { -%>
+      'footermidright' => '<%= $context[footermidright] %>',
+<%- } -%>
+<%- if $context[footer_logo] != undef { -%>
+      'footer_logo' => '<%= $context[footer_logo] %>',
+<%- } -%>
+<%- if $context[home_logo] != undef { -%>
+      'home_logo' => '<%= $context[home_logo] %>',
+<%- } -%>
+<%- if $context[main_logo] != undef { -%>
+      'main_logo' => '<%= $context[main_logo] %>',
+<%- } -%>
+<%- if $context[threatlevel_in_email_subject] != undef { -%>
+      'threatlevel_in_email_subject' => <%= $context[threatlevel_in_email_subject] %>,
+<%- } -%>
+<%- if $context[email_subject_tlp_string] != undef { -%>
+      'email_subject_TLP_string' => '<%= $context[email_subject_tlp_string] %>',
+<%- } -%>
+<%- if $context[email_subject_tag] != undef { -%>
+      'email_subject_tag' => '<%= $context[email_subject_tag] %>',
+<%- } -%>
+<%- if $context[email_subject_include_tag_name] != undef { -%>
+      'email_subject_include_tag_name' => <%= $context[email_subject_include_tag_name] %>,
+<%- } -%>
+<%- if $context[attachments_dir] != undef { -%>
+      'attachments_dir' => '<%= $context[attachments_dir] %>',
+<%- } -%>
+<%- if $context[download_attachments_on_load] != undef { -%>
+      'download_attachments_on_load' => <%= $context[download_attachments_on_load] %>,
+<%- } -%>
+<%- if $context[full_tags_on_event_index] != undef { -%>
+      'full_tags_on_event_index' => <%= $context[full_tags_on_event_index] %>,
+<%- } -%>
+<%- if $context[welcome_text_top] != undef { -%>
+      'welcome_text_top' => '<%= $context[welcome_text_top] %>',
+<%- } -%>
+<%- if $context[welcome_text_bottom] != undef { -%>
+      'welcome_text_bottom' => '<%= $context[welcome_text_bottom] %>',
+<%- } -%>
+<%- if $context[welcome_logo] != undef { -%>
+      'welcome_logo' => '<%= $context[welcome_logo] %>',
+<%- } -%>
+<%- if $context[welcome_logo2] != undef { -%>
+      'welcome_logo2' => '<%= $context[welcome_logo2] %>',
+<%- } -%>
+<%- if $context[title_text] != undef { -%>
+      'title_text' => '<%= $context[title_text] %>',
+<%- } -%>
+<%- if $context[take_ownership_xml_import] != undef { -%>
+      'take_ownership_xml_import' => <%= $context[take_ownership_xml_import] %>,
+<%- } -%>
+<%- if $context[terms_download] != undef { -%>
+      'terms_download' => <%= $context[terms_download] %>,
+<%- } -%>
+<%- if $context[terms_file] != undef { -%>
+      'terms_file' => '<%= $context[terms_file] %>',
+<%- } -%>
+<%- if $context[showorgalternate] != undef { -%>
+      'showorgalternate' => <%= $context[showorgalternate] %>,
+<%- } -%>
+<%- if $context[unpublishedprivate] != undef { -%>
+      'unpublishedprivate' => <%= $context[unpublishedprivate] %>,
+<%- } -%>
+<%- if $context[custom_css] != undef { -%>
+      'custom_css' => '<%= $context[custom_css] %>',
+<%- } -%>
+<%- if $context[event_view_filter_fields] != undef { -%>
+      'event_view_filter_fields' => '<%= $context[event_view_filter_fields] %>',
+<%- } -%>
+<%- if $context[manage_workers] != undef { -%>
+      'manage_workers' => '<%= $context[manage_workers] %>',
+<%- } -%>
+  ),
