@@ -1,7 +1,7 @@
 
 class misp::install inherits misp {
 
-  require '::misp::dependencies'
+  require 'misp::dependencies'
 
   # MISP
 

@@ -1,7 +1,7 @@
 
 class misp::service inherits misp {
 
-  require '::misp::config'
+  require 'misp::config'
 
 
   ## PHP FPM configuration
@@ -81,7 +81,7 @@ class misp::service inherits misp {
 
   if $misp::redis_server {
     # redis module needed when using password for ease of set up
-    class { '::redis':
+    class { 'redis':
       service_ensure => true,
       service_enable => true,
       bind           => $misp::redis_host,

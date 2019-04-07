@@ -250,8 +250,8 @@ class misp (
   $egroup_role_match = {},
 ) {
 
-  contain '::misp::dependencies'
-  contain '::misp::install'
-  contain '::misp::config'
-  contain '::misp::service'
+  contain 'misp::dependencies'
+  contain 'misp::install'
+  contain 'misp::config'
+  contain 'misp::service'
 }

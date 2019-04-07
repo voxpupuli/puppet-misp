@@ -1,7 +1,7 @@
 
 class misp::config inherits misp {
 
-  require '::misp::install'
+  require 'misp::install'
 
   # Apache permissions
 
