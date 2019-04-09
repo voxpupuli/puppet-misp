@@ -1,3 +1,9 @@
+<%- |
+  Optional[Variant[String,Array[String]]] $auth_method,
+| -%>
+<%-
+  $auth_methods = flatten([$auth_method])
+-%>
 <?php
 /**
  * This file is loaded automatically by the app/webroot/index.php file after core.php
@@ -71,18 +77,17 @@
  *
  * Redis (http://http://redis.io/)
  *
- * 	Cache::config('default', array(
+ *	Cache::config('default', array(
  *		'engine' => 'Redis', //[required]
  *		'duration'=> 3600, //[optional]
  *		'probability'=> 100, //[optional]
  *		'prefix' => Inflector::slug(APP_DIR) . '_', //[optional]  prefix every cache file with this string
- *		'server' => '<%= @redis_host -%>' // localhost
- *		'port' => <%= @redis_port -%> // default port 6379
- *		'timeout' => <%= @redis_timeout -%> // timeout in seconds, 0 = unlimited
+ *		'server' => '127.0.0.1' // localhost
+ *		'port' => 6379 // default port 6379
+ *		'timeout' => 0 // timeout in seconds, 0 = unlimited
  *		'persistent' => true, // [optional] set this to false for non-persistent connections
- * 	));
+ *	));
  */
-
 Cache::config('default', array('engine' => 'File'));
 Configure::load('config');
 
@@ -127,9 +132,16 @@ CakePlugin::load('UrlCache');
  * Uncomment the following line to enable client SSL certificate authentication.
  * It's also necessary to configure the plugin — for more information, please read app/Plugin/CertAuth/reame.md
  */
+<%- if 'CertAuth.Certificate' in $auth_methods { -%>
+CakePlugin::load('CertAuth');
+<%- } else { -%>
 // CakePlugin::load('CertAuth');
-<% if (@auth_method == 'ShibbAuth.ApacheShibb') then %> CakePlugin::load('ShibbAuth');
-<% else %>// CakePlugin::load('ShibbAuth');<% end %>
+<%- } -%>
+<%- if 'ShibbAuth.ApacheShibb' in $auth_methods { -%>
+CakePlugin::load('ShibbAuth');
+<%- } else { -%>
+// CakePlugin::load('ShibbAuth');
+<%- } -%>
 /**
  * You can attach event listeners to the request lifecyle as Dispatcher Filter . By Default CakePHP bundles two filters:
  *

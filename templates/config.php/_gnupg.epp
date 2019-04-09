@@ -1,0 +1,21 @@
+<%- |
+  Type[Class[misp]] $context,
+| -%>
+  'GnuPG' =>
+    array (
+      'onlyencrypted' => <%= $context[gpg_onlyencrypted] %>,
+      'email' => <%= $context[gpg_email] %>,
+      'homedir' => <%= $context[gpg_homedir] %>,
+<%- if $context[gpg_password] != undef { -%>
+      'password' => '<%= $context[gpg_password] %>',
+<%- } -%>
+<%- if $context[gpg_binary] != undef { -%>
+      'binary' => '<%= $context[gpg_binary] %>',
+<%- } -%>
+<%- if $context[gpg_bodyonlyencrypted] != undef { -%>
+      'bodyonlyencrypted' => <%= $context[gpg_bodyonlyencrypted] %>,
+<%- } -%>
+<%- if $context[gpg_sign] != undef { -%>
+      'sign' => <%= $context[gpg_sign] %>,
+<%- } -%>
+  ),

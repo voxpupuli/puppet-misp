@@ -1,0 +1,21 @@
+<%- |
+  Type[Class[misp]] $context,
+| -%>
+  'Proxy' =>
+    array (
+<%- if $context[proxy_host] != undef { -%>
+      'host' => '<%= $context[proxy_host] %>',
+<%- } -%>
+<%- if $context[proxy_port] != undef { -%>
+      'port' => '<%= $context[proxy_port] %>',
+<%- } -%>
+<%- if $context[proxy_method] != undef { -%>
+      'method' => '<%= $context[proxy_method] %>',
+<%- } -%>
+<%- if $context[proxy_user] != undef { -%>
+      'user' => '<%= $context[proxy_user] %>',
+<%- } -%>
+<%- if $context[proxy_password] != undef { -%>
+      'password' => '<%= $context[proxy_password] %>',
+<%- } -%>
+  ),

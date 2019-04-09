@@ -1,0 +1,11 @@
+<%- |
+  Type[Class[misp]] $context,
+| -%>
+  'Session' =>
+    array (
+      'autoRegenerate' => <%= $context[session_auto_regenerate] %>,
+      'checkAgent' => <%= $context[session_check_agent] %>,
+      'defaults' => '<%= $context[session_defaults] %>',
+      'timeout' => '<%= $context[session_timeout] %>',
+      'cookieTimeout' => '<%= $context[session_cookie_timeout] %>'
+  ),

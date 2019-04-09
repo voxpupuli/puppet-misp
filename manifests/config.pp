@@ -80,7 +80,7 @@ class misp::config inherits misp {
     ensure    => file,
     owner     => $misp::default_user,
     group     => $misp::default_group,
-    content   => template('misp/bootstrap.php.erb'),
+    content   => epp('misp/bootstrap.php.epp', { auth_method => $misp::security_auth_method }),
     subscribe => Exec['Directory permissions'],
   }
 
@@ -88,7 +88,16 @@ class misp::config inherits misp {
     ensure    => file,
     owner     => $misp::default_user,
     group     => $misp::default_group,
-    content   => template('misp/core.php.erb'),
+    content   => epp('misp/core.php.epp', {
+        level           => $misp::security_level,
+        salt            => $misp::security_salt,
+        cipher_seed     => $misp::security_cipher_seed,
+        auto_regenerate => $misp::session_auto_regenerate,
+        check_agent     => $misp::session_check_agent,
+        defaults        => $misp::session_defaults,
+        timeout         => $misp::session_timeout,
+        cookie_timeout  => $misp::session_cookie_timeout,
+    }),
     subscribe => Exec['Directory permissions'],
   }
 
@@ -97,7 +106,13 @@ class misp::config inherits misp {
     owner     => $misp::default_user,
     group     => $misp::default_group,
     mode      => '0640',
-    content   => template('misp/database.php.erb'),
+    content   => epp('misp/database.php.epp', {
+        host     => $misp::db_host,
+        user     => $misp::db_user,
+        port     => $misp::db_port,
+        password => $misp::db_password,
+        db_name  => $misp::db_name,
+    }),
     subscribe => Exec['Directory permissions'],
   }
 
@@ -106,7 +121,7 @@ class misp::config inherits misp {
     owner     => $misp::default_user,
     group     => $misp::default_group,
     mode      => '0640',
-    content   => template('misp/config.php.erb'),
+    content   => epp('misp/config.php.epp', { context => Class[misp] }),
     seltype   => 'httpd_sys_rw_content_t',
     subscribe => Exec['Directory permissions'],
   }

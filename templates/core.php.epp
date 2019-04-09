@@ -1,3 +1,13 @@
+<%- |
+  String $level,
+  String $salt,
+  String $cipher_seed,
+  Boolean $auto_regenerate,
+  Boolean $check_agent,
+  Enum['php','database','cake','cache'] $defaults,
+  Integer $timeout,
+  Integer $cookie_timeout,
+| -%>
 <?php
 /**
  * This is core configuration file.
@@ -176,27 +186,27 @@ define('LOG_ERROR', LOG_ERR);
  *
  */
 Configure::write('Session', array(
-	'timeout'        => <%= @session_timeout -%>,    // Session timeout, default is 1 hour
-	'cookie_timeout' => <%= @session_cookie_timeout -%>,  // Cookie timeout, default is 1 week
-	'defaults'       => '<%= @session_defaults -%>',
-	'autoRegenerate' => <%= @session_auto_regenerate -%>,
-	'checkAgent' => <%= @session_check_agent -%>
+	'timeout'        => <%= $timeout %>,    // Session timeout, default is 1 hour
+	'cookie_timeout' => <%= $cookie_timeout %>,  // Cookie timeout, default is 1 week
+	'defaults'       => <%= $defaults %>,
+	'autoRegenerate' => <%= $auto_regenerate %>,
+	'checkAgent' => <%= $check_agent %>
 ));
 
 /**
  * The level of CakePHP security.
  */
-Configure::write('Security.level', 'medium');
+Configure::write('Security.level', '<%= $level %>');
 
 /**
  * A random string used in security hashing methods.
  */
-Configure::write('Security.salt', 'Rooraenietu8Eeyo<Qu2eeNfterd-dd+');
+Configure::write('Security.salt', '<%= $salt %>');
 
 /**
  * A random numeric string (digits only) used to encrypt/decrypt strings.
  */
-Configure::write('Security.cipherSeed', '395786739573056621429506834955');
+Configure::write('Security.cipherSeed', '<%= $cipher_seed %>');
 
 /**
  * Apply timestamps with the last modified time to static assets (js, css, images).
@@ -286,4 +296,4 @@ Cache::config('_cake_model_', array(
 
 
 //Comment the following out if you do not with to use the background workers (not recommended)
-require_once dirname(__DIR__) . '/vendor/autoload.php';
+require_once dirname(__DIR__) . '/Vendor/autoload.php';

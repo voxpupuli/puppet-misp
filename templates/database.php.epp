@@ -1,3 +1,11 @@
+<%- |
+  String $host,
+  String $user,
+  Integer $port,
+  String $password,
+  String $db_name,
+  Optional[String] $prefix = undef,
+| -%>
 <?php
 /**
  * This is core configuration file.
@@ -62,12 +70,12 @@ class DATABASE_CONFIG {
 public $default = array(
 'datasource' => 'Database/Mysql',
 'persistent' => false,
-'host' => '<%= @db_host -%>',
-'login' => '<%= @db_user -%>',
-'port' => <%= @db_port -%>,
-'password' => '<%= @db_password -%>',
-'database' => '<%= @db_name -%>',
-'prefix' => '',
+'host' => '<%= $host -%>',
+'login' => '<%= $user -%>',
+'port' => <%= $port -%>,
+'password' => '<%= $password -%>',
+'database' => '<%= $db_name -%>',
+'prefix' => '<%= $prefix %>',
 //'encoding' => 'utf8',
 );
 }

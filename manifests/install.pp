@@ -111,6 +111,7 @@ class misp::install inherits misp {
     revision => $misp::cybox_git_tag,
     owner    => $misp::default_user,
     group    => $misp::default_group,
+    require  => Vcsrepo[$misp::install_dir],
   }
 
   vcsrepo { "${misp::install_dir}/app/files/scripts/python-stix":
@@ -121,6 +122,7 @@ class misp::install inherits misp {
     revision => $misp::stix_git_tag,
     owner    => $misp::default_user,
     group    => $misp::default_group,
+    require  => Vcsrepo[$misp::install_dir],
   }
 
   vcsrepo { "${misp::install_dir}/app/files/scripts/mixbox":
@@ -131,6 +133,7 @@ class misp::install inherits misp {
     revision => $misp::mixbox_git_tag,
     owner    => $misp::default_user,
     group    => $misp::default_group,
+    require  => Vcsrepo[$misp::install_dir],
   }
 
   vcsrepo { "${misp::install_dir}/app/files/scripts/python-maec":
@@ -141,6 +144,7 @@ class misp::install inherits misp {
     revision => $misp::maec_git_tag,
     owner    => $misp::default_user,
     group    => $misp::default_group,
+    require  => Vcsrepo[$misp::install_dir],
   }
 
   vcsrepo { "${misp::install_dir}/app/files/scripts/pydeep":
@@ -151,6 +155,7 @@ class misp::install inherits misp {
     revision => $misp::pydeep_git_tag,
     owner    => $misp::default_user,
     group    => $misp::default_group,
+    require  => Vcsrepo[$misp::install_dir],
   }
 
   if $misp::build_lief {
@@ -162,6 +167,7 @@ class misp::install inherits misp {
       revision => $misp::lief_git_tag,
       provider => git,
       force    => false,
+      require  => Vcsrepo[$misp::install_dir],
     }
 
     Exec <| title == 'Create MISP virtualenv' |>
@@ -250,7 +256,8 @@ class misp::install inherits misp {
 
   exec {
     default:
-      cwd => "${misp::install_dir}/";
+      cwd     => "${misp::install_dir}/",
+      require => Vcsrepo[$misp::install_dir];
 
     'Pear install Console_CommandLine':
       creates => "/opt/rh/rh-${misp::php_version}/root/usr/share/pear/Console/CommandLine.php",
@@ -272,9 +279,10 @@ class misp::install inherits misp {
 
   file {
     default:
-      ensure => directory,
-      owner  => $misp::default_user,
-      group  => $misp::default_group;
+      ensure  => directory,
+      owner   => $misp::default_user,
+      group   => $misp::default_group,
+      require => Vcsrepo[$misp::install_dir];
 
     '/usr/share/httpd/.composer':;
     "${misp::install_dir}/app/Plugin/CakeResque":;
@@ -283,8 +291,9 @@ class misp::install inherits misp {
     "${misp::install_dir}/app/vendor":;
   }
   file { "${misp::install_dir}/app/Vendor":
-    ensure => link,
-    target => "${misp::install_dir}/app/vendor",
+    ensure  => link,
+    target  => "${misp::install_dir}/app/vendor",
+    require => Vcsrepo[$misp::install_dir],
   }
 
   file {
@@ -293,7 +302,8 @@ class misp::install inherits misp {
       content => '{}',
       owner   => $misp::default_user,
       group   => $misp::default_group,
-      replace => false;
+      replace => false,
+      require => Vcsrepo[$misp::install_dir];
 
     "${misp::install_dir}/app/composer.json":;
     "${misp::install_dir}/app/composer.lock":;
@@ -330,12 +340,14 @@ class misp::install inherits misp {
   file { "/etc/opt/rh/rh-${misp::php_version}/php-fpm.d/timezone.ini":
     ensure  => file,
     content => "date.timezone = '${misp::timezone}'",
+    require => Package["rh-${misp::php_version}-php-fpm"],
   }
 
   file { "/etc/opt/rh/rh-${misp::php_version}/php.d/99-timezone.ini":
     ensure    => link,
     target    => "/etc/opt/rh/rh-${misp::php_version}/php-fpm.d/timezone.ini",
     subscribe => File["/etc/opt/rh/rh-${misp::php_version}/php-fpm.d/timezone.ini"],
+    require   => Package["rh-${misp::php_version}"],
   }
 
 
@@ -356,9 +368,12 @@ class misp::install inherits misp {
   }
 
   file{"${misp::install_dir}/app/Console/worker/start.sh":
-    owner => $misp::default_high_user,
-    group => $misp::default_high_group,
-    mode  => '+x',
+    ensure  => file,
+    owner   => $misp::default_high_user,
+    group   => $misp::default_high_group,
+    mode    => '+x',
+    replace => false,
+    require => Vcsrepo[$misp::install_dir],
   }
 
   # Logrotate
