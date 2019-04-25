@@ -248,6 +248,19 @@ class misp (
   $shib_use_default_org = false,
   $shib_default_org = '1',
   $egroup_role_match = {},
+  # ApacheSecureAtuh
+  $apache_auth_enable = false,
+  $apache_auth_apache_env = 'REMOTE_USER',
+  $apache_auth_ldap_server = 'ldap://example.com',
+  $apache_auth_ldap_protocol = 3,
+  $apache_auth_ldap_reader_user = 'cn=userWithReadAccess,ou=users,dc=example,dc=com',
+  $apache_auth_ldap_reader_password = 'UserPassword',
+  $apache_auth_ldap_dn = 'dc=example,dc=com',
+  $apache_auth_ldap_search_filter = '',
+  $apache_auth_ldap_search_attribut = 'uid',
+  $apache_auth_ldap_filter = ['mail'],
+  $apache_auth_ldap_default_role_id = 3,
+  $apache_auth_ldap_default_org = '1',
 ) {
 
   contain 'misp::dependencies'
