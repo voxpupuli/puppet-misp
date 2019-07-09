@@ -86,9 +86,13 @@ class misp::install inherits misp {
       command => 'pip install zmq',
       unless  => 'pip freeze --all | /bin/grep zmq=';
 
-    'Install stix2 v1.1.1':
-      command => 'pip install stix2==1.1.1',
-      unless  => 'pip freeze --all | /bin/grep stix2==1.1.1';
+    'Install stix2 v1.1.2':
+      command => 'pip install stix2==1.1.2',
+      unless  => 'pip freeze --all | /bin/grep stix2==1.1.2';
+
+    'Install plyara':
+      command => 'pip install plyara',
+      unless  => 'pip freeze --all | /bin/grep plyara=';
   }
   if !$misp::pymisp_rpm {
     Exec <| title == 'Create MISP virtualenv' |>
