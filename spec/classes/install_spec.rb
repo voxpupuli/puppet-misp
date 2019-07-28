@@ -187,7 +187,14 @@ describe 'misp::install' do
         end
 
         it do
-          is_expected.to contain_exec('Install stix2 v1.1.1').
+          is_expected.to contain_exec('Install stix2 v1.1.2').
+            with_path(%w[/var/www/MISP//venv/bin /usr/bin /bin]).
+            with_user('apache').
+            with_umask('0022')
+        end
+
+        it do
+          is_expected.to contain_exec('Install plyara').
             with_path(%w[/var/www/MISP//venv/bin /usr/bin /bin]).
             with_user('apache').
             with_umask('0022')

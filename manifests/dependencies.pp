@@ -9,7 +9,7 @@ class misp::dependencies inherits misp {
     'ssdeep', 'ssdeep-libs', 'ssdeep-devel', #For pydeep
 
     # PHP packages
-    "rh-${misp::php_version}", "rh-${misp::php_version}-php-fpm", "rh-${misp::php_version}-php-devel",
+    "rh-${misp::php_version}", "rh-${misp::php_version}-gd", "rh-${misp::php_version}-php-fpm", "rh-${misp::php_version}-php-devel",
     "rh-${misp::php_version}-php-mysqlnd", "rh-${misp::php_version}-php-mbstring", "rh-${misp::php_version}-php-pear",
     "rh-${misp::php_version}-php-xml", "rh-${misp::php_version}-php-bcmath",
 
