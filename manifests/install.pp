@@ -342,6 +342,10 @@ class misp::install inherits misp {
     subscribe => File["/etc/opt/rh/rh-${misp::php_version}/php-fpm.d/timezone.ini"],
   }
 
+  file { "/etc/opt/rh/rh-${misp::php_version}/php-fpm.d/memory_limit.ini":
+    ensure  => file,
+    content => "[www]\nphp_admin_value[memory_limit] = ${misp::php_memory_limit}\n",
+  }
 
   ## File creation for managing workers
   #

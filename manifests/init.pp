@@ -38,6 +38,7 @@ class misp (
   Boolean $lief = false,
   Boolean $build_lief = false,
   $lief_package_name = '',
+  String $php_memory_limit = '2048M',
   # # Services
   $webservername = 'httpd',
   $redis_server = true,
