@@ -52,6 +52,7 @@ describe 'misp::dependencies' do
       it { is_expected.to contain_package('rh-php73-php-bcmath') }
       it { is_expected.to contain_package('sclo-php73-php-pecl-redis4') }
       it { is_expected.to contain_file('/etc/opt/rh/rh-php73/php-fpm.d/timezone.ini') }
+      it { is_expected.to contain_file('/etc/opt/rh/rh-php73/php-fpm.d/memory_limit.ini') }
       it { is_expected.to contain_file('/etc/opt/rh/rh-php73/php.d/99-timezone.ini') }
       it { is_expected.to contain_service('rh-php73-php-fpm') }
     end

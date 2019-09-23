@@ -289,6 +289,12 @@ describe 'misp::install' do
         end
 
         it do
+          is_expected.to contain_file('/etc/opt/rh/rh-php72/php-fpm.d/memory_limit.ini').
+            with_ensure('file').
+            with_content("[www]\nphp_admin_value[memory_limit] = 2048M\n")
+        end
+
+        it do
           is_expected.to contain_file('/etc/opt/rh/rh-php72/php.d/99-timezone.ini').
             with_ensure('link').
             that_subscribes_to('File[/etc/opt/rh/rh-php72/php-fpm.d/timezone.ini]')

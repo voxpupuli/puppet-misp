@@ -9,7 +9,7 @@ class misp (
   # MISP installation
   # # MISP repositories
   String $misp_git_repo = 'https://github.com/MISP/MISP.git',
-  String $misp_git_tag = 'v2.4.111',
+  String $misp_git_tag = 'v2.4.116',
   String $stix_git_repo = 'https://github.com/STIXProject/python-stix.git',
   String $stix_git_tag = 'v1.2.0.6',
   String $cybox_git_repo = 'https://github.com/CybOXProject/python-cybox.git',
@@ -38,6 +38,7 @@ class misp (
   Boolean $lief = false,
   Boolean $build_lief = false,
   $lief_package_name = '',
+  String $php_memory_limit = '2048M',
   # # Services
   $webservername = 'httpd',
   $redis_server = true,
