@@ -9,7 +9,7 @@ class misp (
   # MISP installation
   # # MISP repositories
   String $misp_git_repo = 'https://github.com/MISP/MISP.git',
-  String $misp_git_tag = 'v2.4.116',
+  String $misp_git_tag = 'v2.4.118',
   String $stix_git_repo = 'https://github.com/STIXProject/python-stix.git',
   String $stix_git_tag = 'v1.2.0.6',
   String $cybox_git_repo = 'https://github.com/CybOXProject/python-cybox.git',
