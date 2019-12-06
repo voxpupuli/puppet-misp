@@ -82,7 +82,7 @@ class misp::service inherits misp {
   if $misp::redis_server {
     # redis module needed when using password for ease of set up
     class { 'redis':
-      service_ensure => true,
+      service_ensure => 'running',
       service_enable => true,
       bind           => $misp::redis_host,
       requirepass    => $misp::redis_password,
