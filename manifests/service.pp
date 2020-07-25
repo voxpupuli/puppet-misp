@@ -1,8 +1,5 @@
-
 class misp::service inherits misp {
-
   require 'misp::config'
-
 
   ## PHP FPM configuration
   #
@@ -62,7 +59,6 @@ class misp::service inherits misp {
       line  => 'post_max_size = 50M',
       match => '^post_max_size ';
   }
-
 
   ## Services
   #
