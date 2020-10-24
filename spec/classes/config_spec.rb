@@ -125,7 +125,7 @@ describe 'misp::config' do
         end
 
         it do
-          is_expected.not_to contain_selboolean('httpd redis connection')
+          is_expected.to contain_selboolean('httpd redis connection')
         end
 
         it do
@@ -137,6 +137,11 @@ describe 'misp::config' do
       context 'With webserver defined' do
         let(:pre_condition) do
           'service{"httpd":}'
+        end
+        let(:facts) do
+          data = facts
+          ((data[:os] ||= {})[:selinux] ||= {})[:enabled] = false
+          data
         end
 
         it do
