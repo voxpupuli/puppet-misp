@@ -1,6 +1,4 @@
-
 class misp::install inherits misp {
-
   require 'misp::dependencies'
 
   # MISP
@@ -32,7 +30,6 @@ class misp::install inherits misp {
     notify      => Vcsrepo["${misp::install_dir}/app/files/scripts/python-cybox","${misp::install_dir}/app/files/scripts/python-stix", "${misp::install_dir}/app/files/scripts/mixbox", "${misp::install_dir}/app/files/scripts/python-maec", "${misp::install_dir}/app/files/scripts/pydeep"],
   }
 
-
   ## Python plugins
   #
 
@@ -49,9 +46,9 @@ class misp::install inherits misp {
       user    => $misp::default_user,
       require => File[$misp::venv_dir],
     }
-    $pip_path = [ "${misp::venv_dir}/bin", '/usr/bin', '/bin' ]
+    $pip_path = ["${misp::venv_dir}/bin", '/usr/bin', '/bin']
   } else {
-    $pip_path = [ '/opt/rh/rh-python36/root/usr/bin', '/opt/rh/rh-python36/root/bin', '/usr/bin', '/bin' ]
+    $pip_path = ['/opt/rh/rh-python36/root/usr/bin', '/opt/rh/rh-python36/root/bin', '/usr/bin', '/bin']
   }
 
   Exec <| title == 'Create MISP virtualenv' |>
@@ -105,7 +102,6 @@ class misp::install inherits misp {
       require => Exec['Install python-cybox'],
     }
   }
-
 
   vcsrepo { "${misp::install_dir}/app/files/scripts/python-cybox":
     ensure   => present,
@@ -246,7 +242,6 @@ class misp::install inherits misp {
       subscribe => Vcsrepo["${misp::install_dir}/app/files/scripts/pydeep"];
   }
 
-
   ## Pears
   #
 
@@ -264,7 +259,6 @@ class misp::install inherits misp {
       creates => "/opt/rh/rh-${misp::php_version}/root/usr/share/pear/Crypt/GPG.php",
       command => "${run_php} 'pear install ${misp::install_dir}/INSTALL/dependencies/Crypt_GPG/package.xml'";
   }
-
 
   ## CakePHP
   #
@@ -363,7 +357,7 @@ class misp::install inherits misp {
     notify  => Service['misp-workers'],
   }
 
-  file{"${misp::install_dir}/app/Console/worker/start.sh":
+  file { "${misp::install_dir}/app/Console/worker/start.sh":
     owner => $misp::default_high_user,
     group => $misp::default_high_group,
     mode  => '+x',

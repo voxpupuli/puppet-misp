@@ -4,7 +4,6 @@
 # Author Name Pablo Panero (pablo.panero@cern.ch)
 #
 
-
 class misp (
   # MISP installation
   # # MISP repositories
@@ -250,7 +249,6 @@ class misp (
   $shib_default_org = '1',
   $egroup_role_match = {},
 ) {
-
   contain 'misp::dependencies'
   contain 'misp::install'
   contain 'misp::config'
