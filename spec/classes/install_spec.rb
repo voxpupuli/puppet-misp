@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'misp::install' do
@@ -9,6 +11,7 @@ describe 'misp::install' do
 
       it { is_expected.to compile.with_all_deps }
       it { is_expected.to contain_class('Misp::Install').that_requires('Class[Misp::Dependencies]') }
+
       context 'With default values' do
         it do
           is_expected.to contain_vcsrepo('/var/www/MISP/').
