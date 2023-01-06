@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'misp::config' do
@@ -9,6 +11,7 @@ describe 'misp::config' do
 
       it { is_expected.to compile.with_all_deps }
       it { is_expected.to contain_class('Misp::Config').that_requires('Class[Misp::Install]') }
+
       context 'With default values' do
         it do
           is_expected.to contain_file('/var/www/MISP//app/Plugin/CakeResque/Config/config.php').
@@ -134,6 +137,7 @@ describe 'misp::config' do
             with_group('apache')
         end
       end
+
       context 'With webserver defined' do
         let(:pre_condition) do
           'service{"httpd":}'
@@ -149,6 +153,7 @@ describe 'misp::config' do
             that_notifies('Service[httpd]')
         end
       end
+
       context 'With SELinux enabled and webserver defined' do
         let(:facts) do
           data = facts
