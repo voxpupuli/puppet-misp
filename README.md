@@ -91,12 +91,12 @@ The services needed by MISP are:
 
 In order to use the module it would be enough to include the module:
 ```puppet
-include ::misp,
+include misp,
 ```
 
 Or the class:
 ```puppet
-class{ ::misp:}
+class{ misp:}
 ```
 
 And the module will use all parameters with default values, these values are specified later on.
@@ -104,7 +104,7 @@ And the module will use all parameters with default values, these values are spe
 ### Another usage example
 
 ```puppet
-class {'::misp':
+class {'misp':
     git_tag          => 'v2.4.67',
     email            => 'someone.someother@somewhere.ch',
     contact          => 'someone.someother@somewhere.ch',
