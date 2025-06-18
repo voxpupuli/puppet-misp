@@ -1,11 +1,12 @@
+---
 fixtures:
   repositories:
-    systemd: 'https://github.com/voxpupuli/puppet-systemd'
-    stdlib: 'https://github.com/puppetlabs/puppetlabs-stdlib'
-    vcsrepo: 'https://github.com/puppetlabs/puppetlabs-vcsrepo'
-    redis: 'https://github.com/arioch/puppet-redis'
-    python: 'https://github.com/voxpupuli/puppet-python'
-    epel: 'https://github.com/stahnma/puppet-module-epel.git'
-    augeas_core: 'https://github.com/puppetlabs/puppetlabs-augeas_core.git'
-    selinux_core: 'https://github.com/puppetlabs/puppetlabs-selinux_core.git'
-    yumrepo_core: 'https://github.com/puppetlabs/puppetlabs-yumrepo_core'
+    augeas_core: https://github.com/puppetlabs/puppetlabs-augeas_core.git
+    epel: https://github.com/stahnma/puppet-module-epel.git
+    python: https://github.com/voxpupuli/puppet-python
+    redis: https://github.com/arioch/puppet-redis
+    selinux_core: https://github.com/puppetlabs/puppetlabs-selinux_core.git
+    stdlib: https://github.com/puppetlabs/puppetlabs-stdlib
+    systemd: https://github.com/voxpupuli/puppet-systemd
+    vcsrepo: https://github.com/puppetlabs/puppetlabs-vcsrepo
+    yumrepo_core: https://github.com/puppetlabs/puppetlabs-yumrepo_core
