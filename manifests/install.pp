@@ -347,12 +347,12 @@ class misp::install inherits misp {
   file { '/etc/systemd/system/misp-workers.service':
     ensure  => file,
     content => epp('misp/misp-workers.service.epp', {
-        install_dir => $misp::install_dir,
-        user        => $misp::default_user,
-        group       => $misp::default_group,
-        php_version => $misp::php_version,
-        services    => [$misp::mariadb_service, $misp::redis_service],
-        scls        => $misp::worker_scls,
+      install_dir => $misp::install_dir,
+      user        => $misp::default_user,
+      group       => $misp::default_group,
+      php_version => $misp::php_version,
+      services    => [$misp::mariadb_service, $misp::redis_service],
+      scls        => $misp::worker_scls,
     }),
     notify  => Service['misp-workers'],
   }
