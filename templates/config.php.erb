@@ -259,21 +259,28 @@ $config = array (
   //
   // Uncomment the following to enable Kerberos authentication
   // needs PHP LDAP support enabled (e.g. compile flag --with-ldap or Debian package php5-ldap)
+<% unless @apache_auth_enable -%>
   /*
-   'ApacheSecureAuth' => // Configuration for kerberos authentication
-    array(
-        'apacheEnv' => 'REMOTE_USER',           // If proxy variable = HTTP_REMOTE_USER
-        'ldapServer' => 'ldap://example.com',   // FQDN or IP
-        'ldapProtocol' => 3,
-        'ldapReaderUser' => 'cn=userWithReadAccess,ou=users,dc=example,dc=com', // DN ou RDN LDAP with reader user right
-        'ldapReaderPassword' => 'UserPassword', // the LDAP reader user password
-        'ldapDN' => 'dc=example,dc=com',
-        'ldapSearchAttribut' => 'uid',          // filter for search
-        'ldapFilter' => array(
-            'mail',
-        ),
-        'ldapDefaultRoleId' => 3,               // 3:User, 1:admin. May be good to set "1" for the first user
-        'ldapDefaultOrg' => '1',      // uses 1st local org in MISP if undefined
+<% end -%>
+  'ApacheSecureAuth' => // Configuration for kerberos authentication
+  array(
+    'apacheEnv' => '<%= @apache_auth_apache_env -%>',           // If proxy variable = HTTP_REMOTE_USER
+    'ldapServer' => '<%=  @apache_auth_ldap_server -%>',   // FQDN or IP
+    'ldapProtocol' => '<%= @apache_auth_ldap_protocol -%>',
+    'ldapReaderUser' => '<%= @apache_auth_ldap_reader_user -%>', // DN ou RDN LDAP with reader user right
+    'ldapReaderPassword' => '<%= @apache_auth_ldap_reader_password -%>', // the LDAP reader user password
+    'ldapDN' => '<%= @apache_auth_ldap_dn -%>',
+    'ldapSearchFilter' => '<%= @apache_auth_ldap_search_filter  -%>',
+    'ldapSearchAttribut' => '<%= @apache_auth_ldap_search_attribut -%>',          // filter for search
+    'ldapFilter' => array(
+<% @apache_auth_ldap_filter.each do |ldap_filter| -%>
+                          '<%= ldap_filter -%>',
+<% end -%>
+                          ),
+    'ldapDefaultRoleId' => '<%= @apache_auth_ldap_default_role_id -%>',               // 3:User, 1:admin. May be good to set "1" for the first user
+    'ldapDefaultOrg' => '<%= @apache_auth_ldap_default_org -%>',      // uses 1st local org in MISP if undefined
     ),
-   */
+<% unless @apache_auth_enable -%>
+  */
+<% end -%>
 );
